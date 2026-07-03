@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Template base vanilla para projetos front-end sem frameworks."
+    />
+    <title>Template Base Vanilla</title>
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <script src="assets/js/main.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__content">
+        <a class="site-logo" href="#inicio" aria-label="Ir para o início">Projeto Vanilla</a>
+        <nav class="site-nav" aria-label="Navegação principal">
+          <ul class="site-nav__list">
+            <li><a href="#objetivo">Objetivo</a></li>
+            <li><a href="#estrutura">Estrutura</a></li>
+            <li><a href="#qualidade">Qualidade</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="inicio">
+      <section class="hero section" aria-labelledby="titulo-principal">
+        <div class="container hero__content">
+          <p class="eyebrow">Base front-end sem frameworks</p>
+          <h1 id="titulo-principal">Template limpo para projetos HTML, CSS e JavaScript.</h1>
+          <p>
+            Use esta base para começar projetos pequenos com semântica, organização,
+            responsividade e critérios de qualidade desde o primeiro commit.
+          </p>
+          <a class="button" href="docs/briefing.md">Ver briefing</a>
+        </div>
+      </section>
+
+      <section id="objetivo" class="section" aria-labelledby="titulo-objetivo">
+        <div class="container content-grid">
+          <div>
+            <p class="eyebrow">Objetivo</p>
+            <h2 id="titulo-objetivo">Construir uma fundação reutilizável.</h2>
+          </div>
+          <p>
+            O template separa responsabilidades para facilitar manutenção, estudo e
+            evolução gradual sem adicionar ferramentas antes da hora.
+          </p>
+        </div>
+      </section>
+
+      <section id="estrutura" class="section section--muted" aria-labelledby="titulo-estrutura">
+        <div class="container">
+          <p class="eyebrow">Estrutura</p>
+          <h2 id="titulo-estrutura">Arquivos organizados por responsabilidade.</h2>
+          <div class="card-grid">
+            <article class="card">
+              <h3>HTML semântico</h3>
+              <p>Header, navegação, conteúdo principal, seções nomeadas e rodapé.</p>
+            </article>
+            <article class="card">
+              <h3>CSS modular</h3>
+              <p>Reset, variáveis, base, layout, componentes e responsividade.</p>
+            </article>
+            <article class="card">
+              <h3>JavaScript vanilla</h3>
+              <p>Interações progressivas sem bibliotecas externas.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="qualidade" class="section" aria-labelledby="titulo-qualidade">
+        <div class="container content-grid">
+          <div>
+            <p class="eyebrow">Qualidade</p>
+            <h2 id="titulo-qualidade">Antes de entregar, revise o essencial.</h2>
+          </div>
+          <ul class="check-list">
+            <li>Layout testado em telas pequenas e grandes.</li>
+            <li>Links, foco e navegação funcionando pelo teclado.</li>
+            <li>Conteúdo claro, sem textos provisórios escondidos.</li>
+            <li>CSS e JavaScript organizados por intenção.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__content">
+        <p>&copy; 2026 Template Base Vanilla.</p>
+        <a href="#inicio">Voltar ao topo</a>
+      </div>
+    </footer>
+  </body>
+</html>
