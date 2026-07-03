@@ -1,0 +1,22 @@
+@media (width >= 48rem) {
+  .site-header__content,
+  .site-footer__content {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .content-grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: start;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
