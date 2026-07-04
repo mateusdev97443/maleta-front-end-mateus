@@ -1,45 +1,46 @@
 # O que é HTTP no Front-end
 
-Este capítulo ensina entender pedidos GET e respostas básicas no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+HTTP é o protocolo usado pelo navegador para conversar com servidores. No consumo de API, ele define como o pedido sai e como a resposta volta.
 
-## O que é
+## Cliente e servidor
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
+No nosso caso, o cliente é o navegador executando JavaScript. O servidor é o sistema que recebe o pedido e responde com dados.
 
-## Por que existe
+## Foco em GET
 
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+O método `GET` é usado para buscar informações.
 
 ```js
 fetch("https://dummyjson.com/posts");
 ```
 
-## Aplicação no Front-end
+Esse pedido significa: "quero ler dados deste endereço".
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+## Status HTTP
+
+A resposta vem com um status. Alguns exemplos:
+
+- `200`: pedido bem-sucedido;
+- `404`: recurso não encontrado;
+- `500`: erro no servidor;
+- `401` ou `403`: acesso não autorizado ou proibido.
+
+Nesta fase, não implementamos autenticação. Se uma API exige credencial secreta, ela não é adequada para os exemplos.
+
+## Corpo da resposta
+
+Além do status, uma resposta pode ter corpo com dados, geralmente em JSON.
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Achar que qualquer resposta recebida significa sucesso.
+- Ignorar o status e tentar renderizar dados inexistentes.
+- Entrar em detalhes de backend antes de dominar o pedido GET no Front-end.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Para cada requisição, identifique URL, método, status esperado e formato do corpo antes de escrever a renderização.
 
 ## Exercício rápido
 
-Identifique método, URL e objetivo em uma requisição GET simples.
+Analise uma URL de API pública e escreva: método usado, objetivo do pedido e status esperado em caso de sucesso.

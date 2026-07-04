@@ -1,48 +1,52 @@
 # Estados de uma Promise
 
-Este capítulo ensina pending, fulfilled e rejected no fluxo real no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Uma Promise possui três estados principais: `pending`, `fulfilled` e `rejected`. Entender esses estados ajuda a prever quando o código entra no sucesso ou no erro.
 
-## O que é
+## pending
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
-
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+É o estado inicial. A operação começou, mas ainda não terminou.
 
 ```js
-const carregar = new Promise((resolve, reject) => {
-  const ok = true;
-  ok ? resolve("sucesso") : reject("falha");
+const promessa = new Promise((resolve) => {
+  setTimeout(() => resolve("pronto"), 1000);
 });
 ```
 
+Durante o primeiro segundo, a Promise está pendente.
+
+## fulfilled
+
+A Promise fica `fulfilled` quando `resolve` é chamado. A partir daí, os callbacks do `.then` podem receber o valor.
+
+## rejected
+
+A Promise fica `rejected` quando `reject` é chamado ou quando um erro ocorre dentro do fluxo. A partir daí, o `.catch` pode tratar a falha.
+
+## Transição de estado
+
+Uma Promise muda de `pending` para `fulfilled` ou de `pending` para `rejected`. Depois disso, ela não volta para `pending` e não troca para outro resultado.
+
+```js
+const exemplo = new Promise((resolve, reject) => {
+  resolve("primeiro resultado");
+  reject("tentativa ignorada");
+});
+
+exemplo.then(console.log); // primeiro resultado
+```
+
+A primeira finalização vence. Isso evita que uma mesma operação entregue sucesso e falha ao mesmo tempo.
+
 ## Aplicação no Front-end
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+Uma tela pode estar em estado de carregamento enquanto a Promise está pendente, mostrar dados quando ela resolve e mostrar mensagem amigável quando ela rejeita.
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
-
-## Boas práticas
-
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+- Achar que a Promise pode resolver várias vezes.
+- Não preparar visual para o estado pendente.
+- Tratar falha como se fosse lista vazia; são situações diferentes.
 
 ## Exercício rápido
 
-Desenhe o caminho de sucesso e falha de uma Promise manual.
+Simule uma Promise que fica pendente por 2 segundos e depois resolve. Mostre no DOM "Aguardando" antes e "Resolvida" depois.

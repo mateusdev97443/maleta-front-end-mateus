@@ -1,47 +1,46 @@
 # Consumindo API pública simples
 
-Este capítulo ensina praticar com endpoint aberto e sem token no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Uma API pública simples permite praticar sem token, sem login e sem backend próprio. Ela deve ser usada apenas como fonte de dados didáticos.
 
-## O que é
+## Escolha segura para estudo
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
+Nesta fase, prefira endpoints abertos de demonstração, sem informações sensíveis e sem autenticação.
 
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Exemplo com usuários
 
 ```js
-const url = "https://dummyjson.com/users";
-const response = await fetch(url);
-const users = await response.json();
+async function buscarUsuarios() {
+  const response = await fetch("https://dummyjson.com/users");
+
+  if (!response.ok) {
+    throw new Error("Falha ao buscar usuários");
+  }
+
+  const dados = await response.json();
+  return dados.users;
+}
 ```
 
-## Aplicação no Front-end
+## Renderizando parte dos dados
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+```js
+const usuarios = await buscarUsuarios();
+usuarios.forEach((usuario) => {
+  console.log(usuario.firstName, usuario.email);
+});
+```
 
-## Erros comuns
+## Cuidados
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Não coloque chave secreta no código.
+- Não dependa de API privada.
+- Não use dados reais de pessoas sem necessidade.
+- Não construa autenticação nesta fase.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Antes de usar uma API em exemplo, confirme se ela funciona sem token e se os dados são adequados para estudo.
 
 ## Exercício rápido
 
-Carregue usuários públicos e exiba nome e cidade.
+Busque usuários em uma API pública e exiba primeiro nome e e-mail no console antes de renderizar no DOM.

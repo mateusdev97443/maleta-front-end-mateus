@@ -1,46 +1,49 @@
 # O que são Promises
 
-Este capítulo ensina representar resultado futuro com sucesso ou falha no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Promise é um objeto que representa uma operação futura. Ela não guarda necessariamente o dado final no momento em que nasce; ela guarda a promessa de que algum resultado será entregue depois.
 
-## O que é
+## Criar Promise e consumir Promise
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
-
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+Criar uma Promise é definir como a operação termina. Consumir uma Promise é reagir ao resultado dela.
 
 ```js
-const promessa = new Promise((resolve) => resolve("Dados prontos"));
-promessa.then((dados) => console.log(dados));
+const promessa = new Promise((resolve, reject) => {
+  const encontrouDados = true;
+
+  setTimeout(() => {
+    if (encontrouDados) {
+      resolve("Usuário encontrado");
+    } else {
+      reject("Usuário não encontrado");
+    }
+  }, 1000);
+});
+
+promessa
+  .then((mensagem) => console.log(mensagem))
+  .catch((erro) => console.log(erro));
 ```
 
-## Aplicação no Front-end
+`resolve` representa sucesso. `reject` representa falha. `.then` consome o sucesso. `.catch` consome a falha.
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+## Por que fetch usa Promise
+
+Uma requisição HTTP depende de rede. A resposta pode chegar rápido, demorar ou falhar. Por isso `fetch` retorna uma Promise: o navegador inicia o pedido agora e entrega a resposta quando ela estiver disponível.
+
+## Como pensar
+
+Quando vir uma Promise, leia assim: "ainda não tenho o valor, mas posso preparar o que fazer quando ele chegar ou falhar".
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Criar Promise sem chamar `resolve` ou `reject`, deixando-a pendente para sempre.
+- Confundir a Promise com o valor resolvido.
+- Tratar apenas sucesso e esquecer falha.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Em código didático, crie Promises manuais apenas para aprender. Em telas reais, na maioria das vezes você vai consumir Promises retornadas por APIs como `fetch`.
 
 ## Exercício rápido
 
-Crie uma Promise que resolve uma frase depois de 1 segundo.
+Crie uma Promise que resolve com "Arquivo simulado carregado" e outra versão que rejeita com "Falha ao carregar arquivo".

@@ -1,46 +1,49 @@
 # Lendo respostas com response.json()
 
-Este capítulo ensina converter corpo JSON em objeto JavaScript no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+`response.json()` lê o corpo da resposta e tenta convertê-lo de JSON para um valor JavaScript, como objeto ou array.
 
-## O que é
+## Ele também retorna Promise
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
+A leitura do corpo pode levar um tempo, por isso `response.json()` também é assíncrono.
 
-## Por que existe
+```js
+const response = await fetch("https://dummyjson.com/users/1");
+const usuario = await response.json();
+```
 
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
+Sem o segundo `await`, você terá uma Promise pendente em vez dos dados.
 
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Response não é dado final
 
 ```js
 const response = await fetch(url);
+console.log(response.ok); // metadado HTTP
+
 const dados = await response.json();
+console.log(dados); // corpo convertido
 ```
 
-## Aplicação no Front-end
+## Cuidado ao ler duas vezes
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+O corpo da resposta é um fluxo de leitura. Depois de consumido, não deve ser lido novamente.
+
+```js
+const dados = await response.json();
+const outraLeitura = await response.json(); // problema
+```
+
+Guarde o resultado em uma variável e use essa variável.
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Esquecer `await` antes de `response.json()`.
+- Chamar `response.json()` antes de verificar `response.ok` quando precisa tratar status.
+- Tentar ler o corpo duas vezes.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Use nomes diferentes: `response` para a resposta HTTP e `dados`, `usuario` ou `posts` para o corpo convertido.
 
 ## Exercício rápido
 
-Explique por que response e dados não são a mesma coisa.
+Busque um usuário, salve a resposta em `response`, converta para `usuario` e explique no comentário a diferença entre as duas variáveis.

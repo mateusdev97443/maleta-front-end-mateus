@@ -1,45 +1,57 @@
 # setTimeout como exemplo didático
 
-Este capítulo ensina simular atraso antes de usar APIs reais no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+`setTimeout` agenda a execução de uma função após um intervalo. Ele é útil para estudar assincronismo porque cria uma espera controlada sem depender de internet ou API externa.
 
-## O que é
+## O que ele ensina
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
+Com `setTimeout`, você percebe que:
 
-## Por que existe
+- agendar uma tarefa não é o mesmo que executá-la imediatamente;
+- o código após o temporizador continua rodando;
+- a função interna executa somente depois do tempo indicado;
+- o resultado deve ser tratado dentro do callback ou em um fluxo preparado para isso.
 
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Exemplo de ordem
 
 ```js
-setTimeout(() => { aviso.textContent = "Tempo finalizado"; }, 1500);
+console.log("Abrir tela");
+
+setTimeout(() => {
+  console.log("Mostrar aviso depois de 2 segundos");
+}, 2000);
+
+console.log("Tela continua pronta");
 ```
 
-## Aplicação no Front-end
+## Exemplo com feedback visual
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+```js
+const status = document.querySelector("#status");
+const botao = document.querySelector("#iniciar");
+
+botao.addEventListener("click", () => {
+  status.textContent = "Aguarde um instante...";
+
+  setTimeout(() => {
+    status.textContent = "Você pode continuar.";
+  }, 1000);
+});
+```
+
+## Quando usar no aprendizado
+
+Use `setTimeout` para simular carregamento antes de consumir APIs reais. Assim você pratica loading, mensagens e botão desabilitado sem depender de rede.
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Passar `minhaFuncao()` em vez de `minhaFuncao`, executando a função cedo demais.
+- Esperar que `setTimeout` devolva o valor produzido pelo callback.
+- Usar temporizadores para esconder problemas de organização do código.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Em exemplos didáticos, mantenha tempos curtos e mensagens claras. O objetivo é entender o fluxo, não fazer o usuário esperar sem motivo.
 
 ## Exercício rápido
 
-Faça um botão iniciar uma contagem visual simples usando setTimeout.
+Faça um botão exibir "Salvando..." e depois "Salvo localmente para estudo" usando apenas `setTimeout`.

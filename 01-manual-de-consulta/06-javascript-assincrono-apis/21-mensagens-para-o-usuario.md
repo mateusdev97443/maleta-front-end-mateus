@@ -1,45 +1,49 @@
 # Mensagens para o usuário
 
-Este capítulo ensina comunicar estado sem termos técnicos no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Mensagens de interface explicam o estado da ação em linguagem humana. Elas devem orientar sem assustar e sem expor detalhes internos.
 
-## O que é
+## Tipos de mensagem
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
+- Inicial: "Clique para carregar usuários.";
+- Loading: "Carregando usuários...";
+- Sucesso: "Usuários carregados.";
+- Lista vazia: "Nenhum usuário encontrado.";
+- Erro: "Não foi possível carregar agora. Tente novamente.".
 
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Exemplo
 
 ```js
-mensagem.textContent = "Não conseguimos carregar os dados agora.";
+function mostrarMensagem(texto, tipo) {
+  mensagem.textContent = texto;
+  mensagem.className = `mensagem ${tipo}`;
+}
+
+mostrarMensagem("Carregando usuários...", "info");
 ```
 
-## Aplicação no Front-end
+## Mensagem técnica não é mensagem de usuário
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+Evite exibir textos como `TypeError: Failed to fetch`. Isso ajuda o desenvolvedor, mas não ajuda quem usa a página.
+
+## Aplicação com erro
+
+```js
+catch (erro) {
+  mostrarMensagem("Não conseguimos carregar os dados. Tente novamente.", "erro");
+  console.error(erro);
+}
+```
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Deixar a tela muda após falha.
+- Usar termos técnicos sem contexto.
+- Mostrar sucesso quando a lista veio vazia.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Cada estado precisa ter uma frase curta e específica. Mensagem boa responde: o que aconteceu e o que o usuário pode fazer.
 
 ## Exercício rápido
 
-Substitua mensagens técnicas por frases claras para usuário final.
+Crie quatro mensagens para uma busca de posts: inicial, carregando, vazia e erro.

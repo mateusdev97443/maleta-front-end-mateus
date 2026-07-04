@@ -1,46 +1,49 @@
 # Renderizando dados no DOM
 
-Este capítulo ensina transformar dados recebidos em informação visual no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Renderizar dados é transformar a resposta da API em informação visível na página. O foco deve ser atualizar elementos específicos, sem criar uma estrutura complexa.
 
-## O que é
+## Exemplo de card
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
-
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
-
-```js
-nome.textContent = usuario.name;
-email.textContent = usuario.email;
+```html
+<h2 id="nome"></h2>
+<p id="email"></p>
+<p id="cidade"></p>
 ```
 
-## Aplicação no Front-end
+```js
+function renderizarUsuario(usuario) {
+  nome.textContent = `${usuario.firstName} ${usuario.lastName}`;
+  email.textContent = usuario.email;
+  cidade.textContent = usuario.address.city;
+}
+```
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+## Por que usar textContent
+
+`textContent` é suficiente para inserir textos simples e evita montar HTML desnecessário.
+
+## Limpando antes de renderizar
+
+```js
+function limparUsuario() {
+  nome.textContent = "";
+  email.textContent = "";
+  cidade.textContent = "";
+}
+```
+
+Limpar evita mostrar dados antigos durante uma nova busca.
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Renderizar antes dos dados chegarem.
+- Usar campos que podem não existir sem verificar.
+- Misturar fetch dentro da função de renderização.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+A função de renderização deve receber dados prontos e apenas atualizar o DOM.
 
 ## Exercício rápido
 
-Renderize um card simples com nome, e-mail e cidade.
+Crie uma função que recebe um objeto de usuário e preenche três elementos: nome, e-mail e cidade.

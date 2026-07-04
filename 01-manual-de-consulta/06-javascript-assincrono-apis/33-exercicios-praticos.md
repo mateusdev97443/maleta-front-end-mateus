@@ -1,53 +1,267 @@
 # Exercícios práticos
 
-## 1. Temporizador simples
+Os exercícios abaixo são progressivos. Faça um por vez e só avance quando conseguir explicar o fluxo em voz alta.
 
-Objetivo: praticar espera controlada. Enunciado: ao clicar em um botão, mostre "Aguardando..." e depois "Pronto". Requisitos: usar `setTimeout` e atualizar o DOM. Critério de conclusão: a mensagem muda na ordem correta. Dica opcional: comece selecionando apenas um parágrafo.
+## 1. Temporizador com feedback
 
-## 2. Promise manual simples
+### Objetivo
 
-Objetivo: entender resultado futuro. Enunciado: crie uma Promise que resolve com "Dados carregados" após 1 segundo. Requisitos: usar `resolve`. Critério de conclusão: a frase aparece no console pelo `then`. Dica opcional: simule falha depois com `reject`.
+Entender a diferença entre iniciar uma ação e receber o resultado depois.
 
-## 3. then/catch
+### Enunciado
 
-Objetivo: separar sucesso e erro. Enunciado: crie uma função que às vezes resolve e às vezes rejeita. Requisitos: usar `.then()` e `.catch()`. Critério de conclusão: sucesso e falha exibem mensagens diferentes. Dica opcional: use uma variável booleana.
+Crie um botão que mostra `Aguardando...` ao ser clicado e troca para `Pronto` após 1 segundo.
 
-## 4. async/await
+### Requisitos
 
-Objetivo: reescrever fluxo assíncrono. Enunciado: transforme o exercício anterior em função `async`. Requisitos: usar `await`. Critério de conclusão: o resultado continua igual, mas o código fica sequencial. Dica opcional: mantenha a Promise manual.
+- Usar `setTimeout`.
+- Atualizar um elemento do DOM.
+- Não travar a página.
 
-## 5. try/catch
+### Critério de conclusão
 
-Objetivo: tratar falha com clareza. Enunciado: envolva o `await` em `try/catch`. Requisitos: mensagem amigável no DOM. Critério de conclusão: erro não quebra a página. Dica opcional: registre o erro técnico no console.
+A mensagem aparece imediatamente no clique e muda após o tempo definido.
+
+### Dica opcional
+
+Use um parágrafo com `id="status"`.
+
+## 2. Promise manual com sucesso
+
+### Objetivo
+
+Criar e consumir uma Promise simples.
+
+### Enunciado
+
+Crie uma Promise que resolve com `Dados simulados carregados` após 1 segundo.
+
+### Requisitos
+
+- Usar `new Promise`.
+- Chamar `resolve`.
+- Consumir com `.then`.
+
+### Critério de conclusão
+
+A frase resolvida aparece no console ou na tela.
+
+### Dica opcional
+
+Coloque o `resolve` dentro de um `setTimeout`.
+
+## 3. Promise manual com erro
+
+### Objetivo
+
+Praticar fluxo de falha.
+
+### Enunciado
+
+Altere o exercício anterior para rejeitar com uma mensagem de erro.
+
+### Requisitos
+
+- Usar `reject`.
+- Consumir com `.catch`.
+- Exibir mensagem amigável.
+
+### Critério de conclusão
+
+O erro técnico não aparece diretamente na interface.
+
+### Dica opcional
+
+Use uma variável booleana para alternar sucesso e falha.
+
+## 4. then/catch/finally com loading
+
+### Objetivo
+
+Organizar sucesso, erro e finalização.
+
+### Enunciado
+
+Mostre loading antes de consumir uma Promise e esconda no `.finally`.
+
+### Requisitos
+
+- Usar `.then` para sucesso.
+- Usar `.catch` para erro.
+- Usar `.finally` para remover loading.
+
+### Critério de conclusão
+
+O loading desaparece tanto em sucesso quanto em falha.
+
+### Dica opcional
+
+Teste primeiro com sucesso e depois com rejeição.
+
+## 5. async/await básico
+
+### Objetivo
+
+Reescrever um fluxo assíncrono com leitura sequencial.
+
+### Enunciado
+
+Transforme uma Promise consumida com `.then` em uma função `async` com `await`.
+
+### Requisitos
+
+- Criar função `async`.
+- Usar `await` dentro dela.
+- Manter o mesmo resultado final.
+
+### Critério de conclusão
+
+O código funciona e você consegue apontar onde a função pausa.
+
+### Dica opcional
+
+Comece com uma Promise manual antes de usar `fetch`.
 
 ## 6. Fetch básico
 
-Objetivo: buscar dados públicos. Enunciado: carregue um usuário de `https://dummyjson.com/users/1`. Requisitos: usar `fetch` e `response.json()`. Critério de conclusão: nome aparece na página. Dica opcional: exiba também e-mail.
+### Objetivo
 
-## 7. Tratamento de erro
+Buscar dados de uma API pública sem token.
 
-Objetivo: validar resposta. Enunciado: verifique `response.ok` antes de converter JSON. Requisitos: lançar erro em status inválido. Critério de conclusão: uma URL inexistente mostra mensagem amigável. Dica opcional: teste com `/users/9999` e observe o retorno.
+### Enunciado
 
-## 8. Loading
+Busque `https://dummyjson.com/users/1` e mostre o primeiro nome do usuário.
 
-Objetivo: informar espera. Enunciado: mostre "Carregando..." enquanto o fetch acontece. Requisitos: remover loading no sucesso e no erro. Critério de conclusão: loading nunca fica preso. Dica opcional: use `finally`.
+### Requisitos
 
-## 9. Botão desabilitado
+- Usar `fetch`.
+- Usar `await response.json()`.
+- Atualizar o DOM com `textContent`.
 
-Objetivo: evitar cliques repetidos. Enunciado: desabilite o botão durante a requisição. Requisitos: reabilitar no final. Critério de conclusão: cliques rápidos não disparam múltiplas buscas visíveis. Dica opcional: altere o texto do botão.
+### Critério de conclusão
 
-## 10. Renderização de dados
+O nome aparece na página após a requisição.
 
-Objetivo: preencher um card. Enunciado: renderize nome, e-mail e cidade de um usuário. Requisitos: usar `textContent`. Critério de conclusão: nenhum HTML sensível é injetado. Dica opcional: limpe o card antes da nova busca.
+### Dica opcional
 
-## 11. Lista de resultados
+Use `firstName` no objeto retornado.
 
-Objetivo: renderizar array. Enunciado: carregue `/users` e crie uma lista de nomes. Requisitos: tratar array vazio. Critério de conclusão: a lista não duplica ao clicar novamente. Dica opcional: use `innerHTML = ""` antes do loop.
+## 7. Tratamento de status HTTP
 
-## 12. Busca simples
+### Objetivo
 
-Objetivo: encontrar item por texto. Enunciado: depois de carregar usuários, busque por nome digitado. Requisitos: usar `filter` e `includes`. Critério de conclusão: termo vazio volta a mostrar todos. Dica opcional: normalize com `toLowerCase()`.
+Evitar renderizar resposta inválida.
 
-## 13. Filtro local
+### Enunciado
 
-Objetivo: evitar requisição desnecessária. Enunciado: carregue posts e filtre por `userId`. Requisitos: guardar a lista original em uma variável. Critério de conclusão: o filtro não chama `fetch` novamente. Dica opcional: mostre mensagem quando não houver resultado.
+Antes de converter JSON, verifique `response.ok`.
+
+### Requisitos
+
+- Usar `if (!response.ok)`.
+- Lançar `Error` manualmente.
+- Tratar no `catch`.
+
+### Critério de conclusão
+
+Uma URL inexistente mostra mensagem amigável.
+
+### Dica opcional
+
+Use `response.status` no erro técnico do console.
+
+## 8. Botão desabilitado
+
+### Objetivo
+
+Evitar múltiplas requisições pelo mesmo clique.
+
+### Enunciado
+
+Desabilite o botão enquanto os dados carregam.
+
+### Requisitos
+
+- `disabled = true` antes da busca.
+- `disabled = false` no `finally`.
+- Texto do botão pode mudar durante a espera.
+
+### Critério de conclusão
+
+Cliques repetidos não iniciam várias buscas simultâneas.
+
+### Dica opcional
+
+Teste clicando rapidamente várias vezes.
+
+## 9. Renderização de lista
+
+### Objetivo
+
+Renderizar arrays vindos de API.
+
+### Enunciado
+
+Busque usuários e renderize uma lista com nome e e-mail.
+
+### Requisitos
+
+- Limpar lista anterior.
+- Usar `createElement`.
+- Tratar lista vazia.
+
+### Critério de conclusão
+
+A lista não duplica ao carregar novamente.
+
+### Dica opcional
+
+Crie uma função `renderizarUsuarios`.
+
+## 10. Busca local por nome
+
+### Objetivo
+
+Filtrar dados já carregados.
+
+### Enunciado
+
+Depois de carregar usuários, permita buscar por nome digitado.
+
+### Requisitos
+
+- Guardar lista original.
+- Usar `filter` e `includes`.
+- Normalizar com `toLowerCase`.
+
+### Critério de conclusão
+
+Termo vazio volta a mostrar a lista completa.
+
+### Dica opcional
+
+Não chame `fetch` novamente neste exercício.
+
+## 11. Filtro local por cidade
+
+### Objetivo
+
+Praticar filtro com critério específico.
+
+### Enunciado
+
+Filtre usuários pela cidade do endereço.
+
+### Requisitos
+
+- Ler `usuario.address.city`.
+- Mostrar mensagem se não houver resultado.
+- Criar botão para limpar filtro.
+
+### Critério de conclusão
+
+O filtro funciona sem perder a lista original.
+
+### Dica opcional
+
+Sempre filtre a partir de `usuariosCarregados`.

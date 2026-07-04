@@ -1,51 +1,58 @@
 # try/catch com async/await
 
-Este capítulo ensina capturar falhas em funções assíncronas no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Quando uma Promise aguardada com `await` rejeita, o erro pode ser capturado com `try/catch`. Esse padrão deixa o fluxo de sucesso e falha próximos e legíveis.
 
-## O que é
-
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
-
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Capturando falha em await
 
 ```js
-async function carregar() {
+async function carregarUsuario() {
   try {
-    const resposta = await fetch(url);
+    const response = await fetch("https://dummyjson.com/users/1");
+    const usuario = await response.json();
+    nome.textContent = usuario.firstName;
   } catch (erro) {
-    status.textContent = "Falha ao carregar.";
+    mensagem.textContent = "Não foi possível carregar o usuário.";
+    console.error(erro);
   }
 }
 ```
 
-## Aplicação no Front-end
+A mensagem do usuário é simples. O `console.error` fica para depuração do desenvolvedor.
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+## Usando finally
+
+```js
+async function carregarComLoading() {
+  loading.hidden = false;
+
+  try {
+    const dados = await buscarDados();
+    renderizar(dados);
+  } catch (erro) {
+    mostrarErro("Tente novamente em instantes.");
+    console.error(erro);
+  } finally {
+    loading.hidden = true;
+  }
+}
+```
+
+`finally` evita que o loading fique preso quando ocorre erro.
+
+## Importante sobre status HTTP
+
+`try/catch` captura erro de rede e Promises rejeitadas. Para status como 404, você deve verificar `response.ok` e lançar erro manualmente.
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Colocar apenas `console.error` e não avisar o usuário.
+- Esconder o erro do usuário, deixando a tela sem resposta.
+- Remover loading só dentro do `try`, esquecendo o caminho de erro.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Use três camadas: mensagem amigável para usuário, log técnico no console e limpeza visual no `finally`.
 
 ## Exercício rápido
 
-Crie uma função async que mostre mensagem amigável quando algo falhar.
+Crie uma função `async` que tenta buscar uma URL, mostra erro amigável no `catch` e sempre esconde o loading no `finally`.

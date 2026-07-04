@@ -1,48 +1,69 @@
 # then, catch e finally
 
-Este capítulo ensina tratar sucesso, erro e encerramento no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+`.then`, `.catch` e `.finally` são métodos usados para consumir Promises. Cada um tem um papel claro no fluxo.
 
-## O que é
+## Quando entra no then
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
-
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+`.then` executa quando a Promise resolve com sucesso.
 
 ```js
-buscarUsuario()
-  .then((usuario) => renderizar(usuario))
-  .catch(() => mostrarErro("Não foi possível carregar"))
-  .finally(() => esconderLoading());
+buscarNome()
+  .then((nome) => {
+    titulo.textContent = nome;
+  });
 ```
 
-## Aplicação no Front-end
+## Quando entra no catch
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+`.catch` executa quando a Promise rejeita ou quando um erro acontece em algum `.then` anterior.
 
-## Erros comuns
+```js
+buscarNome()
+  .then((nome) => renderizar(nome))
+  .catch(() => {
+    mensagem.textContent = "Não foi possível carregar o nome.";
+  });
+```
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+## Quando entra no finally
 
-## Boas práticas
+`.finally` executa no sucesso e na falha. Ele é ótimo para encerrar loading.
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+```js
+loading.hidden = false;
+
+buscarNome()
+  .then(renderizar)
+  .catch(mostrarErro)
+  .finally(() => {
+    loading.hidden = true;
+  });
+```
+
+## Erro comum: esquecer return
+
+```js
+fetch(url)
+  .then((response) => {
+    response.json(); // erro: faltou return
+  })
+  .then((dados) => {
+    console.log(dados); // undefined
+  });
+```
+
+Correção:
+
+```js
+fetch(url)
+  .then((response) => response.json())
+  .then((dados) => console.log(dados));
+```
+
+## Boa prática
+
+Use `.finally` para restaurar estado visual, não para processar dados. Dados pertencem ao `.then`; erros pertencem ao `.catch`.
 
 ## Exercício rápido
 
-Monte um fluxo com then, catch e finally usando uma Promise simulada.
+Monte uma Promise simulada com loading visível, mensagem de sucesso no `.then`, erro no `.catch` e limpeza no `.finally`.

@@ -1,46 +1,67 @@
 # Callbacks no contexto assíncrono
 
-Este capítulo ensina funções chamadas depois de uma ação no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Callback é uma função passada como argumento para ser executada em outro momento. Em código assíncrono, esse "outro momento" normalmente acontece depois de um evento, temporizador ou resposta.
 
-## O que é
-
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
-
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Função passada como argumento
 
 ```js
-function aoConcluir(nome) { console.log(`Olá, ${nome}`); }
-setTimeout(() => aoConcluir("Mateus"), 800);
+function mostrarMensagem() {
+  console.log("Callback executado");
+}
+
+setTimeout(mostrarMensagem, 1000);
 ```
 
-## Aplicação no Front-end
+A função `mostrarMensagem` não é executada na hora em que é declarada. Ela é entregue ao `setTimeout`, que a chama depois.
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+## Relação com eventos
 
-## Erros comuns
+Eventos do DOM usam callbacks o tempo todo:
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+```js
+botao.addEventListener("click", () => {
+  status.textContent = "Botão clicado";
+});
+```
 
-## Boas práticas
+Nesse caso, a função só executa quando o clique acontece.
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+## Relação com operações assíncronas
+
+Callbacks ajudam a representar a ideia de "quando terminar, faça isto". Antes de Promises e `async/await`, muitos fluxos assíncronos eram escritos com callbacks.
+
+```js
+function esperarDepoisExecutar(callback) {
+  setTimeout(() => {
+    callback("Dados simulados");
+  }, 1000);
+}
+
+esperarDepoisExecutar((dados) => {
+  console.log(dados);
+});
+```
+
+## Cuidado com aninhamento
+
+O problema aparece quando um callback depende de outro, que depende de outro:
+
+```js
+primeiraEtapa(() => {
+  segundaEtapa(() => {
+    terceiraEtapa(() => {
+      console.log("Difícil de manter");
+    });
+  });
+});
+```
+
+Esse formato fica ruim de ler e de tratar erros. Promises e `async/await` ajudam a organizar esse fluxo.
+
+## Boa prática
+
+Use callbacks com clareza em eventos e exemplos simples. Quando o fluxo tiver várias etapas assíncronas, prefira Promises ou `async/await`.
 
 ## Exercício rápido
 
-Passe uma função para ser executada depois de um temporizador.
+Crie uma função `executarDepoisDeUmSegundo(callback)` e passe para ela uma função que atualiza o texto de um parágrafo.

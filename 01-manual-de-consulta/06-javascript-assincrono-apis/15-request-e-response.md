@@ -1,46 +1,54 @@
 # Request e response
 
-Este capítulo ensina separar o pedido feito e a resposta recebida no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+`Request` é o pedido feito pelo navegador. `Response` é a resposta recebida. Separar esses conceitos evita confundir resposta HTTP com dados prontos.
 
-## O que é
+## Request como pedido
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
+Um pedido contém informações como:
 
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+- URL;
+- método HTTP;
+- parâmetros na URL, quando existirem;
+- intenção da ação.
 
 ```js
+const url = "https://dummyjson.com/users/1";
 const response = await fetch(url);
-console.log(response.status, response.ok);
 ```
 
-## Aplicação no Front-end
+## Response como resposta
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+A resposta contém metadados, como `status` e `ok`, e também pode conter um corpo.
+
+```js
+console.log(response.status);
+console.log(response.ok);
+```
+
+Nesse ponto, você ainda não tem o objeto de usuário pronto.
+
+## Corpo da resposta
+
+Para ler o corpo em JSON, você precisa converter:
+
+```js
+const usuario = await response.json();
+```
+
+## Diferença essencial
+
+`response` é o envelope da resposta. `usuario` é o dado convertido que a tela pode usar.
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Tentar acessar `response.name` em vez de converter o corpo.
+- Ignorar `response.status`.
+- Misturar URL, validação e renderização sem entender cada etapa.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Leia o fluxo como quatro passos: montar pedido, receber resposta, validar status e converter corpo.
 
 ## Exercício rápido
 
-Mostre na tela o status de uma resposta de demonstração.
+Faça uma requisição e mostre no console primeiro o `status`; depois converta para JSON e mostre um campo do dado.

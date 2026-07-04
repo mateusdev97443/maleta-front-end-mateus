@@ -1,45 +1,43 @@
 # Filtro simples com dados carregados
 
-Este capítulo ensina filtrar localmente sem nova requisição no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Filtro local usa dados que já estão na memória para exibir apenas uma parte da lista. Ele é útil para critérios simples, como cidade, categoria ou identificador.
 
-## O que é
-
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
-
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Exemplo por cidade
 
 ```js
-const filtrados = posts.filter((post) => post.userId === 1);
+function filtrarPorCidade(cidadeEscolhida) {
+  const cidadeNormalizada = cidadeEscolhida.trim().toLowerCase();
+
+  const filtrados = usuariosCarregados.filter((usuario) =>
+    usuario.address.city.toLowerCase().includes(cidadeNormalizada)
+  );
+
+  renderizarUsuarios(filtrados);
+}
 ```
 
-## Aplicação no Front-end
+## Diferença para busca
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+Busca geralmente usa texto livre. Filtro costuma usar critério definido, como cidade igual a um valor, status ou categoria.
+
+## Estado simples
+
+```js
+let usuariosCarregados = [];
+```
+
+Esse estado é suficiente para a fase. Não é necessário criar gerenciamento avançado.
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Fazer `fetch` novamente a cada filtro sem necessidade.
+- Filtrar uma lista que já estava filtrada e perder itens.
+- Não oferecer botão para limpar filtro.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Sempre filtre a partir da lista original carregada. Para limpar, renderize novamente a lista completa.
 
 ## Exercício rápido
 
-Filtre posts por usuário sem chamar a API novamente.
+Crie um filtro por cidade e um botão "Limpar filtro" que volta a mostrar todos os usuários carregados.

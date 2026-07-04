@@ -1,49 +1,58 @@
 # async e await
 
-Este capítulo ensina escrever fluxo assíncrono com leitura sequencial no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+`async` e `await` oferecem uma forma mais linear de escrever código que trabalha com Promises.
 
-## O que é
+## O que async faz
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
-
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+Uma função marcada com `async` sempre retorna uma Promise, mesmo quando você retorna um valor simples.
 
 ```js
-async function carregar() {
-  const resposta = await fetch(url);
-  const dados = await resposta.json();
-  console.log(dados);
+async function obterNumero() {
+  return 7;
+}
+
+obterNumero().then((numero) => console.log(numero));
+```
+
+## O que await faz
+
+`await` espera a resolução de uma Promise dentro de uma função `async`. Ele pausa a continuação daquela função, mas não trava o navegador inteiro.
+
+```js
+async function carregarUsuario() {
+  const response = await fetch("https://dummyjson.com/users/1");
+  const usuario = await response.json();
+  nome.textContent = usuario.firstName;
 }
 ```
 
-## Aplicação no Front-end
+Enquanto a resposta não chega, a página ainda pode renderizar e responder a outras interações.
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+## Erro comum
 
-## Erros comuns
+Usar `await` fora de um contexto adequado:
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+```js
+const response = await fetch(url); // inválido em muitos contextos de script comum
+```
 
-## Boas práticas
+Correção:
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+```js
+async function iniciar() {
+  const response = await fetch(url);
+  return await response.json();
+}
+```
+
+## Quando usar
+
+Use `async/await` quando o fluxo tiver passos que dependem um do outro: buscar, validar, converter e renderizar.
+
+## Boa prática
+
+Mesmo com aparência síncrona, lembre que o resultado continua sendo assíncrono. Combine `async/await` com `try/catch` para tratar falhas.
 
 ## Exercício rápido
 
-Transforme um exemplo com then em uma função async com await.
+Reescreva um exemplo com `.then(response => response.json())` usando uma função `async` e dois `await`.

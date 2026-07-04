@@ -1,45 +1,69 @@
 # Introdução ao JavaScript assíncrono
 
-Este capítulo ensina operações que levam tempo sem congelar a interface no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+JavaScript assíncrono é a forma de escrever código para situações em que a resposta não aparece no mesmo instante em que a ação começa.
 
-## O que é
+No Front-end isso acontece o tempo todo: um clique inicia uma busca, um temporizador espera alguns segundos, uma API demora a responder, uma imagem leva tempo para carregar. A página precisa continuar viva enquanto isso acontece.
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
+## A ideia principal
 
-## Por que existe
+Código assíncrono separa dois momentos:
 
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
+- o momento em que a tarefa é iniciada;
+- o momento em que o resultado fica disponível.
 
-## Quando usar
+Essa separação evita que o navegador congele. O usuário ainda consegue rolar a página, clicar em outros elementos e receber feedback visual.
 
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Exemplo simples com espera
 
 ```js
-setTimeout(() => console.log("Ação concluída"), 1000);
+console.log("Antes da espera");
+
+setTimeout(() => {
+  console.log("Resultado chegou depois");
+}, 1000);
+
+console.log("Depois de iniciar a espera");
 ```
 
-## Aplicação no Front-end
+A mensagem do meio aparece por último porque o temporizador agenda uma tarefa para depois. O JavaScript não fica parado olhando para o relógio.
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+## Exemplo aplicado ao Front-end
+
+```js
+const botao = document.querySelector("#carregar");
+const status = document.querySelector("#status");
+
+botao.addEventListener("click", () => {
+  status.textContent = "Carregando informações...";
+
+  setTimeout(() => {
+    status.textContent = "Informações carregadas.";
+  }, 1200);
+});
+```
+
+Esse exemplo ainda não usa API real, mas já mostra a lógica: uma ação começa agora e termina depois.
+
+## Como pensar
+
+Antes de codar um fluxo assíncrono, pergunte:
+
+- quem inicia a ação?
+- o que o usuário vê durante a espera?
+- o que acontece quando dá certo?
+- o que acontece quando falha?
+- a interface precisa bloquear algum botão temporariamente?
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Esperar que uma informação assíncrona esteja pronta imediatamente.
+- Não mostrar nenhum feedback durante a espera.
+- Confundir assíncrono com código sem ordem; existe ordem, mas ela depende do momento em que cada tarefa termina.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Sempre desenhe o fluxo em três estados: carregando, sucesso e falha. Mesmo em exemplos pequenos, esse hábito evita telas silenciosas.
 
 ## Exercício rápido
 
-Mostre uma mensagem "Carregando..." ao clicar em um botão e troque para "Concluído" após 1 segundo.
+Crie um botão que muda o texto de um parágrafo para "Preparando..." e, após 1 segundo, muda para "Pronto para continuar".

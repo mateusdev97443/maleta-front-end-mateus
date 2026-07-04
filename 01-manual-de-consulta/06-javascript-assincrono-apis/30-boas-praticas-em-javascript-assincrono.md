@@ -1,47 +1,93 @@
 # Boas práticas em JavaScript assíncrono
 
-Este capítulo ensina manter código previsível, simples e seguro no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Boas práticas não servem para deixar o código sofisticado. Elas servem para deixar o fluxo previsível quando tempo, rede e usuário estão envolvidos.
 
-## O que é
+## Use nomes claros
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
-
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+Prefira nomes que expliquem ação e resultado.
 
 ```js
-if (!Array.isArray(dados)) {
-  throw new Error("Formato inesperado");
+async function buscarUsuarios() {}
+function renderizarUsuarios(usuarios) {}
+function mostrarErroCarregamento() {}
+```
+
+Evite nomes vagos como `dados`, `coisa` ou `executar` quando a função tem responsabilidade específica.
+
+## Separe responsabilidades
+
+Uma função busca dados. Outra renderiza. Outra mostra erro. Outra controla loading.
+
+```js
+async function buscarUsuarios() {
+  const response = await fetch("https://dummyjson.com/users");
+  if (!response.ok) throw new Error("Falha HTTP");
+  const dados = await response.json();
+  return dados.users;
 }
 ```
 
-## Aplicação no Front-end
+## Use try/catch/finally quando houver await
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+```js
+try {
+  const usuarios = await buscarUsuarios();
+  renderizarUsuarios(usuarios);
+} catch (erro) {
+  mostrarErro("Não foi possível carregar usuários.");
+  console.error(erro);
+} finally {
+  definirLoading(false);
+}
+```
 
-## Erros comuns
+`finally` é especialmente útil para limpar estado visual.
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+## Valide response.ok
 
-## Boas práticas
+Não confie apenas no fato de a requisição ter respondido.
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+```js
+if (!response.ok) {
+  throw new Error(`Status ${response.status}`);
+}
+```
 
-## Exercício rápido
+## Não exponha tokens
 
-Revise um fetch verificando status, loading, erro e lista vazia.
+Código Front-end é público para quem abre a página. Se uma API precisa de segredo, ela não pertence a exemplos desta fase.
+
+## Não use API privada
+
+Exemplos didáticos devem funcionar para qualquer estudante. API privada, com login ou permissão especial, quebra o estudo e cria risco de segurança.
+
+## Não esconda erro do usuário
+
+O console ajuda o desenvolvedor; a tela precisa ajudar o usuário.
+
+```js
+mensagem.textContent = "Não foi possível carregar. Tente novamente.";
+console.error(erro);
+```
+
+## Limpe estado visual
+
+Antes de nova busca, limpe mensagem antiga ou resultado anterior quando fizer sentido. Depois da busca, restaure botão e loading.
+
+## Mantenha exemplos pequenos
+
+Um bom exemplo ensina uma ideia. Não misture busca, filtro, paginação, autenticação e roteamento em um único bloco.
+
+## Evite abstração avançada
+
+Antes de criar utilitários genéricos, domine o fluxo básico: clicar, carregar, validar, converter, renderizar, tratar erro e finalizar.
+
+## Checklist rápido
+
+- A função assíncrona tem nome claro?
+- `response.ok` foi verificado?
+- O loading é encerrado no erro?
+- O usuário recebe mensagem compreensível?
+- O botão volta ao estado normal?
+- Lista vazia tem tratamento?
+- Nenhum token foi exposto?

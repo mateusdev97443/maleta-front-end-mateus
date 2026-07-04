@@ -1,47 +1,52 @@
 # Código síncrono vs assíncrono
 
-Este capítulo ensina comparar execução linha a linha com tarefas futuras no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Código síncrono executa uma instrução após a outra, em sequência direta. Código assíncrono inicia uma tarefa que terminará depois e permite que o restante do programa continue.
 
-## O que é
-
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
-
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Fluxo síncrono
 
 ```js
-console.log("Antes");
-setTimeout(() => console.log("Depois"), 500);
-console.log("Fim");
+console.log("1. Separar ingredientes");
+console.log("2. Misturar massa");
+console.log("3. Colocar no forno");
 ```
 
-## Aplicação no Front-end
+A ordem é previsível: cada linha termina antes da próxima começar.
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+## Fluxo assíncrono
 
-## Erros comuns
+```js
+console.log("1. Pedido enviado");
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+setTimeout(() => {
+  console.log("3. Pedido respondido");
+}, 1000);
+
+console.log("2. Interface continua disponível");
+```
+
+A tarefa agendada pelo `setTimeout` termina depois. Isso muda a ordem dos logs.
+
+## Por que isso importa no Front-end
+
+Se uma página busca dados de uma API, ela não sabe se a resposta virá em 100 ms ou 3 segundos. O código precisa continuar suficiente para atualizar a tela, mostrar loading e impedir ações duplicadas.
+
+## Iniciar não é terminar
+
+Um erro comum é tratar uma função assíncrona como se ela devolvesse o resultado final na mesma linha.
+
+```js
+const resultado = setTimeout(() => "dados", 1000);
+console.log(resultado); // não são os dados
+```
+
+`setTimeout` agenda uma função; ele não devolve o valor produzido depois.
 
 ## Boas práticas
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+- Use logs numerados para estudar ordem de execução.
+- Nomeie funções assíncronas com verbos claros, como `carregar`, `buscar` ou `enviar`.
+- Não coloque lógica que depende do resultado fora do ponto em que o resultado é entregue.
 
 ## Exercício rápido
 
-Anote a ordem dos logs antes de executar e explique por que ela acontece.
+Escreva três `console.log` com um `setTimeout` no meio. Antes de executar, anote a ordem que você espera ver no console e compare com o resultado real.

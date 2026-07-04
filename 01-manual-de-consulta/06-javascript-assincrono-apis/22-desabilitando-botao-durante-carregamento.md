@@ -1,46 +1,48 @@
 # Desabilitando botão durante carregamento
 
-Este capítulo ensina evitar cliques repetidos e requisições duplicadas no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Desabilitar o botão durante uma requisição evita cliques repetidos e múltiplas chamadas desnecessárias.
 
-## O que é
+## Por que isso importa
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
+Se o usuário clica várias vezes em "Carregar", a página pode duplicar resultados, competir requisições e criar estados confusos.
 
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Exemplo
 
 ```js
-botao.disabled = true;
-try { await carregar(); } finally { botao.disabled = false; }
+async function aoClicar() {
+  botao.disabled = true;
+  botao.textContent = "Carregando...";
+
+  try {
+    const usuarios = await buscarUsuarios();
+    renderizarUsuarios(usuarios);
+  } catch (erro) {
+    mostrarErro();
+  } finally {
+    botao.disabled = false;
+    botao.textContent = "Carregar usuários";
+  }
+}
 ```
 
-## Aplicação no Front-end
+## Quando desabilitar
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+Desabilite quando a ação não deve ocorrer em paralelo: envio de formulário, busca que substitui resultado, tentativa de recarregar uma mesma lista.
+
+## Quando ter cuidado
+
+Não desabilite toda a página sem motivo. Bloqueie apenas o controle relacionado à ação em andamento.
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Desabilitar o botão e não reabilitar no erro.
+- Mudar o texto do botão e não restaurar.
+- Permitir dois cliques antes de iniciar o loading.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Altere `disabled` antes do primeiro `await` e restaure no `finally`.
 
 ## Exercício rápido
 
-Impeça dois cliques seguidos durante uma busca simulada.
+Implemente um botão que não permite nova busca enquanto a anterior está em andamento.

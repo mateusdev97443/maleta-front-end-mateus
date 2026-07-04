@@ -1,47 +1,59 @@
 # Tratando status HTTP
 
-Este capítulo ensina não confundir resposta 404 com erro de rede no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Uma requisição pode receber resposta do servidor e ainda assim indicar problema. Por isso é importante verificar `response.ok` e `response.status`.
 
-## O que é
+## response.ok
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
-
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+`response.ok` é `true` para status de sucesso na faixa 200.
 
 ```js
+const response = await fetch(url);
+
 if (!response.ok) {
-  throw new Error(`HTTP ${response.status}`);
+  throw new Error(`Erro HTTP: ${response.status}`);
 }
 ```
 
-## Aplicação no Front-end
+## response.status
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+`response.status` mostra o código numérico da resposta. Ele ajuda a diferenciar situações como não encontrado (`404`) e erro interno (`500`).
+
+## Erro de rede vs status de erro
+
+Erro de rede acontece quando o navegador não consegue completar a requisição. Status HTTP de erro acontece quando o servidor respondeu, mas informou que algo deu errado.
+
+Um `404` pode não cair automaticamente no `catch` do `fetch`, porque houve resposta HTTP. Você precisa lançar erro manualmente se `response.ok` for falso.
+
+## Exemplo completo
+
+```js
+async function buscarPost() {
+  try {
+    const response = await fetch("https://dummyjson.com/posts/999999");
+
+    if (!response.ok) {
+      throw new Error(`Status inesperado: ${response.status}`);
+    }
+
+    const post = await response.json();
+    titulo.textContent = post.title;
+  } catch (erro) {
+    mensagem.textContent = "Não encontramos o conteúdo solicitado.";
+    console.error(erro);
+  }
+}
+```
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Confiar nos dados sem verificar status.
+- Tratar `404` como lista vazia.
+- Mostrar o código técnico como única mensagem ao usuário.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Valide `response.ok` antes de converter e renderizar. Isso impede que a interface trabalhe com dados de uma resposta inválida.
 
 ## Exercício rápido
 
-Faça uma mensagem específica para resposta não encontrada.
+Faça uma função que lança erro quando `response.ok` for falso e mostra uma mensagem amigável no `catch`.

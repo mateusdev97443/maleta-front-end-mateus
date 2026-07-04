@@ -1,47 +1,53 @@
 # Introdução ao fetch
 
-Este capítulo ensina usar a API nativa do navegador para buscar dados no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+`fetch` é uma API nativa do navegador para fazer requisições HTTP. Ela dispensa bibliotecas externas para os casos básicos desta fase.
 
-## O que é
+## fetch retorna Promise
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
+```js
+const promessa = fetch("https://dummyjson.com/users/1");
+console.log(promessa);
+```
 
-## Por que existe
+O retorno não é o usuário. É uma Promise que resolverá com um objeto `Response`.
 
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Exemplo básico
 
 ```js
 fetch("https://dummyjson.com/users/1")
   .then((response) => response.json())
-  .then((user) => console.log(user.name));
+  .then((usuario) => {
+    console.log(usuario.firstName);
+  });
 ```
 
-## Aplicação no Front-end
+## Por que converter a resposta
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+A resposta HTTP vem como um objeto `Response`. Para acessar os dados em JSON, você chama `response.json()`.
 
-## Erros comuns
+## Aplicação no DOM
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+```js
+async function carregarNome() {
+  const response = await fetch("https://dummyjson.com/users/1");
+  const usuario = await response.json();
+  nome.textContent = usuario.firstName;
+}
+```
 
-## Boas práticas
+## Erro comum
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+```js
+const usuario = await fetch(url);
+console.log(usuario.firstName); // errado
+```
+
+O correto é aguardar o `fetch`, converter o corpo e só depois acessar os campos.
+
+## Boa prática
+
+Mesmo no primeiro exemplo, já pense em validar status e tratar erro. O fetch básico ensina o caminho, mas o código profissional precisa de proteção.
 
 ## Exercício rápido
 
-Busque um usuário público e exiba apenas o nome.
+Use `fetch` para buscar um usuário público, converta com `response.json()` e exiba o primeiro nome em um parágrafo.

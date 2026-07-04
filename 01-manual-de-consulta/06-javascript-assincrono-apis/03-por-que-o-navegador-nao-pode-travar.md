@@ -1,46 +1,49 @@
 # Por que o navegador não pode travar
 
-Este capítulo ensina entender responsividade durante esperas no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Uma página travada passa a sensação de erro, mesmo quando a operação ainda está em andamento. O usuário pode achar que o clique não funcionou, repetir a ação ou abandonar a tela.
 
-## O que é
+## O problema de bloquear a interface
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
+Imagine uma busca de CEP, usuário ou lista de produtos. Se o navegador parasse até a resposta chegar, a página não permitiria rolagem, clique, foco em campos ou atualização visual.
 
-## Por que existe
+No Front-end, esperar sem travar é parte da experiência do usuário.
 
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
+## O que fazer durante a espera
 
-## Quando usar
+A interface deve comunicar estado:
 
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
+- mostrar uma mensagem de carregamento;
+- desabilitar o botão que iniciou a ação, se cliques repetidos forem perigosos;
+- manter a área de resultado organizada;
+- permitir que a página continue legível.
 
 ## Exemplo didático
 
 ```js
-botao.disabled = true;
-status.textContent = "Buscando dados sem travar a tela...";
+const botao = document.querySelector("#buscar");
+const aviso = document.querySelector("#aviso");
+
+botao.addEventListener("click", () => {
+  botao.disabled = true;
+  aviso.textContent = "Buscando sem travar a tela...";
+
+  setTimeout(() => {
+    aviso.textContent = "Busca concluída.";
+    botao.disabled = false;
+  }, 1500);
+});
 ```
 
-## Aplicação no Front-end
+O usuário recebe resposta imediata no texto do aviso, mesmo antes da tarefa terminar.
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+## O que evitar
 
-## Erros comuns
+Evite simular espera com laços pesados, como `while` segurando a execução. Isso realmente bloqueia a thread principal e impede a tela de responder.
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+## Boa prática
 
-## Boas práticas
-
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Sempre que uma ação passar de alguns instantes, mostre feedback. Loading não é enfeite: é parte da comunicação entre sistema e usuário.
 
 ## Exercício rápido
 
-Crie um feedback visual para uma ação demorada sem usar laços bloqueantes.
+Crie uma ação que desabilita um botão, mostra "Processando..." e reabilita o botão depois de 2 segundos.

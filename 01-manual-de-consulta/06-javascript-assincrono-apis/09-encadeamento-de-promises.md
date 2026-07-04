@@ -1,47 +1,57 @@
 # Encadeamento de Promises
 
-Este capítulo ensina passar dados de uma etapa para outra no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Encadear Promises significa criar uma sequência de etapas em que a saída de uma etapa alimenta a próxima.
 
-## O que é
-
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
-
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Retornar valor no then
 
 ```js
-fetch(url)
-  .then((response) => response.json())
-  .then((dados) => console.log(dados));
+Promise.resolve(10)
+  .then((numero) => numero * 2)
+  .then((dobro) => console.log(dobro)); // 20
 ```
 
-## Aplicação no Front-end
+O valor retornado no primeiro `.then` chega ao próximo.
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+## Retornar outra Promise
 
-## Erros comuns
+```js
+fetch("https://dummyjson.com/users/1")
+  .then((response) => response.json())
+  .then((usuario) => fetch(`https://dummyjson.com/posts/user/${usuario.id}`))
+  .then((response) => response.json())
+  .then((posts) => console.log(posts));
+```
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+Quando um `.then` retorna outra Promise, o próximo `.then` espera essa Promise terminar.
 
-## Boas práticas
+## Exemplo progressivo
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+1. Buscar usuário.
+2. Converter resposta em JSON.
+3. Usar o `id` do usuário para buscar posts.
+4. Converter nova resposta.
+5. Renderizar resultado.
+
+Essa progressão precisa de retornos claros para não virar uma sequência confusa.
+
+## Erro comum
+
+Aninhar `.then` dentro de `.then` sem necessidade:
+
+```js
+fetch(url).then((response) => {
+  response.json().then((dados) => {
+    console.log(dados);
+  });
+});
+```
+
+Funciona, mas dificulta leitura e tratamento de erro. Prefira retornar a Promise.
+
+## Boa prática
+
+Cada `.then` deve fazer uma transformação pequena: validar, converter, extrair ou renderizar. Se um `.then` tem muitas responsabilidades, separe uma função.
 
 ## Exercício rápido
 
-Explique o que quebra quando você esquece o return em um then com bloco.
+Crie um encadeamento que começa com um número, soma 5, transforma em texto e mostra no console em três etapas separadas.

@@ -1,50 +1,56 @@
 # Tratamento de erros em requisições
 
-Este capítulo ensina lidar com rede, status e dados inesperados no contexto de JavaScript vanilla para Front-end. A ideia central é manter a página utilizável enquanto uma ação aguarda tempo, rede ou resposta externa.
+Tratar erro é preparar a tela para quando a requisição não entrega o resultado esperado. Isso inclui falha de rede, status HTTP de erro e dados em formato inesperado.
 
-## O que é
+## Tipos de falha
 
-É uma forma de organizar código quando o resultado não aparece imediatamente. Em vez de bloquear toda a tela, o JavaScript inicia uma operação, continua permitindo interação e volta ao fluxo quando houver resposta.
+- Rede indisponível ou bloqueada.
+- Servidor respondeu com status de erro.
+- Corpo da resposta não tem os campos esperados.
+- Lista veio vazia quando a tela esperava resultados.
 
-## Por que existe
-
-No navegador, uma requisição pode demorar, falhar ou retornar vazia. Se a interface ficasse parada, o usuário não saberia se clicou corretamente. Código assíncrono existe para controlar essa espera com previsibilidade.
-
-## Quando usar
-
-Use quando houver temporizadores, eventos que iniciam tarefas demoradas, leitura de dados externos, conversão de respostas ou atualização do DOM após uma operação futura.
-
-## Como pensar antes de codar
-
-Antes de escrever código, responda: qual ação inicia o fluxo, o que fica visível durante a espera, qual dado é esperado, como o erro será tratado e qual elemento do DOM será atualizado.
-
-## Exemplo didático
+## Exemplo seguro
 
 ```js
-try {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error("Resposta inválida");
-} catch (erro) {
-  mensagem.textContent = "Tente novamente mais tarde.";
+async function buscarUsuarios() {
+  const response = await fetch("https://dummyjson.com/users");
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+
+  const dados = await response.json();
+
+  if (!Array.isArray(dados.users)) {
+    throw new Error("Formato inesperado");
+  }
+
+  return dados.users;
 }
 ```
 
-## Aplicação no Front-end
+## Mensagem para usuário
 
-Em uma tela real, esse padrão aparece quando um botão busca informações e precisa mostrar loading, evitar cliques repetidos, limpar resultados antigos e renderizar a resposta de forma clara.
+```js
+try {
+  const usuarios = await buscarUsuarios();
+  renderizarUsuarios(usuarios);
+} catch (erro) {
+  mensagem.textContent = "Não conseguimos carregar os usuários agora.";
+  console.error(erro);
+}
+```
 
 ## Erros comuns
 
-- Achar que o resultado estará disponível na linha seguinte sem aguardar.
-- Mostrar erro técnico para o usuário em vez de uma mensagem compreensível.
-- Esquecer de restaurar o estado visual após sucesso ou falha.
+- Usar somente `console.error` e deixar a tela sem explicação.
+- Mostrar detalhes técnicos para o usuário.
+- Tratar qualquer falha como se fosse ausência de resultados.
 
-## Boas práticas
+## Boa prática
 
-- Dê nomes claros para funções assíncronas, como `carregarUsuarios`.
-- Separe busca de dados, renderização e mensagens.
-- Trate sucesso, falha e estado de carregamento.
+Separe mensagem humana de log técnico. O usuário precisa de orientação; o desenvolvedor precisa de detalhe para depurar.
 
 ## Exercício rápido
 
-Crie uma mensagem para o usuário e um log técnico separado.
+Simule uma URL inválida e mostre uma mensagem amigável no DOM, mantendo o erro técnico apenas no console.
