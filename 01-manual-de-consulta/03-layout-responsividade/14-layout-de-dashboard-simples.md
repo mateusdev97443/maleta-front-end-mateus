@@ -2,65 +2,55 @@
 
 ## Introdução
 
-Dashboards organizam navegação, métricas e áreas de conteúdo com clareza e adaptação progressiva. O objetivo deste capítulo é transformar o assunto em decisões práticas: o que usar, quando usar e quais cuidados tomar.
+Dashboard organiza dados, navegação e ações rápidas. Mesmo em versão simples, ele precisa evitar poluição visual e funcionar bem em telas estreitas.
 
-## Explicação conceitual
+## Objetivo do layout
 
-Todo layout começa pelo conteúdo. Antes de aplicar Flexbox, Grid ou media queries, observe a ordem dos elementos, a largura disponível, a relação entre blocos e a prioridade da informação. Um bom layout não tenta forçar a tela; ele distribui o conteúdo de forma fluida, com limites claros e espaçamentos consistentes.
+O objetivo de um dashboard é permitir leitura rápida: navegação, métricas principais, área de conteúdo e detalhes. A hierarquia deve mostrar o que é mais importante primeiro.
 
-Pense sempre em três perguntas:
-
-- O elemento precisa ocupar a linha inteira ou apenas o espaço do conteúdo?
-- Os filhos precisam ficar em linha, coluna ou grade?
-- Em qual largura o conteúdo começa a perder legibilidade?
-
-## Exemplo prático
+## Estrutura HTML recomendada
 
 ```html
-<section class="secao">
-  <div class="container">
-    <h2>Título da seção</h2>
-    <p>Conteúdo organizado com largura controlada e espaçamento previsível.</p>
-  </div>
-</section>
+<div class="dashboard">
+  <aside class="sidebar">
+    <h1>Maleta</h1>
+    <nav aria-label="Navegação do painel">
+      <ul>
+        <li><a href="#">Resumo</a></li>
+        <li><a href="#">Projetos</a></li>
+        <li><a href="#">Estudos</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="painel">
+    <header class="painel__topo">
+      <h2>Resumo</h2>
+      <a href="#">Novo projeto</a>
+    </header>
+
+    <section class="metricas" aria-label="Métricas principais">
+      <article class="metrica">...</article>
+      <article class="metrica">...</article>
+      <article class="metrica">...</article>
+    </section>
+
+    <section class="conteudo">...</section>
+  </main>
+</div>
 ```
 
-```css
-.container {
-  width: min(100% - 2rem, 1120px);
-  margin-inline: auto;
-}
+## Comportamento no mobile
 
-.secao {
-  padding-block: clamp(2rem, 6vw, 5rem);
-}
-```
+No mobile, a sidebar conceitual fica acima do conteúdo como bloco de navegação. Métricas aparecem empilhadas. Tabelas ou listas largas precisam ser simplificadas ou envolvidas por uma área rolável consciente.
 
-Esse padrão já resolve grande parte das páginas: a seção controla o respiro vertical e o container controla a leitura horizontal.
+## Comportamento no desktop
 
-## Quando usar
+No desktop, a sidebar pode ocupar coluna fixa e o conteúdo principal usa o restante do espaço. Métricas podem virar três colunas.
 
-Use este padrão quando precisar organizar blocos de conteúdo, criar seções de página, limitar linhas muito longas, alinhar elementos com consistência ou preparar a estrutura para evoluir em diferentes tamanhos de tela.
+## Onde usar Grid
 
-## Erros comuns
-
-- Definir `width: 1200px` sem alternativa fluida.
-- Resolver todo problema com media query antes de ajustar o layout base.
-- Usar `margin` aleatório em cada elemento sem padrão.
-- Esquecer que o mobile deve funcionar antes do desktop.
-- Esconder overflow sem investigar qual elemento está causando a quebra.
-
-## Boas práticas
-
-- Comece simples e deixe o conteúdo respirar.
-- Use `max-width`, `min()`, `clamp()` e porcentagens com intenção.
-- Prefira espaçamentos reutilizáveis.
-- Teste larguras intermediárias, não apenas celular e notebook.
-- Escolha Flexbox para alinhamento em um eixo e Grid para estruturas em duas dimensões.
-
-## Raciocínio estrutural
-
-Um dashboard simples precisa separar navegação, resumo e conteúdo. No mobile, a sidebar conceitual pode aparecer antes do conteúdo como uma lista de links. No desktop, ela pode ocupar uma coluna lateral.
+Grid é ideal para a estrutura principal e para métricas.
 
 ```css
 .dashboard {
@@ -76,6 +66,7 @@ Um dashboard simples precisa separar navegação, resumo e conteúdo. No mobile,
 @media (min-width: 960px) {
   .dashboard {
     grid-template-columns: 240px minmax(0, 1fr);
+    align-items: start;
   }
 
   .metricas {
@@ -83,3 +74,60 @@ Um dashboard simples precisa separar navegação, resumo e conteúdo. No mobile,
   }
 }
 ```
+
+## Onde usar Flexbox
+
+Use Flexbox em cabeçalhos internos para alinhar título e ação.
+
+```css
+.painel__topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+```
+
+## Onde usar container
+
+Dashboards nem sempre usam container centralizado como landing pages. Em painéis, é comum usar padding interno no shell e limitar áreas de texto dentro do conteúdo. Ainda assim, evite conteúdo colado nas bordas.
+
+```css
+.dashboard {
+  min-height: 100vh;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+```
+
+## Problemas comuns
+
+- Sidebar fixa larga demais para mobile.
+- Coluna principal com `1fr` estourando por conteúdo longo; use `minmax(0, 1fr)`.
+- Métricas pequenas demais por excesso de colunas.
+- Tabelas causando overflow sem tratamento.
+- Dashboard tentando mostrar tudo ao mesmo tempo.
+
+## Exemplo de card de métrica
+
+```css
+.metrica {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+}
+
+.metrica strong {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+}
+```
+
+## Boas práticas
+
+- Comece com informação essencial.
+- Use Grid para estrutura geral.
+- Use Flexbox para pequenos alinhamentos.
+- Teste textos longos em métricas e menus.
+- Não esconda problemas de overflow sem entender a causa.

@@ -2,58 +2,282 @@
 
 ## Introdução
 
-Reconhecer padrões de erro acelera a correção de layouts quebrados. O objetivo deste capítulo é transformar o assunto em decisões práticas: o que usar, quando usar e quais cuidados tomar.
+Este capítulo é um guia de diagnóstico. Para cada erro, observe o sintoma, identifique a causa provável, veja um exemplo ruim e aplique uma correção recomendada.
 
-## Explicação conceitual
+## 1. Largura fixa
 
-Todo layout começa pelo conteúdo. Antes de aplicar Flexbox, Grid ou media queries, observe a ordem dos elementos, a largura disponível, a relação entre blocos e a prioridade da informação. Um bom layout não tenta forçar a tela; ele distribui o conteúdo de forma fluida, com limites claros e espaçamentos consistentes.
+### Sintoma
 
-Pense sempre em três perguntas:
+A página cria rolagem horizontal em telas pequenas.
 
-- O elemento precisa ocupar a linha inteira ou apenas o espaço do conteúdo?
-- Os filhos precisam ficar em linha, coluna ou grade?
-- Em qual largura o conteúdo começa a perder legibilidade?
+### Causa provável
 
-## Exemplo prático
+Algum elemento usa `width` fixo maior que a tela.
 
-```html
-<section class="secao">
-  <div class="container">
-    <h2>Título da seção</h2>
-    <p>Conteúdo organizado com largura controlada e espaçamento previsível.</p>
-  </div>
-</section>
-```
+### Exemplo ruim
 
 ```css
 .container {
-  width: min(100% - 2rem, 1120px);
-  margin-inline: auto;
-}
-
-.secao {
-  padding-block: clamp(2rem, 6vw, 5rem);
+  width: 1200px;
 }
 ```
 
-Esse padrão já resolve grande parte das páginas: a seção controla o respiro vertical e o container controla a leitura horizontal.
+### Correção recomendada
 
-## Quando usar
+```css
+.container {
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+}
+```
 
-Use este padrão quando precisar organizar blocos de conteúdo, criar seções de página, limitar linhas muito longas, alinhar elementos com consistência ou preparar a estrutura para evoluir em diferentes tamanhos de tela.
+## 2. Imagem sem limite
 
-## Erros comuns
+### Sintoma
 
-- Definir `width: 1200px` sem alternativa fluida.
-- Resolver todo problema com media query antes de ajustar o layout base.
-- Usar `margin` aleatório em cada elemento sem padrão.
-- Esquecer que o mobile deve funcionar antes do desktop.
-- Esconder overflow sem investigar qual elemento está causando a quebra.
+A imagem ultrapassa o card ou a seção.
 
-## Boas práticas
+### Causa provável
 
-- Comece simples e deixe o conteúdo respirar.
-- Use `max-width`, `min()`, `clamp()` e porcentagens com intenção.
-- Prefira espaçamentos reutilizáveis.
-- Teste larguras intermediárias, não apenas celular e notebook.
-- Escolha Flexbox para alinhamento em um eixo e Grid para estruturas em duas dimensões.
+A imagem mantém seu tamanho original sem `max-width`.
+
+### Exemplo ruim
+
+```css
+.card img {
+  width: auto;
+}
+```
+
+### Correção recomendada
+
+```css
+.card img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+```
+
+## 3. Grid com coluna fixa
+
+### Sintoma
+
+Cards ficam espremidos ou estouram no mobile.
+
+### Causa provável
+
+A grade usa colunas fixas demais.
+
+### Exemplo ruim
+
+```css
+.cards {
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+}
+```
+
+### Correção recomendada
+
+```css
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+```
+
+## 4. Flex sem wrap
+
+### Sintoma
+
+Itens de menu ou cards saem da tela.
+
+### Causa provável
+
+O container flexível não permite quebra de linha.
+
+### Exemplo ruim
+
+```css
+.menu {
+  display: flex;
+  gap: 1rem;
+}
+```
+
+### Correção recomendada
+
+```css
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+```
+
+## 5. Texto longo causando overflow
+
+### Sintoma
+
+Uma palavra, URL ou código ultrapassa o card.
+
+### Causa provável
+
+Conteúdo longo não tem regra de quebra.
+
+### Exemplo ruim
+
+```html
+<p>https://exemplo.com/caminho-muito-muito-muito-longo-sem-quebra</p>
+```
+
+### Correção recomendada
+
+```css
+.card {
+  overflow-wrap: break-word;
+}
+```
+
+## 6. Padding exagerado no mobile
+
+### Sintoma
+
+O conteúdo fica apertado ou quase sem espaço útil.
+
+### Causa provável
+
+O mesmo padding grande do desktop foi usado no mobile.
+
+### Exemplo ruim
+
+```css
+.secao {
+  padding: 6rem 4rem;
+}
+```
+
+### Correção recomendada
+
+```css
+.secao {
+  padding: clamp(2rem, 6vw, 6rem) clamp(1rem, 4vw, 4rem);
+}
+```
+
+## 7. Breakpoint copiado sem necessidade
+
+### Sintoma
+
+O layout muda em pontos estranhos ou antes de precisar.
+
+### Causa provável
+
+Breakpoints foram copiados de aparelhos ou frameworks, não do conteúdo.
+
+### Exemplo ruim
+
+```css
+@media (min-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+```
+
+### Correção recomendada
+
+Use `auto-fit` ou crie breakpoint quando a largura realmente comportar a mudança.
+
+```css
+.cards {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+```
+
+## 8. Excesso de media queries
+
+### Sintoma
+
+O CSS fica difícil de prever e uma regra corrige a anterior.
+
+### Causa provável
+
+A base não é fluida e depende de muitos remendos.
+
+### Exemplo ruim
+
+```css
+.caixa { width: 320px; }
+@media (min-width: 500px) { .caixa { width: 460px; } }
+@media (min-width: 700px) { .caixa { width: 680px; } }
+```
+
+### Correção recomendada
+
+```css
+.caixa {
+  width: min(100%, 680px);
+}
+```
+
+## 9. Esconder problema com `overflow: hidden`
+
+### Sintoma
+
+O conteúdo é cortado, mas o problema “some”.
+
+### Causa provável
+
+`overflow: hidden` foi usado sem entender qual elemento estourava.
+
+### Exemplo ruim
+
+```css
+body {
+  overflow-x: hidden;
+}
+```
+
+### Correção recomendada
+
+Inspecione o elemento causador e corrija largura fixa, imagem sem limite, grid mal definido ou texto longo.
+
+## 10. Testar só em uma largura
+
+### Sintoma
+
+Funciona no notebook do desenvolvedor, mas quebra em tablets ou celulares.
+
+### Causa provável
+
+O layout não foi testado em larguras intermediárias.
+
+### Correção recomendada
+
+Redimensione o navegador manualmente e teste faixas como 360px, 480px, 768px, 1024px e larguras intermediárias.
+
+## 11. Pensar primeiro no desktop
+
+### Sintoma
+
+O CSS mobile vira uma coleção de correções com `max-width`.
+
+### Causa provável
+
+O layout grande foi criado antes da experiência mínima.
+
+### Correção recomendada
+
+Escreva a base para mobile e use `min-width` para melhorar em telas maiores.
+
+## Checklist de diagnóstico rápido
+
+- Existe largura fixa maior que a tela?
+- Alguma imagem não tem limite?
+- Algum flex precisa de `flex-wrap`?
+- Algum grid usa colunas rígidas?
+- Algum texto longo precisa quebrar?
+- O layout foi testado entre os breakpoints?

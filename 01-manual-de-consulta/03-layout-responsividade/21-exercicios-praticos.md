@@ -2,44 +2,254 @@
 
 ## Introdução
 
-Os exercícios abaixo evoluem do básico ao intermediário. Faça cada um em HTML e CSS puros, sem JavaScript.
+Os exercícios abaixo devem ser feitos com HTML e CSS puros, sem JavaScript. A proposta é praticar raciocínio de layout, não apenas copiar código.
 
-## 1. Criar container centralizado
+## Exercício 1 — Container centralizado
 
-Objetivo: limitar a largura de leitura. Instruções: crie uma seção com título e parágrafo. Requisitos: usar `width`, `max-width` ou `min()` e `margin-inline: auto`. Critérios de conclusão: o conteúdo fica centralizado e não encosta nas bordas no mobile.
+### Objetivo
 
-## 2. Criar seção com largura máxima
+Criar um container que mantenha conteúdo legível em telas grandes e com respiro lateral no mobile.
 
-Objetivo: montar uma seção reutilizável. Instruções: combine `.secao` e `.container`. Requisitos: espaçamento vertical responsivo. Critérios de conclusão: a seção mantém respiro em mobile e desktop.
+### Instruções
 
-## 3. Criar grupo de cards com Flexbox
+Crie uma página com uma seção contendo título, subtítulo e dois parágrafos. A seção deve ocupar a largura da tela, mas o texto precisa ficar limitado e centralizado.
 
-Objetivo: praticar `display: flex`, `gap`, `flex-wrap` e `flex`. Instruções: crie três cards. Requisitos: cards devem quebrar linha sem overflow. Critérios de conclusão: funciona em telas estreitas e largas.
+### Requisitos obrigatórios
 
-## 4. Criar grid de cards responsivo
+- Usar `width`, `max-width` ou `min()`.
+- Usar `margin-inline: auto`.
+- Manter respiro lateral em telas pequenas.
+- Não usar `width` fixa maior que a tela.
 
-Objetivo: usar Grid com `auto-fit` e `minmax()`. Instruções: crie seis cards. Requisitos: uma coluna no mobile e múltiplas quando couber. Critérios de conclusão: nenhum breakpoint é obrigatório para a grade básica.
+### Critérios de conclusão
 
-## 5. Criar formulário responsivo
+O texto não fica colado nas bordas no mobile e não fica longo demais no desktop.
 
-Objetivo: organizar campos de forma legível. Instruções: crie nome, e-mail, assunto e mensagem. Requisitos: campos empilhados no mobile e alguns pares lado a lado no desktop. Critérios de conclusão: labels e campos ficam alinhados e confortáveis.
+### Extra opcional
 
-## 6. Criar hero section responsiva
+Crie uma variação para artigo usando largura em `ch`.
 
-Objetivo: montar abertura de landing page. Instruções: título, texto, botão e imagem. Requisitos: uma coluna no mobile e duas no desktop. Critérios de conclusão: a ordem do conteúdo faz sentido no mobile.
+## Exercício 2 — Seção com largura máxima
 
-## 7. Criar layout simples de landing page
+### Objetivo
 
-Objetivo: combinar hero, benefícios, chamada final e rodapé. Instruções: use seções reutilizáveis. Requisitos: containers, cards e espaçamento consistente. Critérios de conclusão: a página tem hierarquia clara.
+Separar responsabilidade entre seção e container.
 
-## 8. Criar layout simples de dashboard
+### Instruções
 
-Objetivo: praticar Grid de página. Instruções: crie sidebar conceitual, cabeçalho, métricas e conteúdo. Requisitos: sidebar empilhada no mobile e lateral no desktop. Critérios de conclusão: não há overflow horizontal.
+Monte uma seção de “Sobre o projeto” com fundo, espaçamento vertical e conteúdo centralizado.
 
-## 9. Corrigir layout quebrado
+### Requisitos obrigatórios
 
-Objetivo: diagnosticar problemas. Instruções: crie propositalmente uma imagem larga, card com largura fixa e texto longo; depois corrija. Requisitos: usar `max-width`, `minmax(0, 1fr)` ou quebra adequada. Critérios de conclusão: a página não estoura a tela.
+- `.secao` deve controlar `padding-block`.
+- `.container` deve controlar largura.
+- Usar `clamp()` em pelo menos um espaçamento.
 
-## 10. Refatorar layout desktop-first para mobile-first
+### Critérios de conclusão
 
-Objetivo: mudar a estratégia de CSS. Instruções: pegue um layout que começa com duas colunas e transforme o CSS base em uma coluna. Requisitos: usar `min-width` para expandir. Critérios de conclusão: o CSS fica mais simples e previsível.
+A seção mantém ritmo visual em mobile e desktop sem media query obrigatória.
+
+### Extra opcional
+
+Adicione uma segunda seção reutilizando as mesmas classes.
+
+## Exercício 3 — Grupo de cards com Flexbox
+
+### Objetivo
+
+Praticar `display: flex`, `flex-wrap`, `gap` e `flex`.
+
+### Instruções
+
+Crie três cards de benefícios com título, texto e link.
+
+### Requisitos obrigatórios
+
+- O container dos cards deve usar Flexbox.
+- Os cards devem quebrar linha quando não couberem.
+- Cada card deve ter largura mínima confortável.
+- Não usar altura fixa.
+
+### Critérios de conclusão
+
+Os cards ficam empilhados em telas pequenas e lado a lado quando houver espaço.
+
+### Extra opcional
+
+Faça um card ter conteúdo maior e confirme que o layout não quebra.
+
+## Exercício 4 — Grid de cards responsivo
+
+### Objetivo
+
+Criar uma grade fluida com Grid, `auto-fit` e `minmax()`.
+
+### Instruções
+
+Crie seis cards de projetos. Cada card deve ter categoria, título e descrição.
+
+### Requisitos obrigatórios
+
+- Usar `display: grid`.
+- Usar `repeat(auto-fit, minmax(...))`.
+- Usar `gap`.
+- Não depender de três media queries para definir colunas.
+
+### Critérios de conclusão
+
+A grade cria quantas colunas couberem sem overflow horizontal.
+
+### Extra opcional
+
+Adicione um card com imagem usando `aspect-ratio`.
+
+## Exercício 5 — Formulário responsivo
+
+### Objetivo
+
+Construir um formulário confortável em mobile e organizado no desktop.
+
+### Instruções
+
+Crie formulário com nome, e-mail, telefone, assunto, mensagem e botão.
+
+### Requisitos obrigatórios
+
+- Labels visíveis.
+- Campos com `width: 100%`.
+- Campos empilhados no mobile.
+- Nome/e-mail ou telefone/assunto lado a lado apenas em telas maiores.
+
+### Critérios de conclusão
+
+O formulário é fácil de preencher no mobile e não fica largo demais no desktop.
+
+### Extra opcional
+
+Use `fieldset` e `legend` para agrupar dados.
+
+## Exercício 6 — Hero section responsiva
+
+### Objetivo
+
+Criar uma abertura de landing page com hierarquia clara.
+
+### Instruções
+
+Monte hero com etiqueta, título, texto, botão e imagem.
+
+### Requisitos obrigatórios
+
+- Uma coluna no mobile.
+- Duas colunas no desktop.
+- Imagem fluida.
+- Título com `clamp()`.
+
+### Critérios de conclusão
+
+A mensagem principal aparece antes da imagem no HTML e o layout não quebra em telas intermediárias.
+
+### Extra opcional
+
+Adicione um segundo botão em um grupo com Flexbox.
+
+## Exercício 7 — Landing page simples
+
+### Objetivo
+
+Combinar padrões de seção em uma página completa.
+
+### Instruções
+
+Crie uma landing page com topo, hero, benefícios, seção alternada, chamada final e rodapé.
+
+### Requisitos obrigatórios
+
+- Usar container consistente.
+- Usar Grid nos cards.
+- Usar Flexbox no menu ou grupo de ações.
+- Não usar JavaScript.
+
+### Critérios de conclusão
+
+A página mantém ordem lógica no mobile e melhora visualmente no desktop.
+
+### Extra opcional
+
+Inclua uma seção de depoimentos em cards.
+
+## Exercício 8 — Dashboard simples
+
+### Objetivo
+
+Praticar layout de painel com sidebar conceitual e conteúdo principal.
+
+### Instruções
+
+Crie sidebar, topo do painel, três métricas e uma área de conteúdo.
+
+### Requisitos obrigatórios
+
+- Sidebar acima do conteúdo no mobile.
+- Sidebar lateral no desktop.
+- Métricas em uma coluna no mobile e grade no desktop.
+- Usar `minmax(0, 1fr)` na coluna principal.
+
+### Critérios de conclusão
+
+O dashboard não gera overflow horizontal e a navegação continua legível.
+
+### Extra opcional
+
+Adicione uma lista de atividades recentes.
+
+## Exercício 9 — Corrigir layout quebrado
+
+### Objetivo
+
+Praticar diagnóstico de responsividade.
+
+### Instruções
+
+Crie propositalmente uma página com container fixo, imagem sem limite, flex sem wrap e texto longo. Depois corrija cada problema.
+
+### Requisitos obrigatórios
+
+- Identificar o sintoma de cada erro.
+- Corrigir largura fixa.
+- Corrigir imagem.
+- Corrigir flex sem wrap.
+- Corrigir texto longo.
+
+### Critérios de conclusão
+
+A página final não tem rolagem horizontal em telas pequenas.
+
+### Extra opcional
+
+Escreva comentários no CSS explicando cada correção.
+
+## Exercício 10 — Refatorar desktop-first para mobile-first
+
+### Objetivo
+
+Transformar um CSS cheio de correções em uma estratégia progressiva.
+
+### Instruções
+
+Crie primeiro um layout desktop-first com duas colunas e correções para mobile. Depois refatore para mobile-first.
+
+### Requisitos obrigatórios
+
+- CSS base deve ser uma coluna.
+- Usar `@media (min-width: ...)` para expandir.
+- Reduzir regras desnecessárias.
+- Manter o mesmo HTML.
+
+### Critérios de conclusão
+
+A versão mobile-first fica mais curta, mais previsível e funciona em telas intermediárias.
+
+### Extra opcional
+
+Compare os dois CSS em comentários: o que ficou mais simples?

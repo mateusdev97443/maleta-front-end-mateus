@@ -2,58 +2,155 @@
 
 ## Introdução
 
-Cards organizam conteúdo repetível e precisam se adaptar de uma coluna no mobile a grades no desktop. O objetivo deste capítulo é transformar o assunto em decisões práticas: o que usar, quando usar e quais cuidados tomar.
+Cards agrupam informações relacionadas em blocos reutilizáveis. Um card responsivo precisa funcionar com pouco ou muito texto, com ou sem imagem, em uma coluna no mobile e em grade quando houver espaço.
 
-## Explicação conceitual
-
-Todo layout começa pelo conteúdo. Antes de aplicar Flexbox, Grid ou media queries, observe a ordem dos elementos, a largura disponível, a relação entre blocos e a prioridade da informação. Um bom layout não tenta forçar a tela; ele distribui o conteúdo de forma fluida, com limites claros e espaçamentos consistentes.
-
-Pense sempre em três perguntas:
-
-- O elemento precisa ocupar a linha inteira ou apenas o espaço do conteúdo?
-- Os filhos precisam ficar em linha, coluna ou grade?
-- Em qual largura o conteúdo começa a perder legibilidade?
-
-## Exemplo prático
+## Estrutura HTML de card
 
 ```html
-<section class="secao">
-  <div class="container">
-    <h2>Título da seção</h2>
-    <p>Conteúdo organizado com largura controlada e espaçamento previsível.</p>
+<article class="card">
+  <img class="card__imagem" src="layout.jpg" alt="Exemplo de layout responsivo">
+  <div class="card__corpo">
+    <p class="card__categoria">Layout</p>
+    <h2 class="card__titulo">Cards responsivos</h2>
+    <p class="card__texto">Um card deve se adaptar ao conteúdo sem depender de altura fixa.</p>
+    <a class="card__acao" href="#">Ler mais</a>
   </div>
-</section>
+</article>
+```
+
+Use `article` quando o card representa conteúdo independente, como projeto, post, produto ou aula.
+
+## Card com imagem
+
+```css
+.card {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  background: #fff;
+}
+
+.card__imagem {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.card__corpo {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+```
+
+A imagem usa proporção fixa, mas o corpo do card cresce conforme o conteúdo.
+
+## Card sem imagem
+
+```html
+<article class="card card--simples">
+  <h2>Checklist de responsividade</h2>
+  <p>Revise largura, imagens, espaçamentos e breakpoints.</p>
+</article>
 ```
 
 ```css
-.container {
-  width: min(100% - 2rem, 1120px);
-  margin-inline: auto;
-}
-
-.secao {
-  padding-block: clamp(2rem, 6vw, 5rem);
+.card--simples {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  gap: 0.75rem;
 }
 ```
 
-Esse padrão já resolve grande parte das páginas: a seção controla o respiro vertical e o container controla a leitura horizontal.
+Cards sem imagem dependem mais de hierarquia tipográfica e espaçamento.
+
+## Card com botão
+
+```css
+.card__acao {
+  display: inline-block;
+  justify-self: start;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: #111827;
+  color: #fff;
+  text-decoration: none;
+}
+```
+
+Use `justify-self: start` para impedir que o botão ocupe largura total quando isso não for desejado.
+
+## Cards em Flexbox
+
+Flexbox funciona bem quando os cards precisam quebrar linha e ter largura mínima.
+
+```css
+.cards-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cards-flex > .card {
+  flex: 1 1 260px;
+}
+```
+
+## Cards em Grid
+
+Grid é a opção mais direta para grade responsiva.
+
+```css
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+```
+
+Esse padrão cria colunas quando couber e mantém uma coluna no mobile.
+
+## Altura variável
+
+Evite forçar `height` em cards com texto real. Títulos podem ter duas linhas, descrições podem variar e botões podem quebrar.
+
+```css
+/* Frágil */
+.card-ruim {
+  height: 320px;
+}
+
+/* Mais seguro */
+.card-bom {
+  min-height: 100%;
+}
+```
+
+Se precisar alinhar botões no final, use grid interno:
+
+```css
+.card__corpo {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+}
+```
 
 ## Quando usar
 
-Use este padrão quando precisar organizar blocos de conteúdo, criar seções de página, limitar linhas muito longas, alinhar elementos com consistência ou preparar a estrutura para evoluir em diferentes tamanhos de tela.
+Use cards para listas de projetos, benefícios, posts, planos, produtos, recursos e métricas. Não use card para tudo: se o conteúdo é apenas texto corrido, uma seção simples pode ser melhor.
 
 ## Erros comuns
 
-- Definir `width: 1200px` sem alternativa fluida.
-- Resolver todo problema com media query antes de ajustar o layout base.
-- Usar `margin` aleatório em cada elemento sem padrão.
-- Esquecer que o mobile deve funcionar antes do desktop.
-- Esconder overflow sem investigar qual elemento está causando a quebra.
+- Altura fixa que quebra com texto maior.
+- Imagem sem proporção, deixando cards desalinhados.
+- Botão esticado sem intenção.
+- Grade com colunas fixas que estouram o mobile.
+- Cards com informações demais e pouca hierarquia.
 
 ## Boas práticas
 
-- Comece simples e deixe o conteúdo respirar.
-- Use `max-width`, `min()`, `clamp()` e porcentagens com intenção.
-- Prefira espaçamentos reutilizáveis.
-- Teste larguras intermediárias, não apenas celular e notebook.
-- Escolha Flexbox para alinhamento em um eixo e Grid para estruturas em duas dimensões.
+- Use `article` quando o card for conteúdo independente.
+- Controle imagem com `aspect-ratio` e `object-fit`.
+- Prefira Grid para listas de cards.
+- Use `gap` dentro do card.
+- Teste com títulos longos e sem imagem.

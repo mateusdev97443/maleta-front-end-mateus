@@ -2,58 +2,115 @@
 
 ## Introdução
 
-A propriedade display define como um elemento participa do fluxo e como seus filhos podem ser organizados. O objetivo deste capítulo é transformar o assunto em decisões práticas: o que usar, quando usar e quais cuidados tomar.
+`display` define duas coisas importantes: como o próprio elemento se comporta diante dos irmãos e, em alguns valores, como ele organiza os filhos. Por isso, `display` é uma das propriedades mais importantes para layout.
 
-## Explicação conceitual
+## Comportamento externo e organização dos filhos
 
-Todo layout começa pelo conteúdo. Antes de aplicar Flexbox, Grid ou media queries, observe a ordem dos elementos, a largura disponível, a relação entre blocos e a prioridade da informação. Um bom layout não tenta forçar a tela; ele distribui o conteúdo de forma fluida, com limites claros e espaçamentos consistentes.
-
-Pense sempre em três perguntas:
-
-- O elemento precisa ocupar a linha inteira ou apenas o espaço do conteúdo?
-- Os filhos precisam ficar em linha, coluna ou grade?
-- Em qual largura o conteúdo começa a perder legibilidade?
-
-## Exemplo prático
-
-```html
-<section class="secao">
-  <div class="container">
-    <h2>Título da seção</h2>
-    <p>Conteúdo organizado com largura controlada e espaçamento previsível.</p>
-  </div>
-</section>
-```
+Um elemento tem comportamento externo quando decide se ocupa a linha inteira, se fica no meio do texto ou se desaparece. Ele organiza filhos quando vira um contexto de layout, como Flexbox ou Grid.
 
 ```css
-.container {
-  width: min(100% - 2rem, 1120px);
-  margin-inline: auto;
+.caixa {
+  display: block; /* comportamento externo */
 }
 
-.secao {
-  padding-block: clamp(2rem, 6vw, 5rem);
+.menu {
+  display: flex; /* comportamento externo + organização dos filhos */
 }
 ```
 
-Esse padrão já resolve grande parte das páginas: a seção controla o respiro vertical e o container controla a leitura horizontal.
+## `display: block`
 
-## Quando usar
+Elementos block começam em nova linha e ocupam a largura disponível. Use para seções, cards, containers e blocos de conteúdo.
 
-Use este padrão quando precisar organizar blocos de conteúdo, criar seções de página, limitar linhas muito longas, alinhar elementos com consistência ou preparar a estrutura para evoluir em diferentes tamanhos de tela.
+```css
+.card {
+  display: block;
+  padding: 1rem;
+  border: 1px solid #ddd;
+}
+```
 
-## Erros comuns
+## `display: inline`
 
-- Definir `width: 1200px` sem alternativa fluida.
-- Resolver todo problema com media query antes de ajustar o layout base.
-- Usar `margin` aleatório em cada elemento sem padrão.
-- Esquecer que o mobile deve funcionar antes do desktop.
-- Esconder overflow sem investigar qual elemento está causando a quebra.
+Elementos inline acompanham o texto. Largura e altura não funcionam da mesma forma que em blocos. Use para trechos pequenos, links dentro de frases e marcações textuais.
+
+```html
+<p>Leia o <a href="#">guia completo</a> antes de praticar.</p>
+```
+
+## `display: inline-block`
+
+`inline-block` mantém o elemento na linha, mas permite largura, altura, padding vertical e aparência de botão.
+
+```css
+.botao {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: #222;
+  color: #fff;
+}
+```
+
+## `display: flex`
+
+Flexbox organiza filhos em um eixo principal. Use quando precisa alinhar, distribuir ou quebrar itens em linha/coluna.
+
+```css
+.cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+```
+
+## `display: grid`
+
+Grid organiza filhos em linhas e colunas. Use para cards, galerias, dashboards e estruturas de página.
+
+```css
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+```
+
+## `display: none`
+
+`display: none` remove o elemento do layout e da navegação visual. Use com cuidado. Nesta fase, não será usado para abrir e fechar menus com JavaScript.
+
+```css
+.aviso-impressao {
+  display: none;
+}
+```
+
+## Quando alterar `display`
+
+Altere `display` quando o comportamento padrão não atende ao objetivo: transformar link em botão, alinhar itens de cabeçalho, montar grade de cards ou ocultar conteúdo não aplicável a determinado contexto.
+
+## Exemplos de escolha
+
+- Link dentro de parágrafo: `inline`.
+- Botão visual dentro de hero: `inline-block`.
+- Lista de links no cabeçalho: `flex`.
+- Lista de cards: `grid`.
+- Bloco de seção: `block`.
+
+## Erros comuns específicos
+
+- Usar `display: inline` em elemento que precisa de largura e padding vertical.
+- Usar `display: flex` sem entender que só os filhos diretos viram itens flexíveis.
+- Aplicar `display: grid` no item errado em vez do container.
+- Usar `display: none` para esconder problema de layout.
+- Esperar que `display` sozinho resolva espaçamento, largura e responsividade.
 
 ## Boas práticas
 
-- Comece simples e deixe o conteúdo respirar.
-- Use `max-width`, `min()`, `clamp()` e porcentagens com intenção.
-- Prefira espaçamentos reutilizáveis.
-- Teste larguras intermediárias, não apenas celular e notebook.
-- Escolha Flexbox para alinhamento em um eixo e Grid para estruturas em duas dimensões.
+- Identifique primeiro quem é o container e quem são os itens.
+- Use `inline-block` para links com aparência de botão.
+- Use Flexbox para alinhamento em um eixo.
+- Use Grid para estruturas em duas dimensões.
+- Evite esconder conteúdo importante sem necessidade.

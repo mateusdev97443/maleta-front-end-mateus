@@ -2,92 +2,145 @@
 
 ## Introdução
 
-Formulários responsivos reduzem atrito, respeitam leitura vertical e mantêm campos confortáveis. O objetivo deste capítulo é transformar o assunto em decisões práticas: o que usar, quando usar e quais cuidados tomar.
+Formulário responsivo precisa ser fácil de ler, preencher e revisar. O layout deve reduzir esforço: labels claras, campos confortáveis, agrupamento lógico e ordem previsível.
 
-## Explicação conceitual
+## Objetivo do layout
 
-Todo layout começa pelo conteúdo. Antes de aplicar Flexbox, Grid ou media queries, observe a ordem dos elementos, a largura disponível, a relação entre blocos e a prioridade da informação. Um bom layout não tenta forçar a tela; ele distribui o conteúdo de forma fluida, com limites claros e espaçamentos consistentes.
+O objetivo é coletar dados sem confundir a pessoa usuária. No mobile, campos empilhados costumam ser melhores. No desktop, campos relacionados podem ficar lado a lado quando isso não prejudicar a leitura.
 
-Pense sempre em três perguntas:
-
-- O elemento precisa ocupar a linha inteira ou apenas o espaço do conteúdo?
-- Os filhos precisam ficar em linha, coluna ou grade?
-- Em qual largura o conteúdo começa a perder legibilidade?
-
-## Exemplo prático
-
-```html
-<section class="secao">
-  <div class="container">
-    <h2>Título da seção</h2>
-    <p>Conteúdo organizado com largura controlada e espaçamento previsível.</p>
-  </div>
-</section>
-```
-
-```css
-.container {
-  width: min(100% - 2rem, 1120px);
-  margin-inline: auto;
-}
-
-.secao {
-  padding-block: clamp(2rem, 6vw, 5rem);
-}
-```
-
-Esse padrão já resolve grande parte das páginas: a seção controla o respiro vertical e o container controla a leitura horizontal.
-
-## Quando usar
-
-Use este padrão quando precisar organizar blocos de conteúdo, criar seções de página, limitar linhas muito longas, alinhar elementos com consistência ou preparar a estrutura para evoluir em diferentes tamanhos de tela.
-
-## Erros comuns
-
-- Definir `width: 1200px` sem alternativa fluida.
-- Resolver todo problema com media query antes de ajustar o layout base.
-- Usar `margin` aleatório em cada elemento sem padrão.
-- Esquecer que o mobile deve funcionar antes do desktop.
-- Esconder overflow sem investigar qual elemento está causando a quebra.
-
-## Boas práticas
-
-- Comece simples e deixe o conteúdo respirar.
-- Use `max-width`, `min()`, `clamp()` e porcentagens com intenção.
-- Prefira espaçamentos reutilizáveis.
-- Teste larguras intermediárias, não apenas celular e notebook.
-- Escolha Flexbox para alinhamento em um eixo e Grid para estruturas em duas dimensões.
-
-## Raciocínio estrutural
-
-Formulários devem priorizar leitura vertical, labels claras e campos confortáveis. No mobile, empilhar campos reduz erro. No desktop, campos relacionados podem ficar lado a lado.
+## Estrutura HTML recomendada
 
 ```html
 <form class="formulario">
-  <div class="formulario__linha">
-    <label>Nome <input type="text" name="nome"></label>
-    <label>E-mail <input type="email" name="email"></label>
-  </div>
-  <label>Mensagem <textarea name="mensagem"></textarea></label>
+  <fieldset>
+    <legend>Dados pessoais</legend>
+
+    <div class="formulario__linha">
+      <label>
+        Nome
+        <input type="text" name="nome" autocomplete="name">
+      </label>
+
+      <label>
+        E-mail
+        <input type="email" name="email" autocomplete="email">
+      </label>
+    </div>
+  </fieldset>
+
+  <label>
+    Mensagem
+    <textarea name="mensagem" rows="5"></textarea>
+  </label>
+
+  <button type="submit">Enviar</button>
 </form>
 ```
+
+## Comportamento no mobile
+
+No mobile, empilhe tudo. Campo lado a lado em tela estreita gera digitação desconfortável e leitura ruim. Botões devem ser fáceis de tocar.
+
+## Comportamento no desktop
+
+No desktop, use duas colunas apenas para campos curtos e relacionados, como nome/sobrenome ou cidade/estado. Mensagens, observações e campos longos devem ocupar a linha inteira.
+
+## Onde usar Grid
+
+Grid facilita linhas de formulário que mudam de uma para duas colunas.
 
 ```css
 .formulario {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
-.formulario label {
+.formulario__linha {
   display: grid;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 @media (min-width: 760px) {
   .formulario__linha {
-    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
   }
 }
 ```
+
+## Onde usar Flexbox
+
+Use Flexbox em grupos de ações, como botões de enviar e cancelar.
+
+```css
+.formulario__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+```
+
+## Estilo base de campos
+
+```css
+.formulario label {
+  display: grid;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.formulario input,
+.formulario textarea,
+.formulario select {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font: inherit;
+}
+```
+
+## Onde usar container
+
+Formulários longos não devem ocupar a tela inteira no desktop. Limite a largura para melhorar leitura.
+
+```css
+.formulario-container {
+  width: min(100% - 2rem, 760px);
+  margin-inline: auto;
+}
+```
+
+## Problemas comuns
+
+- Campos muito estreitos em colunas no mobile.
+- Labels longe dos inputs.
+- Botão pequeno demais para toque.
+- Formulário ocupando largura excessiva no desktop.
+- Agrupar campos sem lógica.
+
+## Exemplo semicompleto
+
+```css
+fieldset {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  border: 0;
+}
+
+button {
+  justify-self: start;
+  padding: 0.85rem 1.25rem;
+  border: 0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+```
+
+## Boas práticas
+
+- Mantenha label visível.
+- Empilhe campos no mobile.
+- Use colunas apenas quando houver espaço e relação entre campos.
+- Dê largura máxima ao formulário.
+- Teste navegação e leitura visual antes de estilizar demais.

@@ -2,58 +2,136 @@
 
 ## Introdução
 
-Containers transformam páginas largas em experiências legíveis, controladas e consistentes. O objetivo deste capítulo é transformar o assunto em decisões práticas: o que usar, quando usar e quais cuidados tomar.
+Container é o elemento que controla a largura útil do conteúdo. Ele impede que textos fiquem longos demais no desktop e garante respiro lateral no mobile.
 
-## Explicação conceitual
+## `width`, `max-width` e `min-width`
 
-Todo layout começa pelo conteúdo. Antes de aplicar Flexbox, Grid ou media queries, observe a ordem dos elementos, a largura disponível, a relação entre blocos e a prioridade da informação. Um bom layout não tenta forçar a tela; ele distribui o conteúdo de forma fluida, com limites claros e espaçamentos consistentes.
+`width` define uma largura desejada. `max-width` define um limite máximo. `min-width` define um limite mínimo. Em responsividade, `max-width` costuma ser mais seguro que largura fixa.
 
-Pense sempre em três perguntas:
+```css
+/* Ruim: pode estourar telas menores. */
+.container-ruim {
+  width: 1200px;
+}
 
-- O elemento precisa ocupar a linha inteira ou apenas o espaço do conteúdo?
-- Os filhos precisam ficar em linha, coluna ou grade?
-- Em qual largura o conteúdo começa a perder legibilidade?
-
-## Exemplo prático
-
-```html
-<section class="secao">
-  <div class="container">
-    <h2>Título da seção</h2>
-    <p>Conteúdo organizado com largura controlada e espaçamento previsível.</p>
-  </div>
-</section>
+/* Melhor: ocupa a tela pequena e limita no desktop. */
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+}
 ```
+
+## Centralização com `margin-inline: auto`
+
+Quando um bloco tem largura menor que o pai, `margin-inline: auto` divide o espaço lateral e centraliza o elemento.
+
+```css
+.texto {
+  max-width: 68ch;
+  margin-inline: auto;
+}
+```
+
+`ch` é útil para largura de leitura porque se relaciona ao tamanho dos caracteres.
+
+## Container moderno com `min()`
 
 ```css
 .container {
   width: min(100% - 2rem, 1120px);
   margin-inline: auto;
 }
+```
 
+Esse padrão significa: use no máximo `1120px`, mas em telas pequenas deixe `1rem` de respiro de cada lado.
+
+## Por que evitar `width: 1200px`
+
+Uma largura fixa ignora telas menores. Em um celular de 390px, um elemento de 1200px cria rolagem horizontal. Responsividade exige que a largura possa encolher.
+
+```css
+/* Problema clássico */
+.banner {
+  width: 1200px;
+}
+
+/* Correção */
+.banner {
+  width: min(100%, 1200px);
+}
+```
+
+## Containers para texto
+
+Textos longos precisam de largura menor que layouts de cards. Um container de página pode ter 1120px, mas um artigo pode ter 65ch a 75ch.
+
+```css
+.artigo {
+  width: min(100% - 2rem, 70ch);
+  margin-inline: auto;
+}
+```
+
+## Containers para seções
+
+Uma seção controla o espaçamento vertical. O container interno controla a largura.
+
+```html
+<section class="secao">
+  <div class="container">
+    <h2>Benefícios</h2>
+    <p>Conteúdo com largura controlada.</p>
+  </div>
+</section>
+```
+
+```css
 .secao {
   padding-block: clamp(2rem, 6vw, 5rem);
 }
 ```
 
-Esse padrão já resolve grande parte das páginas: a seção controla o respiro vertical e o container controla a leitura horizontal.
+## Containers aninhados
+
+Evite aninhar containers sem motivo. Um container dentro de outro pode reduzir demais a largura e criar alinhamentos estranhos. Use container menor apenas quando o conteúdo realmente pedir, como texto de artigo dentro de uma página ampla.
+
+## Exemplos bons e ruins
+
+```css
+/* Bom para página */
+.container-pagina {
+  width: min(100% - 2rem, 1120px);
+  margin-inline: auto;
+}
+
+/* Bom para texto */
+.container-texto {
+  width: min(100% - 2rem, 68ch);
+  margin-inline: auto;
+}
+
+/* Ruim para responsividade */
+.container-fixo {
+  width: 1180px;
+}
+```
 
 ## Quando usar
 
-Use este padrão quando precisar organizar blocos de conteúdo, criar seções de página, limitar linhas muito longas, alinhar elementos com consistência ou preparar a estrutura para evoluir em diferentes tamanhos de tela.
+Use containers em páginas, seções, artigos, dashboards e formulários. Sempre que a tela puder ficar maior que a largura confortável do conteúdo, use um limite.
 
 ## Erros comuns
 
-- Definir `width: 1200px` sem alternativa fluida.
-- Resolver todo problema com media query antes de ajustar o layout base.
-- Usar `margin` aleatório em cada elemento sem padrão.
-- Esquecer que o mobile deve funcionar antes do desktop.
-- Esconder overflow sem investigar qual elemento está causando a quebra.
+- Usar largura fixa em pixels sem limite fluido.
+- Centralizar com `text-align: center` achando que isso centraliza o bloco.
+- Aplicar container em cada card individual e perder alinhamento geral.
+- Não deixar respiro lateral no mobile.
+- Usar o mesmo limite para texto longo e grade de cards.
 
 ## Boas práticas
 
-- Comece simples e deixe o conteúdo respirar.
-- Use `max-width`, `min()`, `clamp()` e porcentagens com intenção.
-- Prefira espaçamentos reutilizáveis.
-- Teste larguras intermediárias, não apenas celular e notebook.
-- Escolha Flexbox para alinhamento em um eixo e Grid para estruturas em duas dimensões.
+- Use `width: min(100% - 2rem, valor)` para containers principais.
+- Use `ch` para limitar textos extensos.
+- Separe responsabilidade: seção espaça, container limita.
+- Evite containers aninhados sem necessidade.

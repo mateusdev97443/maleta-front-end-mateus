@@ -2,79 +2,142 @@
 
 ## Introdução
 
-Seções consistentes ajudam a montar páginas profissionais com blocos reutilizáveis e previsíveis. O objetivo deste capítulo é transformar o assunto em decisões práticas: o que usar, quando usar e quais cuidados tomar.
+Seções são blocos de construção de páginas. Um projeto profissional reaproveita padrões de seção com variações, em vez de reinventar espaçamento, container e grade a cada bloco.
 
-## Explicação conceitual
+## Objetivo dos padrões
 
-Todo layout começa pelo conteúdo. Antes de aplicar Flexbox, Grid ou media queries, observe a ordem dos elementos, a largura disponível, a relação entre blocos e a prioridade da informação. Um bom layout não tenta forçar a tela; ele distribui o conteúdo de forma fluida, com limites claros e espaçamentos consistentes.
+Padrões ajudam a manter consistência. Eles definem como uma seção respira, como limita conteúdo, como organiza título e como adapta layout em telas diferentes.
 
-Pense sempre em três perguntas:
-
-- O elemento precisa ocupar a linha inteira ou apenas o espaço do conteúdo?
-- Os filhos precisam ficar em linha, coluna ou grade?
-- Em qual largura o conteúdo começa a perder legibilidade?
-
-## Exemplo prático
+## Estrutura base
 
 ```html
 <section class="secao">
   <div class="container">
-    <h2>Título da seção</h2>
-    <p>Conteúdo organizado com largura controlada e espaçamento previsível.</p>
+    <header class="secao__cabecalho">
+      <p class="etiqueta">Aprendizado</p>
+      <h2>Layouts que se adaptam</h2>
+      <p>Use padrões para criar páginas consistentes.</p>
+    </header>
+
+    <div class="secao__conteudo">...</div>
   </div>
 </section>
 ```
 
 ```css
+.secao {
+  padding-block: clamp(2.5rem, 7vw, 6rem);
+}
+
 .container {
   width: min(100% - 2rem, 1120px);
   margin-inline: auto;
 }
 
-.secao {
-  padding-block: clamp(2rem, 6vw, 5rem);
+.secao__cabecalho {
+  max-width: 70ch;
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
 }
 ```
 
-Esse padrão já resolve grande parte das páginas: a seção controla o respiro vertical e o container controla a leitura horizontal.
+## Hero
 
-## Quando usar
-
-Use este padrão quando precisar organizar blocos de conteúdo, criar seções de página, limitar linhas muito longas, alinhar elementos com consistência ou preparar a estrutura para evoluir em diferentes tamanhos de tela.
-
-## Erros comuns
-
-- Definir `width: 1200px` sem alternativa fluida.
-- Resolver todo problema com media query antes de ajustar o layout base.
-- Usar `margin` aleatório em cada elemento sem padrão.
-- Esquecer que o mobile deve funcionar antes do desktop.
-- Esconder overflow sem investigar qual elemento está causando a quebra.
-
-## Boas práticas
-
-- Comece simples e deixe o conteúdo respirar.
-- Use `max-width`, `min()`, `clamp()` e porcentagens com intenção.
-- Prefira espaçamentos reutilizáveis.
-- Teste larguras intermediárias, não apenas celular e notebook.
-- Escolha Flexbox para alinhamento em um eixo e Grid para estruturas em duas dimensões.
-
-## Padrões úteis
-
-- Hero: apresenta promessa, texto curto e ação principal.
-- Benefícios: usa cards ou lista para explicar valor.
-- Conteúdo alternado: texto e imagem, empilhados no mobile e em colunas no desktop.
-- Chamada final: reforça ação com largura de texto controlada.
+Hero apresenta a mensagem principal. Deve priorizar título, texto e ação.
 
 ```css
-.secao--alternada {
+.hero {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+}
+```
+
+## Benefícios em cards
+
+Use quando existem vantagens ou recursos repetíveis.
+
+```css
+.beneficios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+```
+
+## Seção alternada
+
+Boa para explicar um recurso com texto e imagem.
+
+```html
+<section class="secao">
+  <div class="container secao-alternada">
+    <div>Texto explicativo</div>
+    <img src="exemplo.png" alt="Exemplo visual">
+  </div>
+</section>
+```
+
+```css
+.secao-alternada {
   display: grid;
   gap: 2rem;
   align-items: center;
 }
 
 @media (min-width: 880px) {
-  .secao--alternada {
+  .secao-alternada {
     grid-template-columns: 1fr 1fr;
   }
 }
 ```
+
+## Chamada final
+
+A chamada final deve ser curta, centralizada se fizer sentido e com ação clara.
+
+```css
+.cta-final {
+  max-width: 720px;
+  margin-inline: auto;
+  text-align: center;
+}
+```
+
+## Rodapé simples
+
+Rodapé pode usar Flexbox para distribuir informações quando houver espaço.
+
+```css
+.rodape {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+```
+
+## Comportamento no mobile e desktop
+
+No mobile, quase todos os padrões viram coluna única. No desktop, apenas alguns ganham colunas. Não force duas colunas se o conteúdo fica apertado.
+
+## Problemas comuns
+
+- Cada seção com padding diferente sem motivo.
+- Títulos sem largura de leitura.
+- Imagens desalinhadas por falta de proporção.
+- Seções alternadas quebrando a ordem lógica no mobile.
+- Repetir código em vez de criar padrões reutilizáveis.
+
+## Boas práticas
+
+- Use uma classe de seção para espaçamento vertical.
+- Use container para largura horizontal.
+- Use cabeçalho de seção para título e descrição.
+- Varie layout sem quebrar consistência.
+- Pense primeiro na sequência mobile.

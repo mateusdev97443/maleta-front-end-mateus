@@ -2,58 +2,104 @@
 
 ## Introdução
 
-Boas práticas evitam gambiarras e tornam o layout mais simples de manter. O objetivo deste capítulo é transformar o assunto em decisões práticas: o que usar, quando usar e quais cuidados tomar.
+Boas práticas tornam o layout mais previsível, sustentável e fácil de auditar. O objetivo não é usar a propriedade mais avançada, mas resolver o problema com clareza.
 
-## Explicação conceitual
+## Comece pelo conteúdo
 
-Todo layout começa pelo conteúdo. Antes de aplicar Flexbox, Grid ou media queries, observe a ordem dos elementos, a largura disponível, a relação entre blocos e a prioridade da informação. Um bom layout não tenta forçar a tela; ele distribui o conteúdo de forma fluida, com limites claros e espaçamentos consistentes.
+Leia o conteúdo antes de escolher layout. Um texto longo pede largura de leitura. Uma lista de itens pede repetição. Um dashboard pede hierarquia de dados.
 
-Pense sempre em três perguntas:
+## Use HTML bem estruturado
 
-- O elemento precisa ocupar a linha inteira ou apenas o espaço do conteúdo?
-- Os filhos precisam ficar em linha, coluna ou grade?
-- Em qual largura o conteúdo começa a perder legibilidade?
-
-## Exemplo prático
+HTML semântico reduz complexidade do CSS. Prefira `header`, `main`, `section`, `article`, `aside`, `nav`, listas e títulos em ordem lógica.
 
 ```html
-<section class="secao">
-  <div class="container">
-    <h2>Título da seção</h2>
-    <p>Conteúdo organizado com largura controlada e espaçamento previsível.</p>
-  </div>
+<section class="secao-beneficios">
+  <header>
+    <h2>Benefícios</h2>
+    <p>Por que estudar responsividade.</p>
+  </header>
+  <div class="cards">...</div>
 </section>
 ```
+
+## Mobile-first
+
+O CSS base deve funcionar em telas pequenas. Depois, aumente complexidade com `min-width`.
+
+```css
+.layout {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+```
+
+## Layout fluido
+
+Prefira medidas que se adaptem: porcentagem, `max-width`, `min()`, `minmax()`, `auto-fit` e `clamp()`.
 
 ```css
 .container {
   width: min(100% - 2rem, 1120px);
   margin-inline: auto;
 }
+```
 
-.secao {
-  padding-block: clamp(2rem, 6vw, 5rem);
+## Poucos breakpoints
+
+Breakpoints devem existir porque o conteúdo pediu, não porque um aparelho famoso tem determinada largura. Se `auto-fit` resolve, talvez a media query seja desnecessária.
+
+## Containers consistentes
+
+Use o mesmo padrão de container para manter alinhamento entre seções. Crie variações apenas quando houver motivo, como artigo estreito.
+
+```css
+.container-texto {
+  width: min(100% - 2rem, 70ch);
+  margin-inline: auto;
 }
 ```
 
-Esse padrão já resolve grande parte das páginas: a seção controla o respiro vertical e o container controla a leitura horizontal.
+## Imagens fluidas
 
-## Quando usar
+```css
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+```
 
-Use este padrão quando precisar organizar blocos de conteúdo, criar seções de página, limitar linhas muito longas, alinhar elementos com consistência ou preparar a estrutura para evoluir em diferentes tamanhos de tela.
+Em cards e galerias, combine com `aspect-ratio` e `object-fit`.
 
-## Erros comuns
+## Teste larguras intermediárias
 
-- Definir `width: 1200px` sem alternativa fluida.
-- Resolver todo problema com media query antes de ajustar o layout base.
-- Usar `margin` aleatório em cada elemento sem padrão.
-- Esquecer que o mobile deve funcionar antes do desktop.
-- Esconder overflow sem investigar qual elemento está causando a quebra.
+Não teste apenas “celular” e “desktop”. Muitos problemas aparecem entre 600px e 1000px, especialmente menus, dashboards e grades de cards.
 
-## Boas práticas
+## Combine Flexbox e Grid com intenção
 
-- Comece simples e deixe o conteúdo respirar.
-- Use `max-width`, `min()`, `clamp()` e porcentagens com intenção.
-- Prefira espaçamentos reutilizáveis.
-- Teste larguras intermediárias, não apenas celular e notebook.
-- Escolha Flexbox para alinhamento em um eixo e Grid para estruturas em duas dimensões.
+Use Grid para estrutura de página e listas em grade. Use Flexbox para alinhamentos internos, menus simples e grupos de ações.
+
+## Revise overflow
+
+Se apareceu rolagem horizontal, descubra a causa. Possíveis culpados: imagem sem limite, largura fixa, texto longo, grid rígido ou flex sem wrap.
+
+## Mantenha código simples
+
+Código responsivo bom costuma ter poucas regras bem escolhidas. Se uma seção exige muitas exceções, reveja HTML, container, largura e estratégia mobile-first.
+
+## Checklist profissional
+
+- O conteúdo faz sentido sem layout complexo?
+- O HTML está em ordem lógica?
+- O mobile funciona antes do desktop?
+- As imagens têm limites?
+- Os containers são consistentes?
+- Os breakpoints têm motivo?
+- O layout foi testado entre larguras?
+- Flexbox e Grid foram usados com intenção?
