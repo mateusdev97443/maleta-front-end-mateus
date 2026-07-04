@@ -1,11 +1,11 @@
 # Perguntas de Revisão
 
-Responda antes de olhar o gabarito. A ideia é testar entendimento real, não memorização.
+Responda primeiro sem consultar o gabarito. Depois compare sua resposta com os comentários.
 
 ## Perguntas
 
 1. O que é DOM?
-2. Qual a diferença entre HTML escrito e DOM interpretado?
+2. Qual a diferença entre HTML e DOM?
 3. Qual a diferença entre querySelector e querySelectorAll?
 4. O que é NodeList?
 5. Por que verificar se o elemento existe?
@@ -21,30 +21,30 @@ Responda antes de olhar o gabarito. A ideia é testar entendimento real, não me
 
 ## Gabarito comentado
 
-1. Resposta esperada: explique com suas palavras o conceito de "O que é DOM?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+1. **O que é DOM?** É a representação da página criada pelo navegador a partir do HTML. O JavaScript manipula essa representação, não o arquivo original salvo no projeto.
 
-2. Resposta esperada: explique com suas palavras o conceito de "Qual a diferença entre HTML escrito e DOM interpretado?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+2. **Qual a diferença entre HTML e DOM?** HTML é o código escrito. DOM é a estrutura interpretada, em memória, com elementos que podem ser lidos e alterados enquanto a página está aberta.
 
-3. Resposta esperada: explique com suas palavras o conceito de "Qual a diferença entre querySelector e querySelectorAll?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+3. **Qual a diferença entre querySelector e querySelectorAll?** `querySelector` retorna o primeiro elemento encontrado ou `null`. `querySelectorAll` retorna uma lista com todos os elementos compatíveis.
 
-4. Resposta esperada: explique com suas palavras o conceito de "O que é NodeList?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+4. **O que é NodeList?** É a lista retornada por `querySelectorAll`. Ela pode ser percorrida com `forEach`, mas não deve ser tratada como um único elemento.
 
-5. Resposta esperada: explique com suas palavras o conceito de "Por que verificar se o elemento existe?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+5. **Por que verificar se o elemento existe?** Porque seletores podem não encontrar nada. Manipular `null` gera erro e interrompe o script.
 
-6. Resposta esperada: explique com suas palavras o conceito de "Qual a diferença entre textContent, innerText e innerHTML?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+6. **Qual a diferença entre textContent, innerText e innerHTML?** `textContent` trabalha com texto puro; `innerText` considera mais o texto visível; `innerHTML` lê ou escreve marcação e exige cuidado.
 
-7. Resposta esperada: explique com suas palavras o conceito de "Quando usar classList?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+7. **Quando usar classList?** Quando o JavaScript precisa controlar estados visuais como ativo, aberto, erro, sucesso ou escondido sem sobrescrever todas as classes.
 
-8. Resposta esperada: explique com suas palavras o conceito de "Por que evitar excesso de estilo inline?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+8. **Por que evitar excesso de estilo inline?** Porque espalha regras visuais no JavaScript. Classes deixam CSS responsável pela aparência e tornam o código mais limpo.
 
-9. Resposta esperada: explique com suas palavras o conceito de "O que é evento?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+9. **O que é evento?** É uma ocorrência percebida pelo navegador, como clique, digitação ou envio de formulário, que pode disparar uma função.
 
-10. Resposta esperada: explique com suas palavras o conceito de "Para que serve addEventListener?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+10. **Para que serve addEventListener?** Serve para registrar uma função que será executada quando determinado evento acontecer em um elemento.
 
-11. Resposta esperada: explique com suas palavras o conceito de "O que é event.target?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+11. **O que é event.target?** É a referência ao elemento que originou o evento. Ajuda a descobrir qual botão, item ou campo foi acionado.
 
-12. Resposta esperada: explique com suas palavras o conceito de "Para que serve preventDefault?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+12. **Para que serve preventDefault?** Serve para impedir o comportamento padrão do navegador, como recarregar a página no envio de um formulário.
 
-13. Resposta esperada: explique com suas palavras o conceito de "Como validar formulário simples?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+13. **Como validar formulário simples?** Escute `submit`, impeça o comportamento padrão quando necessário, leia `value`, use `trim`, mostre erro claro e interrompa o fluxo se houver problema.
 
-14. Resposta esperada: explique com suas palavras o conceito de "Como organizar código DOM?" e cite um exemplo simples de interface. Uma boa resposta menciona seleção correta, verificação de existência, classes CSS para visual e eventos registrados com clareza.
+14. **Como organizar código DOM?** Selecione elementos no começo, use nomes claros, verifique existência, crie funções pequenas, prefira classes CSS e teste cada estado manualmente.

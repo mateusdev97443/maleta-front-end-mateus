@@ -1,49 +1,46 @@
 # Selecionando Elementos com querySelector
 
-## Ideia principal
+`querySelector` seleciona o primeiro elemento que combina com um seletor CSS. Ele recebe uma string, exatamente como você escreveria um seletor no CSS: classe com ponto, id com jogo da velha, tag pelo nome.
 
-`querySelector` retorna o primeiro elemento que combina com o seletor CSS informado. Nesta fase, o JavaScript passa a conversar com a página que o navegador já montou. O objetivo não é decorar comandos, mas entender qual elemento será lido, qual elemento será alterado e qual ação do usuário dispara a mudança.
-
-## Exemplo base
+## Exemplos de seleção
 
 ```html
-<button class="botao">Clique aqui</button>
-<p class="mensagem">Mensagem inicial</p>
+<h1 id="titulo-principal">Manual DOM</h1>
+<p class="descricao">Aprendendo seleção.</p>
+<button>Continuar</button>
 ```
 
 ```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
+const titulo = document.querySelector("#titulo-principal");
+const descricao = document.querySelector(".descricao");
+const primeiroBotao = document.querySelector("button");
+```
 
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "Mensagem alterada com JavaScript.";
-  });
+## Retorna apenas um elemento
+
+Se houver cinco botões, `document.querySelector("button")` retorna somente o primeiro encontrado na ordem do documento. Isso é ótimo quando existe um alvo único, mas perigoso quando você precisa mexer em vários itens.
+
+## Pode retornar null
+
+Quando nenhum elemento combina com o seletor, o resultado é `null`. Tentar acessar propriedade em `null` gera erro.
+
+```js
+const aviso = document.querySelector(".aviso");
+
+if (aviso) {
+  aviso.textContent = "Aviso encontrado.";
 }
 ```
 
-O botão é o elemento que dispara a interação. A mensagem é o elemento que recebe a alteração. A verificação com `if` evita erro quando o seletor não encontra nada no DOM.
+## Erro comum: esquecer o ponto da classe
 
-## Como pensar antes de codar
+```js
+const cardErrado = document.querySelector("card");
+const cardCerto = document.querySelector(".card");
+```
 
-1. Identifique o elemento no HTML.
-2. Escolha um seletor claro, de preferência uma classe criada para esse comportamento.
-3. Selecione com `document.querySelector` quando precisar de um elemento.
-4. Verifique se o elemento existe antes de acessar propriedades.
-5. Faça uma alteração pequena e previsível.
-6. Teste manualmente no navegador.
+`card` procura uma tag chamada `<card>`. `.card` procura uma classe.
 
-## Erros comuns
+## Quando usar
 
-- Tentar manipular um elemento antes de ele existir no DOM.
-- Usar seletor diferente da classe escrita no HTML.
-- Misturar muitas responsabilidades dentro do mesmo evento.
-- Alterar aparência diretamente com muitos estilos inline, quando uma classe CSS resolveria melhor.
-
-## Boa prática
-
-Prefira código explícito: nomes de variáveis claros, funções pequenas e classes CSS para mudanças visuais. DOM bem organizado é aquele que outra pessoa consegue ler e prever sem executar mentalmente vinte passos.
-
-## Exercício rápido
-
-Crie um botão e um parágrafo. Ao clicar no botão, altere o texto do parágrafo. Depois, teste o que acontece quando a classe do botão está escrita errada e corrija o problema.
+Use `querySelector` para título único, formulário único, botão principal, mensagem de erro específica ou qualquer elemento em que você espera apenas um resultado.

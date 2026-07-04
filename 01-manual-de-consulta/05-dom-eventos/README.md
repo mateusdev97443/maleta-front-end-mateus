@@ -2,21 +2,29 @@
 
 ## Objetivo da fase
 
-A Fase 6 ensina como o JavaScript lê, interpreta e altera a interface por meio do DOM e de eventos do navegador. Depois da Fase 5, em que o foco era lógica, variáveis, condicionais, laços e funções, agora o JavaScript deixa de ser apenas raciocínio interno e passa a controlar partes visíveis da página.
+A Fase 6 ensina como o JavaScript conversa com o HTML já renderizado pelo navegador. O foco é manipular interface com JavaScript puro: selecionar elementos, ler conteúdo, alterar classes, trabalhar com atributos, criar/remover elementos simples e reagir a ações do usuário.
+
+## Conexão com a Fase 5
+
+Na Fase 5, o JavaScript foi estudado como linguagem de lógica: variáveis, tipos, condicionais, laços, funções e objetos. Agora essa lógica passa a controlar partes visíveis da página. Uma condição pode decidir qual mensagem aparece; uma função pode abrir um menu; um evento pode validar um campo.
 
 ## O que o Mateus vai aprender
 
-- O que é o DOM e como o navegador cria uma representação do HTML.
-- Como selecionar um ou vários elementos com `querySelector` e `querySelectorAll`.
-- Como ler e alterar textos, classes, atributos e estruturas simples.
-- Como registrar eventos com `addEventListener`.
-- Como trabalhar com clique, digitação, envio de formulário, `event.target` e `preventDefault`.
-- Como montar interações pequenas: menu, accordion, feedback visual, cards e tema claro/escuro.
-- Como evitar erros comuns e escrever código DOM legível.
+- Entender o DOM como representação criada pelo navegador.
+- Diferenciar HTML escrito e DOM interpretado.
+- Selecionar um elemento ou vários elementos.
+- Ler e alterar texto de forma segura.
+- Usar classes para estados visuais.
+- Ler, alterar e remover atributos.
+- Criar e remover elementos simples.
+- Registrar eventos com `addEventListener`.
+- Trabalhar com clique, digitação e envio de formulário.
+- Usar `event.target` e `preventDefault` quando fizer sentido.
+- Construir interações pequenas como menu, accordion, cards e tema visual.
 
 ## Ordem recomendada de estudo
 
-Estude os capítulos na ordem numérica. Eles começam pela ideia de DOM, avançam para seleção e manipulação de elementos, depois entram em eventos e terminam com padrões, exercícios e desafios.
+Siga a numeração. Os primeiros capítulos constroem a base mental do DOM; os capítulos intermediários ensinam manipulação; os capítulos finais integram eventos, formulários, componentes, exercícios, revisão e padrão profissional.
 
 ## Arquivos da fase
 
@@ -58,8 +66,8 @@ Estude os capítulos na ordem numérica. Eles começam pela ideia de DOM, avanç
 
 ## Avisos de escopo
 
-Esta fase usa JavaScript puro no navegador e exemplos pequenos. Ela não ensina `fetch`, APIs, Promises, `async/await` nem frameworks. Também não entra em TypeScript, backend, banco de dados, autenticação, roteamento, deploy ou projeto grande.
+Esta fase não ensina comunicação externa, programação assíncrona, bibliotecas de interface, tipagem estática, servidor, banco de dados, autenticação, roteamento, publicação do site ou projeto grande. O estudo fica concentrado em DOM e eventos no navegador.
 
 ## Como estudar
 
-Leia um capítulo por vez, copie os exemplos em arquivos simples de HTML, CSS e JavaScript, altere nomes de classes e textos, quebre o código de propósito e observe os erros no console. Depois resolva os exercícios sem olhar respostas prontas.
+Leia o capítulo, copie o exemplo em arquivos simples, rode no navegador, abra o console, altere seletores de propósito e observe os erros. Depois resolva exercícios sem solução pronta e use o modelo de análise para planejar cada interação antes de escrever código.

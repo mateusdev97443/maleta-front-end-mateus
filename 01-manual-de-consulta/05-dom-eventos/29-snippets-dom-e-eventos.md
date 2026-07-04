@@ -1,159 +1,171 @@
 # Snippets de DOM e Eventos
 
-Estes snippets são modelos curtos para consulta. Adapte nomes de classes ao seu HTML e sempre teste se os elementos existem antes de manipular em projetos maiores.
+Modelos curtos para consulta. Adapte seletores ao seu HTML e mantenha as verificações quando o elemento puder não existir.
 
 ## Selecionar um elemento
 
-**Objetivo:** Encontrar o primeiro item compatível.
+**Objetivo:** Encontrar um alvo único no DOM.
 
 ```js
 const titulo = document.querySelector(".titulo");
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Seleciona o primeiro elemento com a classe `.titulo`. Se nada for encontrado, `titulo` recebe `null`.
 
-**Quando usar:** Use quando só existe um alvo principal.
+**Quando usar:** Quando a interface tem apenas um título, mensagem, formulário ou botão principal.
 
-**Cuidado importante:** Verifique se não retornou null.
+**Cuidado importante:** Verifique a existência antes de acessar propriedades.
 
 ## Selecionar vários elementos
 
-**Objetivo:** Criar uma lista de itens encontrados.
+**Objetivo:** Obter todos os itens equivalentes.
 
 ```js
-const botoes = document.querySelectorAll(".botao");
-botoes.forEach(function (botao) {
-  console.log(botao.textContent);
+const cards = document.querySelectorAll(".card");
+
+cards.forEach(function (card) {
+  card.classList.add("card--preparado");
 });
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Seleciona todos os elementos `.card` e percorre a lista para aplicar uma classe em cada um.
 
-**Quando usar:** Use em listas, cards e abas.
+**Quando usar:** Quando existem cards, links, abas, botões de filtro ou perguntas repetidas.
 
-**Cuidado importante:** NodeList não é um único elemento.
+**Cuidado importante:** A lista não possui `addEventListener` direto; percorra item por item.
 
 ## Alterar texto
 
-**Objetivo:** Trocar conteúdo textual seguro.
+**Objetivo:** Atualizar uma mensagem visível.
 
 ```js
-mensagem.textContent = "Texto atualizado.";
-```
+const status = document.querySelector(".status");
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
-
-**Quando usar:** Use para mensagens simples.
-
-**Cuidado importante:** Não use marcação HTML aqui.
-
-## Alternar classe
-
-**Objetivo:** Ligar e desligar estado visual.
-
-```js
-card.classList.toggle("ativo");
-```
-
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
-
-**Quando usar:** Use para menus, accordions e temas.
-
-**Cuidado importante:** A classe precisa existir no CSS.
-
-## Verificar se classe existe
-
-**Objetivo:** Testar estado visual.
-
-```js
-if (card.classList.contains("ativo")) {
-  console.log("Está ativo");
+if (status) {
+  status.textContent = "Dados conferidos.";
 }
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Troca apenas o texto do elemento, sem interpretar tags.
 
-**Quando usar:** Use antes de decidir uma ação.
+**Quando usar:** Mensagens de sucesso, erro, contadores e previews.
 
-**Cuidado importante:** Evite depender de texto visual.
+**Cuidado importante:** Para texto digitado por usuário, prefira sempre `textContent`.
+
+## Alternar classe
+
+**Objetivo:** Ligar e desligar um estado visual.
+
+```js
+const painel = document.querySelector(".painel");
+
+if (painel) {
+  painel.classList.toggle("painel--aberto");
+}
+```
+
+**Explicação curta:** Se a classe existe, remove; se não existe, adiciona.
+
+**Quando usar:** Menus, accordions, tema visual, detalhes expansíveis.
+
+**Cuidado importante:** A aparência precisa estar definida no CSS.
+
+## Verificar se classe existe
+
+**Objetivo:** Descobrir o estado atual do elemento.
+
+```js
+const aberto = menu.classList.contains("menu--aberto");
+```
+
+**Explicação curta:** Retorna verdadeiro quando a classe está presente e falso quando não está.
+
+**Quando usar:** Para trocar texto de botão ou decidir o próximo passo.
+
+**Cuidado importante:** Não use texto visível como única fonte de estado.
 
 ## Alterar atributo
 
-**Objetivo:** Mudar link ou imagem.
+**Objetivo:** Modificar informações como link ou imagem.
 
 ```js
-link.setAttribute("href", "contato.html");
+imagem.setAttribute("src", "imagens/perfil.png");
+imagem.setAttribute("alt", "Foto de perfil atualizada");
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Atualiza o caminho da imagem e o texto alternativo relacionado.
 
-**Quando usar:** Use para src, alt, href e aria.
+**Quando usar:** Troca de imagem, link, descrição alternativa ou estado de botão.
 
-**Cuidado importante:** Não coloque valores sem revisar.
+**Cuidado importante:** Ao trocar imagem, revise também o `alt`.
 
 ## Desabilitar botão
 
-**Objetivo:** Impedir clique temporário.
+**Objetivo:** Impedir uma ação temporariamente.
 
 ```js
 botao.setAttribute("disabled", "");
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Adiciona o atributo `disabled`, deixando o botão inativo.
 
-**Quando usar:** Use quando falta preencher algo.
+**Quando usar:** Enquanto um campo obrigatório está vazio.
 
-**Cuidado importante:** Remova com removeAttribute.
+**Cuidado importante:** Remova com `removeAttribute("disabled")` quando a ação voltar a ser permitida.
 
 ## Criar elemento
 
-**Objetivo:** Adicionar item novo.
+**Objetivo:** Adicionar estrutura simples à página.
 
 ```js
 const item = document.createElement("li");
-item.textContent = "Novo item";
+item.textContent = "Estudar classList";
 lista.append(item);
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Cria um `li`, define seu texto e insere no fim da lista.
 
-**Quando usar:** Use em listas dinâmicas simples.
+**Quando usar:** Listas visuais criadas por interação do usuário.
 
-**Cuidado importante:** Crie texto com textContent.
+**Cuidado importante:** Configure o elemento antes de inserir no DOM.
 
 ## Remover elemento
 
-**Objetivo:** Apagar item da interface.
+**Objetivo:** Retirar um item da interface.
 
 ```js
-item.remove();
+const aviso = document.querySelector(".aviso");
+
+if (aviso) {
+  aviso.remove();
+}
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Remove o elemento encontrado da árvore do DOM.
 
-**Quando usar:** Use em cards ou mensagens descartáveis.
+**Quando usar:** Avisos descartáveis, itens removidos e mensagens temporárias.
 
-**Cuidado importante:** Confirme se o elemento existe.
+**Cuidado importante:** Se precisar mostrar de novo, talvez seja melhor esconder com classe.
 
 ## Evento de clique
 
-**Objetivo:** Reagir a clique.
+**Objetivo:** Executar ação ao ativar botão.
 
 ```js
 botao.addEventListener("click", function () {
-  mensagem.textContent = "Clicou";
+  card.classList.toggle("card--ativo");
 });
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Registra uma função que alterna estado visual do card quando o botão é clicado.
 
-**Quando usar:** Use em botões e controles.
+**Quando usar:** Botões, menus, cards e controles visuais.
 
-**Cuidado importante:** Registre uma vez.
+**Cuidado importante:** Não registre o mesmo evento repetidamente sem necessidade.
 
 ## Evento de input
 
-**Objetivo:** Ler digitação.
+**Objetivo:** Responder à digitação.
 
 ```js
 campo.addEventListener("input", function () {
@@ -161,73 +173,73 @@ campo.addEventListener("input", function () {
 });
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Copia o valor atual do campo para um elemento de preview a cada alteração.
 
-**Quando usar:** Use em preview e validação simples.
+**Quando usar:** Prévia de nome, contador visual ou limpeza de erro.
 
-**Cuidado importante:** Não exagere na lógica a cada tecla.
+**Cuidado importante:** Campos usam `value`, não `textContent`.
 
-## Evento de submit
+## Evento de submit com preventDefault
 
-**Objetivo:** Controlar envio sem recarregar.
+**Objetivo:** Validar formulário sem recarregar a página.
 
 ```js
 formulario.addEventListener("submit", function (event) {
   event.preventDefault();
-  mensagem.textContent = "Formulário conferido.";
+  mensagem.textContent = "Formulário revisado.";
 });
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Escuta o envio do formulário e impede o comportamento padrão antes de mostrar feedback.
 
-**Quando usar:** Use no formulário, não no botão.
+**Quando usar:** Formulários simples com validação visual.
 
-**Cuidado importante:** Use preventDefault quando necessário.
+**Cuidado importante:** Registre no `form`, não apenas no botão.
 
-## Validar campo vazio
+## Validação de campo vazio
 
-**Objetivo:** Bloquear campo obrigatório.
+**Objetivo:** Detectar ausência de texto útil.
 
 ```js
-if (nome.value.trim() === "") {
-  erro.textContent = "Preencha seu nome.";
+if (campoNome.value.trim() === "") {
+  erro.textContent = "Digite seu nome.";
 }
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Remove espaços das pontas e verifica se ainda resta conteúdo.
 
-**Quando usar:** Use em formulários simples.
+**Quando usar:** Campos obrigatórios de nome, assunto ou comentário.
 
-**Cuidado importante:** trim evita espaços falsos.
+**Cuidado importante:** Espaços não devem contar como preenchimento real.
 
 ## Mostrar mensagem de erro
 
-**Objetivo:** Dar feedback claro.
+**Objetivo:** Exibir retorno claro para o usuário.
 
 ```js
 erro.textContent = "Campo obrigatório.";
-erro.classList.add("visivel");
+erro.classList.add("erro--visivel");
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Define o texto do erro e adiciona uma classe para destacar visualmente.
 
-**Quando usar:** Use para orientar o usuário.
+**Quando usar:** Validações e orientações de correção.
 
-**Cuidado importante:** Não use só cor.
+**Cuidado importante:** Não use apenas cor; mantenha texto explicativo.
 
 ## Esconder e mostrar elemento
 
-**Objetivo:** Alternar visibilidade.
+**Objetivo:** Controlar visibilidade por classe.
 
 ```js
-painel.classList.toggle("escondido");
+detalhes.classList.toggle("detalhes--oculto");
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Alterna a classe que o CSS usa para esconder ou mostrar o bloco.
 
-**Quando usar:** Use com CSS .escondido.
+**Quando usar:** Painéis, respostas, menus e informações extras.
 
-**Cuidado importante:** Prefira classes.
+**Cuidado importante:** Evite alternar vários estilos inline.
 
 ## Menu simples
 
@@ -235,35 +247,37 @@ painel.classList.toggle("escondido");
 
 ```js
 botaoMenu.addEventListener("click", function () {
-  menu.classList.toggle("aberto");
+  menu.classList.toggle("menu--aberto");
 });
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** O clique alterna a classe responsável por exibir a navegação.
 
-**Quando usar:** Use em navegação simples.
+**Quando usar:** Menus pequenos em páginas de estudo.
 
-**Cuidado importante:** Cuide do texto do botão.
+**Cuidado importante:** Atualize o texto do botão se isso ajudar o usuário.
 
 ## Accordion simples
 
-**Objetivo:** Mostrar resposta.
+**Objetivo:** Controlar resposta do item clicado.
 
 ```js
-pergunta.addEventListener("click", function () {
-  resposta.classList.toggle("aberta");
+perguntas.forEach(function (pergunta) {
+  pergunta.addEventListener("click", function () {
+    pergunta.closest(".faq-item").classList.toggle("faq-item--aberto");
+  });
 });
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Cada pergunta altera o item de FAQ mais próximo, sem afetar todos os outros por engano.
 
-**Quando usar:** Use em FAQ.
+**Quando usar:** Dúvidas frequentes e detalhes expansíveis.
 
-**Cuidado importante:** Não esconda conteúdo importante sem pista visual.
+**Cuidado importante:** Confira se `closest` encontrou o item antes de manipular em códigos maiores.
 
 ## Tema claro/escuro simples
 
-**Objetivo:** Trocar tema por classe.
+**Objetivo:** Trocar aparência geral da página.
 
 ```js
 botaoTema.addEventListener("click", function () {
@@ -271,8 +285,8 @@ botaoTema.addEventListener("click", function () {
 });
 ```
 
-**Explicação curta:** o código aplica uma ação pequena e direta no DOM.
+**Explicação curta:** Alterna uma classe no `body`, permitindo que o CSS mude a aparência global.
 
-**Quando usar:** Use em exemplo visual simples.
+**Quando usar:** Exercício de estado visual amplo.
 
-**Cuidado importante:** Sem persistência nesta fase.
+**Cuidado importante:** Nesta fase, a troca vale apenas para a página aberta.

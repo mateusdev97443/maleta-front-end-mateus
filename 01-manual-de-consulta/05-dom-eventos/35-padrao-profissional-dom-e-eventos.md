@@ -1,41 +1,67 @@
 # Padrão Profissional DOM e Eventos
 
-## Regras de escrita
+Este padrão define como escrever código DOM simples, legível e seguro para a Fase 6.
 
-- Use nomes claros de variáveis, como `botaoEnviar`, `campoNome` e `mensagemErro`.
-- Faça a seleção de elementos no começo do script ou do bloco da funcionalidade.
-- Verifique a existência antes de manipular.
-- Separe lógica e visual: JavaScript decide o estado; CSS desenha o estado.
-- Prefira `classList` a muitos comandos de `style`.
+## Nomeie pelo papel na interface
 
-## Organização de eventos
+Prefira `botaoMenu`, `formCadastro`, `campoEmail`, `mensagemErro` e `listaTarefas`. Evite nomes vagos como `x`, `coisa` ou `elemento1`.
 
-Registre eventos com `addEventListener`, mantenha funções pequenas e evite cadastrar o mesmo evento várias vezes sem necessidade.
+## Selecione no começo da funcionalidade
 
 ```js
-const botao = document.querySelector(".botao");
-const painel = document.querySelector(".painel");
+const formCadastro = document.querySelector(".form-cadastro");
+const campoNome = document.querySelector(".campo-nome");
+const mensagem = document.querySelector(".mensagem-form");
+```
 
-function alternarPainel() {
-  painel.classList.toggle("aberto");
-}
+Seleção concentrada facilita revisar dependências do código.
 
-if (botao && painel) {
-  botao.addEventListener("click", alternarPainel);
+## Verifique existência
+
+```js
+if (!formCadastro || !campoNome || !mensagem) {
+  return;
 }
 ```
 
-## Cuidados profissionais
+Em um script real, isso evita quebrar páginas que não possuem aquela interface.
 
-- Evite duplicação de seletores e mensagens.
-- Evite manipulação excessiva de `innerHTML`; prefira `textContent` e `createElement`.
-- Comentários devem explicar decisões, não repetir o óbvio.
-- Teste manualmente estados vazios, preenchidos e cliques repetidos.
+## Use funções pequenas
+
+```js
+function mostrarErro(texto) {
+  mensagem.textContent = texto;
+  mensagem.classList.add("mensagem--erro");
+}
+
+function limparErro() {
+  mensagem.textContent = "";
+  mensagem.classList.remove("mensagem--erro");
+}
+```
+
+## Separe lógica e visual
+
+O JavaScript decide o estado; o CSS desenha o estado. Prefira `classList` para aberto, ativo, erro, sucesso, oculto e selecionado.
+
+## Evite duplicação
+
+Se dois eventos fazem quase a mesma coisa, extraia uma função. Se várias mensagens repetem texto, guarde em constantes claras.
+
+## Use innerHTML com muita cautela
+
+Para texto, use `textContent`. Para estruturas, prefira `createElement`. Isso deixa a intenção mais clara e reduz riscos.
+
+## Comentários úteis
+
+Comente decisões, não traduções óbvias do código. Um bom comentário explica por que uma verificação existe ou por que determinado evento está no formulário.
 
 ## Checklist antes de considerar pronto
 
-- A interação tem objetivo claro.
-- Os elementos existem antes de serem usados.
-- O usuário recebe feedback.
-- O console não mostra erro.
-- O código está simples o suficiente para manutenção.
+- Seletores conferidos no HTML.
+- Elementos verificados antes do uso.
+- Eventos registrados uma vez.
+- Formulários tratam envio corretamente.
+- Classes CSS controlam visual.
+- Console sem erros.
+- Caminhos de erro e sucesso testados manualmente.

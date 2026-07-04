@@ -1,49 +1,44 @@
 # Introdução ao DOM e Eventos
 
-## Ideia principal
+Este manual começa quando o JavaScript deixa de trabalhar apenas com valores na memória e passa a conversar com a interface. Na Fase 5, Mateus estudou variáveis, condicionais, laços, funções e objetos. Agora esses recursos serão usados para selecionar elementos, reagir a ações do usuário e alterar partes da tela.
 
-Este capítulo aprofunda um ponto essencial de DOM e eventos. Nesta fase, o JavaScript passa a conversar com a página que o navegador já montou. O objetivo não é decorar comandos, mas entender qual elemento será lido, qual elemento será alterado e qual ação do usuário dispara a mudança.
+## O que muda nesta fase
 
-## Exemplo base
+Antes, um código podia calcular um desconto e mostrar o resultado no console. Com DOM e eventos, esse mesmo resultado pode aparecer dentro de um parágrafo, ativar uma mensagem visual ou desabilitar um botão.
 
 ```html
-<button class="botao">Clique aqui</button>
-<p class="mensagem">Mensagem inicial</p>
+<section class="resumo-produto">
+  <h2 class="produto-nome">Mochila Front-end</h2>
+  <p class="produto-status">Aguardando escolha.</p>
+  <button class="botao-comprar">Selecionar produto</button>
+</section>
 ```
 
 ```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
+const botaoComprar = document.querySelector(".botao-comprar");
+const produtoStatus = document.querySelector(".produto-status");
 
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "Mensagem alterada com JavaScript.";
+if (botaoComprar && produtoStatus) {
+  botaoComprar.addEventListener("click", function () {
+    produtoStatus.textContent = "Produto selecionado para análise.";
   });
 }
 ```
 
-O botão é o elemento que dispara a interação. A mensagem é o elemento que recebe a alteração. A verificação com `if` evita erro quando o seletor não encontra nada no DOM.
+## Três ideias centrais
 
-## Como pensar antes de codar
+1. **Selecionar:** encontrar no DOM o elemento que será lido ou alterado.
+2. **Escutar:** registrar qual ação do usuário importa, como clique, digitação ou envio de formulário.
+3. **Atualizar:** mudar texto, classe, atributo ou estrutura de forma controlada.
 
-1. Identifique o elemento no HTML.
-2. Escolha um seletor claro, de preferência uma classe criada para esse comportamento.
-3. Selecione com `document.querySelector` quando precisar de um elemento.
-4. Verifique se o elemento existe antes de acessar propriedades.
-5. Faça uma alteração pequena e previsível.
-6. Teste manualmente no navegador.
+## O que você deve praticar
 
-## Erros comuns
+- Ler o HTML e identificar bons pontos de seleção.
+- Criar classes com nomes úteis para comportamento.
+- Verificar se o elemento foi encontrado antes de manipular.
+- Preferir classes CSS para aparência.
+- Testar cada interação no navegador e no console.
 
-- Tentar manipular um elemento antes de ele existir no DOM.
-- Usar seletor diferente da classe escrita no HTML.
-- Misturar muitas responsabilidades dentro do mesmo evento.
-- Alterar aparência diretamente com muitos estilos inline, quando uma classe CSS resolveria melhor.
+## Cuidado inicial
 
-## Boa prática
-
-Prefira código explícito: nomes de variáveis claros, funções pequenas e classes CSS para mudanças visuais. DOM bem organizado é aquele que outra pessoa consegue ler e prever sem executar mentalmente vinte passos.
-
-## Exercício rápido
-
-Crie um botão e um parágrafo. Ao clicar no botão, altere o texto do parágrafo. Depois, teste o que acontece quando a classe do botão está escrita errada e corrija o problema.
+DOM não é sinônimo de bagunçar a página inteira com JavaScript. Uma interação profissional altera apenas o necessário, mantém o HTML compreensível e deixa o CSS cuidar da parte visual sempre que possível.

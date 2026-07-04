@@ -1,49 +1,47 @@
 # Event Object, target e preventDefault
 
-## Ideia principal
+Quando um evento acontece, o navegador entrega informações para a função. Esse objeto costuma ser chamado de `event`.
 
-O objeto `event` descreve o evento, `target` aponta a origem e `preventDefault` impede o comportamento padrão. Nesta fase, o JavaScript passa a conversar com a página que o navegador já montou. O objetivo não é decorar comandos, mas entender qual elemento será lido, qual elemento será alterado e qual ação do usuário dispara a mudança.
+## event
 
-## Exemplo base
+```js
+botao.addEventListener("click", function (event) {
+  console.log(event);
+});
+```
+
+Ele contém dados sobre o tipo de evento, elemento de origem e métodos úteis.
+
+## event.target
+
+`event.target` aponta para o elemento que originou o evento.
 
 ```html
-<button class="botao">Clique aqui</button>
-<p class="mensagem">Mensagem inicial</p>
+<div class="opcoes">
+  <button>Pequeno</button>
+  <button>Médio</button>
+  <button>Grande</button>
+</div>
+<p class="tamanho-escolhido"></p>
 ```
 
 ```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
+const opcoes = document.querySelector(".opcoes");
+const tamanhoEscolhido = document.querySelector(".tamanho-escolhido");
 
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "Mensagem alterada com JavaScript.";
+if (opcoes && tamanhoEscolhido) {
+  opcoes.addEventListener("click", function (event) {
+    if (event.target.tagName === "BUTTON") {
+      tamanhoEscolhido.textContent = `Tamanho: ${event.target.textContent}`;
+    }
   });
 }
 ```
 
-O botão é o elemento que dispara a interação. A mensagem é o elemento que recebe a alteração. A verificação com `if` evita erro quando o seletor não encontra nada no DOM.
+## preventDefault
 
-## Como pensar antes de codar
+`preventDefault` impede o comportamento padrão. Em formulários simples, isso evita recarregamento enquanto validamos e mostramos feedback.
 
-1. Identifique o elemento no HTML.
-2. Escolha um seletor claro, de preferência uma classe criada para esse comportamento.
-3. Selecione com `document.querySelector` quando precisar de um elemento.
-4. Verifique se o elemento existe antes de acessar propriedades.
-5. Faça uma alteração pequena e previsível.
-6. Teste manualmente no navegador.
+## Cuidado
 
-## Erros comuns
-
-- Tentar manipular um elemento antes de ele existir no DOM.
-- Usar seletor diferente da classe escrita no HTML.
-- Misturar muitas responsabilidades dentro do mesmo evento.
-- Alterar aparência diretamente com muitos estilos inline, quando uma classe CSS resolveria melhor.
-
-## Boa prática
-
-Prefira código explícito: nomes de variáveis claros, funções pequenas e classes CSS para mudanças visuais. DOM bem organizado é aquele que outra pessoa consegue ler e prever sem executar mentalmente vinte passos.
-
-## Exercício rápido
-
-Crie um botão e um parágrafo. Ao clicar no botão, altere o texto do parágrafo. Depois, teste o que acontece quando a classe do botão está escrita errada e corrija o problema.
+Não use `preventDefault` sem motivo. Ele deve resolver um comportamento padrão que atrapalha a interação planejada.

@@ -1,49 +1,36 @@
 # Boas Práticas de DOM e Eventos
 
-## Ideia principal
+Boas práticas deixam o código previsível. A meta não é escrever o menor código possível, mas um código que Mateus consiga revisar depois.
 
-Boas práticas tornam interações previsíveis, acessíveis e fáceis de manter. Nesta fase, o JavaScript passa a conversar com a página que o navegador já montou. O objetivo não é decorar comandos, mas entender qual elemento será lido, qual elemento será alterado e qual ação do usuário dispara a mudança.
+## Selecione com intenção
 
-## Exemplo base
+Use classes claras para comportamento, como `.botao-menu`, `.form-contato`, `.erro-email`. Evite seletores frágeis demais quando a estrutura pode mudar.
 
-```html
-<button class="botao">Clique aqui</button>
-<p class="mensagem">Mensagem inicial</p>
-```
+## Verifique elementos
 
 ```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
-
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "Mensagem alterada com JavaScript.";
-  });
+if (!formulario || !campoNome || !mensagem) {
+  return;
 }
 ```
 
-O botão é o elemento que dispara a interação. A mensagem é o elemento que recebe a alteração. A verificação com `if` evita erro quando o seletor não encontra nada no DOM.
+Em scripts maiores, retornar cedo evita aninhamento excessivo.
 
-## Como pensar antes de codar
+## Separe funções
 
-1. Identifique o elemento no HTML.
-2. Escolha um seletor claro, de preferência uma classe criada para esse comportamento.
-3. Selecione com `document.querySelector` quando precisar de um elemento.
-4. Verifique se o elemento existe antes de acessar propriedades.
-5. Faça uma alteração pequena e previsível.
-6. Teste manualmente no navegador.
+```js
+function mostrarErro(texto) {
+  mensagem.textContent = texto;
+  mensagem.classList.add("mensagem--erro");
+}
+```
 
-## Erros comuns
+Funções pequenas deixam eventos mais legíveis.
 
-- Tentar manipular um elemento antes de ele existir no DOM.
-- Usar seletor diferente da classe escrita no HTML.
-- Misturar muitas responsabilidades dentro do mesmo evento.
-- Alterar aparência diretamente com muitos estilos inline, quando uma classe CSS resolveria melhor.
+## Prefira classes para visual
 
-## Boa prática
+Estados como aberto, ativo, inválido e escondido devem ser classes. Isso mantém CSS e JavaScript com responsabilidades separadas.
 
-Prefira código explícito: nomes de variáveis claros, funções pequenas e classes CSS para mudanças visuais. DOM bem organizado é aquele que outra pessoa consegue ler e prever sem executar mentalmente vinte passos.
+## Teste manualmente
 
-## Exercício rápido
-
-Crie um botão e um parágrafo. Ao clicar no botão, altere o texto do parágrafo. Depois, teste o que acontece quando a classe do botão está escrita errada e corrija o problema.
+Antes de considerar pronto, teste caminho feliz, campo vazio, clique repetido, correção de erro e ausência de erro no console.

@@ -1,49 +1,38 @@
 # Criando Elementos com JavaScript
 
-## Ideia principal
+Criar elementos com JavaScript é útil quando a interface precisa adicionar itens depois de uma ação do usuário. O método principal é `document.createElement`.
 
-`createElement` cria novos elementos em memória antes de inseri-los na página. Nesta fase, o JavaScript passa a conversar com a página que o navegador já montou. O objetivo não é decorar comandos, mas entender qual elemento será lido, qual elemento será alterado e qual ação do usuário dispara a mudança.
-
-## Exemplo base
+## Criando item de lista
 
 ```html
-<button class="botao">Clique aqui</button>
-<p class="mensagem">Mensagem inicial</p>
+<ul class="lista-estudos"></ul>
+<button class="adicionar-topico">Adicionar tópico</button>
 ```
 
 ```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
+const listaEstudos = document.querySelector(".lista-estudos");
+const adicionarTopico = document.querySelector(".adicionar-topico");
 
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "Mensagem alterada com JavaScript.";
+if (listaEstudos && adicionarTopico) {
+  adicionarTopico.addEventListener("click", function () {
+    const item = document.createElement("li");
+    item.textContent = "Revisar eventos de clique";
+    listaEstudos.append(item);
   });
 }
 ```
 
-O botão é o elemento que dispara a interação. A mensagem é o elemento que recebe a alteração. A verificação com `if` evita erro quando o seletor não encontra nada no DOM.
+## append e appendChild
 
-## Como pensar antes de codar
+- `append` aceita elementos e textos.
+- `appendChild` aceita um nó por vez.
 
-1. Identifique o elemento no HTML.
-2. Escolha um seletor claro, de preferência uma classe criada para esse comportamento.
-3. Selecione com `document.querySelector` quando precisar de um elemento.
-4. Verifique se o elemento existe antes de acessar propriedades.
-5. Faça uma alteração pequena e previsível.
-6. Teste manualmente no navegador.
+Para estudos iniciais, `append` costuma ser mais simples.
 
-## Erros comuns
+## Por que não montar tudo como string
 
-- Tentar manipular um elemento antes de ele existir no DOM.
-- Usar seletor diferente da classe escrita no HTML.
-- Misturar muitas responsabilidades dentro do mesmo evento.
-- Alterar aparência diretamente com muitos estilos inline, quando uma classe CSS resolveria melhor.
+Criar elementos deixa cada parte clara: primeiro cria o `li`, depois define texto, depois insere na lista. Isso reduz erros e evita uso desnecessário de marcação em string.
 
 ## Boa prática
 
-Prefira código explícito: nomes de variáveis claros, funções pequenas e classes CSS para mudanças visuais. DOM bem organizado é aquele que outra pessoa consegue ler e prever sem executar mentalmente vinte passos.
-
-## Exercício rápido
-
-Crie um botão e um parágrafo. Ao clicar no botão, altere o texto do parágrafo. Depois, teste o que acontece quando a classe do botão está escrita errada e corrija o problema.
+Crie o elemento, configure conteúdo e classes, depois insira no DOM. Essa ordem facilita manutenção.

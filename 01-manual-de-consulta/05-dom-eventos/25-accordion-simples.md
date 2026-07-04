@@ -1,49 +1,43 @@
 # Accordion Simples
 
-## Ideia principal
+Accordion é um bloco em que uma pergunta revela ou esconde uma resposta. É comum em FAQ, dúvidas frequentes e detalhes de produto.
 
-Accordion mostra ou esconde respostas mantendo o conteúdo organizado. Nesta fase, o JavaScript passa a conversar com a página que o navegador já montou. O objetivo não é decorar comandos, mas entender qual elemento será lido, qual elemento será alterado e qual ação do usuário dispara a mudança.
-
-## Exemplo base
+## HTML
 
 ```html
-<button class="botao">Clique aqui</button>
-<p class="mensagem">Mensagem inicial</p>
+<div class="faq-item">
+  <button class="faq-pergunta" type="button">O que é DOM?</button>
+  <p class="faq-resposta">É a representação da página criada pelo navegador.</p>
+</div>
 ```
+
+## JavaScript
 
 ```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
+const perguntas = document.querySelectorAll(".faq-pergunta");
 
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "Mensagem alterada com JavaScript.";
+perguntas.forEach(function (pergunta) {
+  pergunta.addEventListener("click", function () {
+    const item = pergunta.closest(".faq-item");
+
+    if (item) {
+      item.classList.toggle("faq-item--aberto");
+    }
   });
-}
+});
 ```
 
-O botão é o elemento que dispara a interação. A mensagem é o elemento que recebe a alteração. A verificação com `if` evita erro quando o seletor não encontra nada no DOM.
+## CSS simples
 
-## Como pensar antes de codar
+```css
+.faq-resposta { display: none; }
+.faq-item--aberto .faq-resposta { display: block; }
+```
 
-1. Identifique o elemento no HTML.
-2. Escolha um seletor claro, de preferência uma classe criada para esse comportamento.
-3. Selecione com `document.querySelector` quando precisar de um elemento.
-4. Verifique se o elemento existe antes de acessar propriedades.
-5. Faça uma alteração pequena e previsível.
-6. Teste manualmente no navegador.
+## Por que usar closest
 
-## Erros comuns
+`closest` procura o ancestral mais próximo que combina com o seletor. Assim, a pergunta altera apenas o item de FAQ ao qual pertence.
 
-- Tentar manipular um elemento antes de ele existir no DOM.
-- Usar seletor diferente da classe escrita no HTML.
-- Misturar muitas responsabilidades dentro do mesmo evento.
-- Alterar aparência diretamente com muitos estilos inline, quando uma classe CSS resolveria melhor.
+## Cuidado
 
-## Boa prática
-
-Prefira código explícito: nomes de variáveis claros, funções pequenas e classes CSS para mudanças visuais. DOM bem organizado é aquele que outra pessoa consegue ler e prever sem executar mentalmente vinte passos.
-
-## Exercício rápido
-
-Crie um botão e um parágrafo. Ao clicar no botão, altere o texto do parágrafo. Depois, teste o que acontece quando a classe do botão está escrita errada e corrija o problema.
+Não selecione uma única `.faq-resposta` global se existem várias respostas. Cada pergunta precisa controlar seu próprio bloco.

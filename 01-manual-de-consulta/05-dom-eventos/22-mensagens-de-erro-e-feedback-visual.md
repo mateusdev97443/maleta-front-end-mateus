@@ -1,49 +1,42 @@
 # Mensagens de Erro e Feedback Visual
 
-## Ideia principal
+Feedback visual explica o que aconteceu. Sem feedback, o usuário clica, digita ou envia e fica sem saber se a ação funcionou.
 
-Feedback visual mostra ao usuário o que aconteceu e como corrigir problemas. Nesta fase, o JavaScript passa a conversar com a página que o navegador já montou. O objetivo não é decorar comandos, mas entender qual elemento será lido, qual elemento será alterado e qual ação do usuário dispara a mudança.
+## Mensagem clara
 
-## Exemplo base
+Uma boa mensagem diz o problema e sugere correção.
+
+- Ruim: “Erro”.
+- Melhor: “Digite seu nome antes de continuar.”
+
+## Exemplo com classe visual
 
 ```html
-<button class="botao">Clique aqui</button>
-<p class="mensagem">Mensagem inicial</p>
+<input class="campo-usuario" type="text">
+<p class="feedback-usuario" aria-live="polite"></p>
 ```
 
 ```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
+const campoUsuario = document.querySelector(".campo-usuario");
+const feedbackUsuario = document.querySelector(".feedback-usuario");
 
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "Mensagem alterada com JavaScript.";
-  });
+function mostrarErroUsuario() {
+  feedbackUsuario.textContent = "Digite um usuário.";
+  feedbackUsuario.classList.add("feedback--erro");
+  campoUsuario.classList.add("campo--erro");
 }
 ```
 
-O botão é o elemento que dispara a interação. A mensagem é o elemento que recebe a alteração. A verificação com `if` evita erro quando o seletor não encontra nada no DOM.
+## Limpar feedback
 
-## Como pensar antes de codar
-
-1. Identifique o elemento no HTML.
-2. Escolha um seletor claro, de preferência uma classe criada para esse comportamento.
-3. Selecione com `document.querySelector` quando precisar de um elemento.
-4. Verifique se o elemento existe antes de acessar propriedades.
-5. Faça uma alteração pequena e previsível.
-6. Teste manualmente no navegador.
-
-## Erros comuns
-
-- Tentar manipular um elemento antes de ele existir no DOM.
-- Usar seletor diferente da classe escrita no HTML.
-- Misturar muitas responsabilidades dentro do mesmo evento.
-- Alterar aparência diretamente com muitos estilos inline, quando uma classe CSS resolveria melhor.
+```js
+function limparErroUsuario() {
+  feedbackUsuario.textContent = "";
+  feedbackUsuario.classList.remove("feedback--erro");
+  campoUsuario.classList.remove("campo--erro");
+}
+```
 
 ## Boa prática
 
-Prefira código explícito: nomes de variáveis claros, funções pequenas e classes CSS para mudanças visuais. DOM bem organizado é aquele que outra pessoa consegue ler e prever sem executar mentalmente vinte passos.
-
-## Exercício rápido
-
-Crie um botão e um parágrafo. Ao clicar no botão, altere o texto do parágrafo. Depois, teste o que acontece quando a classe do botão está escrita errada e corrija o problema.
+Não dependa apenas de cor. Texto claro ajuda mais pessoas e facilita depuração manual.

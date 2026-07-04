@@ -1,49 +1,41 @@
 # O que é o DOM
 
-## Ideia principal
+DOM significa Document Object Model. Em português prático: é o modelo em forma de objetos que o navegador cria para representar a página. O arquivo HTML é o texto escrito pelo desenvolvedor; o DOM é a estrutura viva que o navegador monta e que o JavaScript consegue acessar.
 
-O DOM é a representação em memória do documento criada pelo navegador a partir do HTML recebido. Nesta fase, o JavaScript passa a conversar com a página que o navegador já montou. O objetivo não é decorar comandos, mas entender qual elemento será lido, qual elemento será alterado e qual ação do usuário dispara a mudança.
+## HTML escrito e DOM interpretado
 
-## Exemplo base
+Imagine este HTML:
 
 ```html
-<button class="botao">Clique aqui</button>
-<p class="mensagem">Mensagem inicial</p>
+<article class="card">
+  <h2>Título do card</h2>
+  <p>Descrição do conteúdo.</p>
+</article>
 ```
 
-```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
+Depois de carregar a página, o navegador transforma esse texto em objetos internos. O JavaScript não edita diretamente o arquivo `.html` salvo no projeto; ele altera a representação em memória. Por isso, ao recarregar a página, alterações feitas apenas pelo JavaScript somem.
 
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "Mensagem alterada com JavaScript.";
-  });
+## O DOM como ponte
+
+O DOM permite que o JavaScript faça perguntas e ações como:
+
+- existe um elemento com a classe `.card`?
+- qual texto está dentro do parágrafo?
+- devo adicionar a classe `.destaque`?
+- preciso criar um novo item na lista?
+
+```js
+const card = document.querySelector(".card");
+
+if (card) {
+  card.classList.add("card--destaque");
 }
 ```
 
-O botão é o elemento que dispara a interação. A mensagem é o elemento que recebe a alteração. A verificação com `if` evita erro quando o seletor não encontra nada no DOM.
+## O que é um elemento no DOM
 
-## Como pensar antes de codar
+Um elemento é uma parte da página, como `h1`, `p`, `button`, `input`, `img` ou `form`. Cada elemento possui propriedades e métodos. Por exemplo, um parágrafo tem `textContent`, um link tem `href`, uma imagem tem `src` e todo elemento pode ter `classList`.
 
-1. Identifique o elemento no HTML.
-2. Escolha um seletor claro, de preferência uma classe criada para esse comportamento.
-3. Selecione com `document.querySelector` quando precisar de um elemento.
-4. Verifique se o elemento existe antes de acessar propriedades.
-5. Faça uma alteração pequena e previsível.
-6. Teste manualmente no navegador.
+## Erro comum
 
-## Erros comuns
-
-- Tentar manipular um elemento antes de ele existir no DOM.
-- Usar seletor diferente da classe escrita no HTML.
-- Misturar muitas responsabilidades dentro do mesmo evento.
-- Alterar aparência diretamente com muitos estilos inline, quando uma classe CSS resolveria melhor.
-
-## Boa prática
-
-Prefira código explícito: nomes de variáveis claros, funções pequenas e classes CSS para mudanças visuais. DOM bem organizado é aquele que outra pessoa consegue ler e prever sem executar mentalmente vinte passos.
-
-## Exercício rápido
-
-Crie um botão e um parágrafo. Ao clicar no botão, altere o texto do parágrafo. Depois, teste o que acontece quando a classe do botão está escrita errada e corrija o problema.
+Achar que mudar o DOM altera o arquivo original. Não altera. O JavaScript muda a página carregada naquele momento no navegador. Para mudar o código fonte, você edita os arquivos do projeto.

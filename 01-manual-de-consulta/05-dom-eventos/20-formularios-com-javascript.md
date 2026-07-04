@@ -1,49 +1,51 @@
 # Formulários com JavaScript
 
-## Ideia principal
+Formulários conectam campos, botões e mensagens. Com JavaScript, você pode ler valores, validar entradas simples e mostrar feedback sem sair da página.
 
-Formulários simples podem ser lidos, validados e responder com feedback visual. Nesta fase, o JavaScript passa a conversar com a página que o navegador já montou. O objetivo não é decorar comandos, mas entender qual elemento será lido, qual elemento será alterado e qual ação do usuário dispara a mudança.
-
-## Exemplo base
+## Estrutura recomendada
 
 ```html
-<button class="botao">Clique aqui</button>
-<p class="mensagem">Mensagem inicial</p>
+<form class="form-cadastro">
+  <label>Nome
+    <input class="campo-nome" type="text">
+  </label>
+  <p class="erro-nome"></p>
+  <button type="submit">Cadastrar</button>
+</form>
 ```
 
 ```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
+const formCadastro = document.querySelector(".form-cadastro");
+const campoNome = document.querySelector(".campo-nome");
+const erroNome = document.querySelector(".erro-nome");
 
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "Mensagem alterada com JavaScript.";
+if (formCadastro && campoNome && erroNome) {
+  formCadastro.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    if (campoNome.value.trim() === "") {
+      erroNome.textContent = "Digite seu nome.";
+      campoNome.classList.add("campo--erro");
+      return;
+    }
+
+    erroNome.textContent = "Cadastro conferido.";
+    campoNome.classList.remove("campo--erro");
   });
 }
 ```
 
-O botão é o elemento que dispara a interação. A mensagem é o elemento que recebe a alteração. A verificação com `if` evita erro quando o seletor não encontra nada no DOM.
+## Limpar erro ao corrigir
 
-## Como pensar antes de codar
-
-1. Identifique o elemento no HTML.
-2. Escolha um seletor claro, de preferência uma classe criada para esse comportamento.
-3. Selecione com `document.querySelector` quando precisar de um elemento.
-4. Verifique se o elemento existe antes de acessar propriedades.
-5. Faça uma alteração pequena e previsível.
-6. Teste manualmente no navegador.
-
-## Erros comuns
-
-- Tentar manipular um elemento antes de ele existir no DOM.
-- Usar seletor diferente da classe escrita no HTML.
-- Misturar muitas responsabilidades dentro do mesmo evento.
-- Alterar aparência diretamente com muitos estilos inline, quando uma classe CSS resolveria melhor.
+```js
+campoNome.addEventListener("input", function () {
+  if (campoNome.value.trim() !== "") {
+    erroNome.textContent = "";
+    campoNome.classList.remove("campo--erro");
+  }
+});
+```
 
 ## Boa prática
 
-Prefira código explícito: nomes de variáveis claros, funções pequenas e classes CSS para mudanças visuais. DOM bem organizado é aquele que outra pessoa consegue ler e prever sem executar mentalmente vinte passos.
-
-## Exercício rápido
-
-Crie um botão e um parágrafo. Ao clicar no botão, altere o texto do parágrafo. Depois, teste o que acontece quando a classe do botão está escrita errada e corrija o problema.
+Validação visual ajuda o usuário, mas não deve ser vista como proteção completa. Nesta fase, o foco é experiência na interface.

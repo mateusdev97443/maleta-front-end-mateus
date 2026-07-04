@@ -1,49 +1,31 @@
 # Evento de Input
 
-## Ideia principal
+O evento `input` acontece sempre que o valor de um campo muda por digitação, colagem ou limpeza. Ele é ideal para previews e validações simples enquanto o usuário escreve.
 
-O evento de input acompanha a digitação e permite previews e validações em tempo real. Nesta fase, o JavaScript passa a conversar com a página que o navegador já montou. O objetivo não é decorar comandos, mas entender qual elemento será lido, qual elemento será alterado e qual ação do usuário dispara a mudança.
-
-## Exemplo base
+## Preview de nome
 
 ```html
-<button class="botao">Clique aqui</button>
-<p class="mensagem">Mensagem inicial</p>
+<label for="nome">Nome</label>
+<input id="nome" class="campo-nome" type="text">
+<p class="preview-nome">Seu nome aparecerá aqui.</p>
 ```
 
 ```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
+const campoNome = document.querySelector(".campo-nome");
+const previewNome = document.querySelector(".preview-nome");
 
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "Mensagem alterada com JavaScript.";
+if (campoNome && previewNome) {
+  campoNome.addEventListener("input", function () {
+    const nomeDigitado = campoNome.value.trim();
+    previewNome.textContent = nomeDigitado || "Seu nome aparecerá aqui.";
   });
 }
 ```
 
-O botão é o elemento que dispara a interação. A mensagem é o elemento que recebe a alteração. A verificação com `if` evita erro quando o seletor não encontra nada no DOM.
+## Por que trim
 
-## Como pensar antes de codar
+`trim` remove espaços no começo e no fim. Assim, um campo com apenas espaços pode ser tratado como vazio.
 
-1. Identifique o elemento no HTML.
-2. Escolha um seletor claro, de preferência uma classe criada para esse comportamento.
-3. Selecione com `document.querySelector` quando precisar de um elemento.
-4. Verifique se o elemento existe antes de acessar propriedades.
-5. Faça uma alteração pequena e previsível.
-6. Teste manualmente no navegador.
+## Erro comum
 
-## Erros comuns
-
-- Tentar manipular um elemento antes de ele existir no DOM.
-- Usar seletor diferente da classe escrita no HTML.
-- Misturar muitas responsabilidades dentro do mesmo evento.
-- Alterar aparência diretamente com muitos estilos inline, quando uma classe CSS resolveria melhor.
-
-## Boa prática
-
-Prefira código explícito: nomes de variáveis claros, funções pequenas e classes CSS para mudanças visuais. DOM bem organizado é aquele que outra pessoa consegue ler e prever sem executar mentalmente vinte passos.
-
-## Exercício rápido
-
-Crie um botão e um parágrafo. Ao clicar no botão, altere o texto do parágrafo. Depois, teste o que acontece quando a classe do botão está escrita errada e corrija o problema.
+Usar `textContent` para ler campo de formulário. Campos usam `value`; elementos de texto usam `textContent`.

@@ -1,49 +1,34 @@
 # Removendo Elementos
 
-## Ideia principal
+Remover elementos significa retirar algo da árvore do DOM. O método mais direto é `remove`.
 
-`remove` apaga um elemento do DOM quando a interação pede retirada visual. Nesta fase, o JavaScript passa a conversar com a página que o navegador já montou. O objetivo não é decorar comandos, mas entender qual elemento será lido, qual elemento será alterado e qual ação do usuário dispara a mudança.
-
-## Exemplo base
+## Exemplo: fechar aviso
 
 ```html
-<button class="botao">Clique aqui</button>
-<p class="mensagem">Mensagem inicial</p>
+<div class="aviso-sistema">
+  <p>Revise seus dados antes de continuar.</p>
+  <button class="fechar-aviso">Fechar</button>
+</div>
 ```
 
 ```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
+const avisoSistema = document.querySelector(".aviso-sistema");
+const fecharAviso = document.querySelector(".fechar-aviso");
 
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "Mensagem alterada com JavaScript.";
+if (avisoSistema && fecharAviso) {
+  fecharAviso.addEventListener("click", function () {
+    avisoSistema.remove();
   });
 }
 ```
 
-O botão é o elemento que dispara a interação. A mensagem é o elemento que recebe a alteração. A verificação com `if` evita erro quando o seletor não encontra nada no DOM.
+## Remover ou esconder?
 
-## Como pensar antes de codar
+Remover apaga o elemento do DOM. Esconder com classe mantém o elemento na página, apenas invisível.
 
-1. Identifique o elemento no HTML.
-2. Escolha um seletor claro, de preferência uma classe criada para esse comportamento.
-3. Selecione com `document.querySelector` quando precisar de um elemento.
-4. Verifique se o elemento existe antes de acessar propriedades.
-5. Faça uma alteração pequena e previsível.
-6. Teste manualmente no navegador.
+- Use `remove` quando o item não precisa voltar.
+- Use classe quando a interface pode mostrar novamente.
 
-## Erros comuns
+## Erro comum
 
-- Tentar manipular um elemento antes de ele existir no DOM.
-- Usar seletor diferente da classe escrita no HTML.
-- Misturar muitas responsabilidades dentro do mesmo evento.
-- Alterar aparência diretamente com muitos estilos inline, quando uma classe CSS resolveria melhor.
-
-## Boa prática
-
-Prefira código explícito: nomes de variáveis claros, funções pequenas e classes CSS para mudanças visuais. DOM bem organizado é aquele que outra pessoa consegue ler e prever sem executar mentalmente vinte passos.
-
-## Exercício rápido
-
-Crie um botão e um parágrafo. Ao clicar no botão, altere o texto do parágrafo. Depois, teste o que acontece quando a classe do botão está escrita errada e corrija o problema.
+Tentar usar um elemento depois que ele foi removido. Se o código precisa reabrir algo, talvez seja melhor alternar uma classe `escondido` em vez de remover.

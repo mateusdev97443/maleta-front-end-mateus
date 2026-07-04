@@ -1,39 +1,48 @@
 # Modelo de Análise de Interação
 
-Antes de codar, responda às perguntas abaixo. Esse roteiro evita tentativa e erro sem direção.
+Antes de codar uma interação, responda às perguntas abaixo. Esse modelo força você a transformar uma ideia visual em passos técnicos.
 
-## Perguntas do modelo
+## Perguntas obrigatórias
 
 - Qual elemento dispara a ação?
 - Qual evento será escutado?
 - Qual elemento será alterado?
 - O que muda: texto, classe, atributo, estilo ou estrutura?
-- O elemento existe no DOM?
+- O elemento existe no DOM no momento da seleção?
 - Preciso impedir comportamento padrão?
 - Preciso validar dados?
 - Qual feedback o usuário recebe?
 - Como evitar código bagunçado?
 - Como testar manualmente?
 
-## Exemplo preenchido: botão que altera mensagem
+## Exemplo preenchido: preview de nome
 
-O botão `.botao` dispara um clique. O parágrafo `.mensagem` recebe novo `textContent`. Os dois elementos precisam existir antes do evento ser registrado. O feedback é o texto atualizado na tela.
+- Elemento que dispara: campo `.campo-nome`.
+- Evento: `input`.
+- Elemento alterado: `.preview-nome`.
+- Mudança: texto via `textContent`.
+- Validação: se vazio, mostrar texto padrão.
+- Feedback: o card muda enquanto o usuário digita.
 
 ```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
+const campoNome = document.querySelector(".campo-nome");
+const previewNome = document.querySelector(".preview-nome");
 
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "A interação funcionou.";
+if (campoNome && previewNome) {
+  campoNome.addEventListener("input", function () {
+    previewNome.textContent = campoNome.value.trim() || "Nome ainda não informado.";
   });
 }
 ```
 
-## Exemplo preenchido: formulário simples
+## Exemplo preenchido: menu simples
 
-O formulário dispara `submit`. O comportamento padrão é impedido com `preventDefault` para evitar recarregar a página. O campo é validado com `trim` e a mensagem de erro aparece em um elemento separado.
+- Elemento que dispara: botão `.menu-botao`.
+- Evento: `click`.
+- Elemento alterado: navegação `.menu`.
+- Mudança: classe `menu--aberto`.
+- Feedback: texto do botão alterna entre abrir e fechar.
 
-## Teste manual
+## Teste manual recomendado
 
-Clique, digite, envie vazio, envie preenchido, observe o console e confirme se a interface retorna ao estado esperado.
+Teste o primeiro clique, o segundo clique, campo vazio, texto com espaços, envio por teclado, clique repetido e console sem erros.

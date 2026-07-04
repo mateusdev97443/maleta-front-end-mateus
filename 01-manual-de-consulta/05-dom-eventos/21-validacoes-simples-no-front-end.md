@@ -1,49 +1,47 @@
 # Validações Simples no Front-end
 
-## Ideia principal
+Validação simples verifica se os dados preenchidos fazem sentido para a interface antes de mostrar uma mensagem positiva. Nesta fase, vamos validar presença de texto, tamanho mínimo e escolhas obrigatórias.
 
-Validações no front-end melhoram a experiência, mas não substituem validações do servidor. Nesta fase, o JavaScript passa a conversar com a página que o navegador já montou. O objetivo não é decorar comandos, mas entender qual elemento será lido, qual elemento será alterado e qual ação do usuário dispara a mudança.
-
-## Exemplo base
-
-```html
-<button class="botao">Clique aqui</button>
-<p class="mensagem">Mensagem inicial</p>
-```
+## Campo vazio
 
 ```js
-const botao = document.querySelector(".botao");
-const mensagem = document.querySelector(".mensagem");
-
-if (botao && mensagem) {
-  botao.addEventListener("click", function () {
-    mensagem.textContent = "Mensagem alterada com JavaScript.";
-  });
+if (campoNome.value.trim() === "") {
+  mensagem.textContent = "O nome é obrigatório.";
 }
 ```
 
-O botão é o elemento que dispara a interação. A mensagem é o elemento que recebe a alteração. A verificação com `if` evita erro quando o seletor não encontra nada no DOM.
+## Tamanho mínimo
 
-## Como pensar antes de codar
+```js
+if (campoSenha.value.trim().length < 6) {
+  mensagem.textContent = "Use pelo menos 6 caracteres.";
+}
+```
 
-1. Identifique o elemento no HTML.
-2. Escolha um seletor claro, de preferência uma classe criada para esse comportamento.
-3. Selecione com `document.querySelector` quando precisar de um elemento.
-4. Verifique se o elemento existe antes de acessar propriedades.
-5. Faça uma alteração pequena e previsível.
-6. Teste manualmente no navegador.
+## Seleção obrigatória
 
-## Erros comuns
+```js
+const planoSelecionado = document.querySelector(".plano--ativo");
 
-- Tentar manipular um elemento antes de ele existir no DOM.
-- Usar seletor diferente da classe escrita no HTML.
-- Misturar muitas responsabilidades dentro do mesmo evento.
-- Alterar aparência diretamente com muitos estilos inline, quando uma classe CSS resolveria melhor.
+if (!planoSelecionado) {
+  mensagem.textContent = "Escolha um plano.";
+}
+```
 
-## Boa prática
+## Exemplo com retorno antecipado
 
-Prefira código explícito: nomes de variáveis claros, funções pequenas e classes CSS para mudanças visuais. DOM bem organizado é aquele que outra pessoa consegue ler e prever sem executar mentalmente vinte passos.
+```js
+function validarNome() {
+  if (campoNome.value.trim() === "") {
+    erroNome.textContent = "Preencha o nome.";
+    return false;
+  }
 
-## Exercício rápido
+  erroNome.textContent = "";
+  return true;
+}
+```
 
-Crie um botão e um parágrafo. Ao clicar no botão, altere o texto do parágrafo. Depois, teste o que acontece quando a classe do botão está escrita errada e corrija o problema.
+## Erro comum
+
+Criar uma validação que mostra erro, mas permite continuar como se estivesse tudo certo. Use `return` para interromper o fluxo quando o dado não passou.

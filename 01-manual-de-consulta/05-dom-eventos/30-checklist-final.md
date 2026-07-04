@@ -23,5 +23,5 @@ Use esta lista antes de considerar uma interação pronta.
 - O conteúdo está em português do Brasil.
 - Os exemplos são pequenos, completos e progressivos.
 - Os exercícios não entregam tudo resolvido.
-- Os mini desafios não usam APIs nem persistência.
+- Os mini desafios não usam comunicação externa nem persistência.
 - Não houve merge na `main`.
