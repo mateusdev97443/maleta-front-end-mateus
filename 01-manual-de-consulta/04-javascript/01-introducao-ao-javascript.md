@@ -1,33 +1,41 @@
 # Introdução ao JavaScript
 
-JavaScript é a linguagem que adiciona comportamento e lógica às páginas e aplicações Front-end. HTML descreve a estrutura, CSS define aparência e layout, e JavaScript decide, calcula, valida, transforma dados e responde a regras.
+JavaScript é a linguagem que dá lógica e comportamento aos projetos Front-end. HTML marca o conteúdo, CSS controla aparência e layout, e JavaScript trabalha com decisões, cálculos, validações, listas, regras e respostas a estados do sistema.
 
-Em projetos reais, JavaScript aparece em validações, cálculos de preço, filtros de listas, menus, formulários, carrinhos, dashboards e comunicação com serviços. Nesta fase, porém, o foco é a lógica antes da tela: entender valores, condições, repetições e funções.
+## HTML, CSS e JavaScript no mesmo projeto
+
+Pense em uma página de produto:
+
+- HTML descreve título, imagem, preço e botão.
+- CSS define espaçamento, cor, grade, responsividade e destaque visual.
+- JavaScript calcula preço final, verifica estoque, monta mensagens e decide se uma regra é verdadeira ou falsa.
 
 ```js
-const nome = "Mateus";
-const horasDeEstudo = 2;
-const mensagem = `${nome} estudou ${horasDeEstudo} horas de JavaScript.`;
+const preco = 120;
+const desconto = 0.15;
+const produtoDisponivel = true;
 
-console.log(mensagem);
+const precoFinal = preco - preco * desconto;
+
+if (produtoDisponivel) {
+  console.log(`Produto disponível por R$ ${precoFinal}.`);
+} else {
+  console.log("Produto indisponível no momento.");
+}
 ```
 
-Aprender lógica primeiro evita decorar comandos visuais sem compreender decisões do código. Manipular página sem dominar dados costuma gerar código frágil.
+## JavaScript como lógica e comportamento
 
-## Quando usar
+Antes de manipular qualquer tela, JavaScript precisa responder perguntas: há estoque? a nota aprova? o nome foi informado? qual item da lista atende ao filtro? Esse raciocínio é o núcleo da linguagem para Front-end.
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+## Por que estudar lógica antes de manipular a tela
 
-## Erros comuns
+Quando o aluno pula direto para interface, ele pode decorar comandos sem entender a regra. A consequência é código que funciona apenas no exemplo copiado. Ao estudar lógica primeiro, Mateus aprende a separar problema, dados de entrada, processamento e saída.
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
+## Onde aparece em projetos reais
 
-## Boas práticas
+JavaScript aparece em calculadoras de preço, filtros de catálogo, validações simples, mensagens condicionais, carrinhos, painéis com dados, alternância de estados e preparação de informações que serão mostradas na interface.
 
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+## Limites desta fase
+
+Esta fase não aprofunda manipulação visual nem ferramentas avançadas. O foco é escrever lógica limpa, testar no console e criar base para fases futuras.

@@ -1,356 +1,356 @@
 # Exercícios práticos
 
-Exercícios graduais para treinar fundamentos com valores fixos e `console.log`.
+Exercícios graduais para praticar fundamentos com valores fixos e `console.log`. Cada exercício pede testes concretos para evitar respostas vagas.
 
 ## Exercício 1 — Criar variáveis de perfil
 
 ### Objetivo
 
-Praticar criar variáveis de perfil.
+Declarar dados básicos de um aluno.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie `nome`, `idade`, `cidade`, `trilha` e `estaEstudando`. Mostre uma linha no console para cada dado. Teste com seu nome e depois com um perfil fictício.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Use `const` para dados que não mudam e nomes em camelCase.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+Todos os dados aparecem no console com rótulos claros.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Crie uma variável `objetivoAtual` e inclua na mensagem final.
 
 ## Exercício 2 — Calcular idade aproximada
 
 ### Objetivo
 
-Praticar calcular idade aproximada.
+Praticar subtração e variáveis numéricas.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie `anoAtual` e `anoNascimento`. Calcule `idadeAproximada`. Teste com 2000, 2005 e 2010 como anos de nascimento.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Não use string para anos. Use nomes descritivos.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+O console mostra a idade aproximada correta para cada teste.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Mostre uma frase com template literal.
 
 ## Exercício 3 — Montar frase com template literal
 
 ### Objetivo
 
-Praticar montar frase com template literal.
+Unir texto e variáveis com crase.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie `nome`, `fase`, `tema` e gere a frase: “Mateus está na Fase 5 estudando JavaScript”. Troque o tema para testar.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Use crase e `${}`; não use concatenação.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+A frase muda corretamente quando as variáveis mudam.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Inclua uma segunda linha com horas de estudo.
 
 ## Exercício 4 — Verificar maioridade
 
 ### Objetivo
 
-Praticar verificar maioridade.
+Criar uma decisão booleana simples.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie `idade` e uma condição que exiba “maior de idade” ou “menor de idade”. Teste 17, 18 e 21.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Use `>=` e estrutura `if/else`.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+Os três testes retornam mensagens corretas.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Crie uma variável `podeAcessar` antes do `if`.
 
 ## Exercício 5 — Classificar nota
 
 ### Objetivo
 
-Praticar classificar nota.
+Treinar `if`, `else if` e ordem de condições.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie `nota` e classifique: 9 ou mais “excelente”, 7 ou mais “aprovado”, 5 ou mais “recuperação”, abaixo disso “reprovado”. Teste 10, 8, 6 e 3.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Comece pela maior faixa.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+Cada nota cai na categoria correta.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Transforme limites em constantes nomeadas.
 
 ## Exercício 6 — Calcular desconto
 
 ### Objetivo
 
-Praticar calcular desconto.
+Aplicar operadores matemáticos em regra de preço.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie `precoOriginal` e `percentualDesconto`. Calcule valor do desconto e preço final. Teste 100 com 10%, 250 com 20% e 80 com 0%.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Use percentual em decimal, como `0.1`.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+O console mostra preço original, desconto e preço final.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Crie mensagem formatada com template literal.
 
 ## Exercício 7 — Verificar estoque
 
 ### Objetivo
 
-Praticar verificar estoque.
+Combinar comparação e mensagem.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie `quantidadeEmEstoque` e `quantidadeSolicitada`. Informe se a compra pode continuar. Teste estoque 5 pedido 3, estoque 2 pedido 4 e estoque 0 pedido 1.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Use comparação `>=`.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+A mensagem reflete disponibilidade real.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Adicione regra para estoque baixo quando sobrar 1 item.
 
 ## Exercício 8 — Percorrer lista de tecnologias
 
 ### Objetivo
 
-Praticar percorrer lista de tecnologias.
+Praticar array e `for...of`.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie array com HTML, CSS e JavaScript. Percorra e mostre “Tecnologia estudada: X”. Adicione Git e rode de novo.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Use `for...of`.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+Todos os itens aparecem sem acessar índices manualmente.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Mostre também a quantidade total com `length`.
 
 ## Exercício 9 — Somar números de um array
 
 ### Objetivo
 
-Praticar somar números de um array.
+Usar acumulador em loop.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie `notas = [8, 7, 9]`. Some todos os valores em `total`. Teste com outro array `[5, 10, 6]`.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Use `let total = 0` e `for...of`.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+O total bate com a soma manual.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Calcule a média.
 
 ## Exercício 10 — Encontrar item em array
 
 ### Objetivo
 
-Praticar encontrar item em array.
+Usar busca simples com `includes` ou `find`.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie lista de tecnologias e verifique se “JavaScript” existe. Teste procurando “Git” também como segundo termo de busca.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Use comparação estrita se usar `find`.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+O console informa encontrado ou não encontrado corretamente.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Mostre o índice com `indexOf`.
 
 ## Exercício 11 — Filtrar produtos disponíveis
 
 ### Objetivo
 
-Praticar filtrar produtos disponíveis.
+Criar nova lista a partir de array de objetos.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie três produtos com `nome` e `disponivel`. Use `filter` para gerar apenas disponíveis. Teste com dois disponíveis e depois nenhum disponível.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+A condição deve retornar boolean.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+A nova lista contém apenas produtos disponíveis.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Mostre os nomes com `map`.
 
 ## Exercício 12 — Criar objeto de projeto
 
 ### Objetivo
 
-Praticar criar objeto de projeto.
+Modelar entidade real.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie objeto `projeto` com `nome`, `fase`, `tema`, `concluido`. Altere `concluido` para `true` e adicione `revisado`.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Use acesso com ponto para propriedades comuns.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+O objeto final mostra todas as propriedades corretas.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Acesse uma propriedade usando colchetes.
 
 ## Exercício 13 — Criar função de saudação
 
 ### Objetivo
 
-Praticar criar função de saudação.
+Praticar parâmetro e chamada.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie `saudarAluno(nome)` que retorna “Olá, Nome!”. Teste com Mateus, Ana e João.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+A função deve retornar string, não apenas imprimir.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+Cada chamada retorna saudação personalizada.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Padronize o nome com `trim()`.
 
 ## Exercício 14 — Criar função de cálculo
 
 ### Objetivo
 
-Praticar criar função de cálculo.
+Encapsular cálculo reutilizável.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie `calcularTotal(preco, quantidade)` e teste 10x3, 25x4 e 99x1.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Use `return`.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+Os totais são corretos e salvos em variáveis antes do console.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Crie função separada para aplicar desconto.
 
 ## Exercício 15 — Criar função de validação simples
 
 ### Objetivo
 
-Praticar criar função de validação simples.
+Validar strings básicas.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Crie `validarNome(nome)` que retorna `true` se o nome sem espaços tiver pelo menos 3 caracteres. Teste “Ma”, “Mateus” e “  Ana  ”.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+Use `trim()` e `length`.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+A função retorna boolean correto.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Crie validação simples de email com `includes("@")`.
 
 ## Exercício 16 — Refatorar código repetido para função
 
 ### Objetivo
 
-Praticar refatorar código repetido para função.
+Transformar repetição em função.
 
 ### Instruções
 
-Crie um arquivo de estudo, declare os dados necessários e mostre o resultado no console.
+Comece com três cálculos de preço final repetidos. Depois crie `calcularPrecoFinal(preco, desconto)` e substitua as repetições.
 
 ### Requisitos obrigatórios
 
-Use nomes claros, `const` ou `let` corretamente e comparação estrita quando houver decisão.
+A função deve receber dados por parâmetro.
 
 ### Critérios de conclusão
 
-O resultado aparece no console e o código pode ser explicado linha por linha.
+O resultado final é igual ao código repetido, mas com menos duplicação.
 
 ### Extra opcional
 
-Crie mais dois casos de teste com valores diferentes.
+Crie array de preços e aplique a função em cada item.
 

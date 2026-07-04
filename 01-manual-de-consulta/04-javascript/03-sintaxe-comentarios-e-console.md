@@ -1,39 +1,57 @@
 # Sintaxe, comentários e console
 
-Uma instrução é uma ordem para o JavaScript executar. O ponto e vírgula é aceito ao fim de instruções e ajuda a deixar limites claros. Blocos usam chaves para agrupar instruções.
+Sintaxe é o conjunto de regras que torna o código compreensível para a linguagem. Pequenos detalhes como chaves, parênteses e aspas mudam completamente o resultado.
+
+## Instruções e blocos
+
+Uma instrução é uma ordem executável. Um bloco agrupa instruções entre chaves.
 
 ```js
 const idade = 20;
 
 if (idade >= 18) {
   console.log("Maior de idade");
+  console.log("Pode continuar o cadastro");
 }
-
-// Comentário de uma linha
-/* Comentário de
-   múltiplas linhas */
-
-console.log("Informação comum");
-console.warn("Aviso para investigar");
-console.error("Erro que precisa de correção");
 ```
 
-Use o console como laboratório: execute, observe, altere um valor e rode de novo.
+## Ponto e vírgula
 
-## Quando usar
+JavaScript consegue inserir ponto e vírgula em muitos casos, mas usá-lo ajuda o iniciante a enxergar onde uma instrução termina.
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+```js
+const curso = "Front-end";
+const fase = 5;
+```
 
-## Erros comuns
+## Comentários úteis e comentários ruins
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
+Comentário útil explica intenção ou uma regra de negócio.
 
-## Boas práticas
+```js
+// Frete grátis apenas para compras a partir de 200 reais.
+const compraTemFreteGratis = totalCompra >= 200;
+```
 
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+Comentário ruim repete o óbvio.
+
+```js
+// Cria uma variável nome
+const nome = "Mateus";
+```
+
+## Console como ferramenta de estudo
+
+`console.log` mostra valores comuns. `console.warn` destaca um alerta. `console.error` simula ou destaca erro.
+
+```js
+const estoque = 2;
+
+console.log("Estoque atual:", estoque);
+console.warn("Estoque baixo");
+console.error("Produto sem cadastro de preço");
+```
+
+## Exercício mental
+
+Antes de rodar um código, responda: quais linhas criam valores? quais linhas decidem algo? quais linhas apenas mostram resultado?

@@ -1,41 +1,65 @@
 # Null, undefined, truthy e falsy
 
-`null` indica ausência intencional. `undefined` indica que algo ainda não recebeu valor. Em condicionais, alguns valores se comportam como falso: `false`, `0`, `""`, `null`, `undefined` e `NaN`. Outros tendem a ser truthy.
+`null` e `undefined` representam ausência, mas não significam a mesma coisa.
+
+## `null`
+
+Use `null` quando a ausência é intencional.
+
+```js
+const complementoEndereco = null;
+```
+
+Isso comunica: “este campo foi considerado e não possui valor”.
+
+## `undefined`
+
+`undefined` surge quando uma variável foi declarada sem valor ou quando uma busca não encontra resultado.
 
 ```js
 let telefone;
-const complemento = null;
-const nome = "Mateus";
+console.log(telefone);
 
-if (nome) {
-  console.log("Nome informado");
-}
+const tecnologias = ["HTML", "CSS"];
+console.log(tecnologias[5]);
+```
 
-if (telefone === undefined) {
-  console.log("Telefone ainda não definido");
-}
+## Valores falsy
 
-if (complemento === null) {
-  console.log("Complemento não existe neste cadastro");
+Em uma condição, estes valores se comportam como falso: `false`, `0`, `""`, `null`, `undefined` e `NaN`.
+
+```js
+const nome = "";
+
+if (!nome) {
+  console.log("Nome não informado.");
 }
 ```
 
-Quando a regra exige precisão, seja explícito em vez de confiar apenas em truthy ou falsy.
+## Valores truthy
 
-## Quando usar
+Strings com conteúdo, números diferentes de zero, arrays e objetos costumam se comportar como verdadeiro.
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+```js
+const lista = [];
+
+if (lista) {
+  console.log("Arrays são truthy mesmo vazios.");
+}
+```
+
+## Quando ser explícito
+
+Se a regra depende de ausência intencional, compare com `null`. Se depende de texto vazio, compare com `""` ou use `trim()`.
+
+```js
+if (complementoEndereco === null) {
+  console.log("Sem complemento por escolha do cadastro.");
+}
+```
 
 ## Erros comuns
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+- Achar que array vazio é falsy.
+- Tratar `undefined` como valor planejado.
+- Usar `if (valor)` quando a regra exige distinguir `0` de ausência.

@@ -1,38 +1,61 @@
 # Booleans, comparações e lógica
 
-Boolean representa verdadeiro ou falso. Comparações e operadores lógicos criam decisões.
+Boolean é o tipo com apenas dois valores: `true` e `false`. Ele representa respostas de sim ou não.
+
+## Comparação estrita
+
+Use `===` para comparar valor e tipo. Use `!==` para diferente estrito.
 
 ```js
-const idade = 19;
-const temIngresso = true;
+const idade = 18;
 
 console.log(idade === 18);
 console.log(idade !== 17);
-console.log(idade > 18);
-console.log(idade >= 18);
-console.log(idade < 60);
-console.log(idade <= 20);
-console.log(idade >= 18 && temIngresso === true);
-console.log(idade >= 18 || temIngresso === true);
-console.log(!temIngresso);
 ```
 
-Prefira `===` e `!==` porque comparam valor e tipo. Evite `==`, pois ele tenta converter tipos automaticamente.
+`==` tenta converter tipos automaticamente, o que pode esconder erro.
 
-## Quando usar
+```js
+console.log("18" == 18); // true por coerção
+console.log("18" === 18); // false porque os tipos diferem
+```
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+## Operadores relacionais
 
-## Erros comuns
+```js
+const nota = 7.5;
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
+console.log(nota > 7);
+console.log(nota < 10);
+console.log(nota >= 7);
+console.log(nota <= 10);
+```
 
-## Boas práticas
+## Lógica com `&&`, `||` e `!`
 
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+```js
+const usuarioAtivo = true;
+const senhaCorreta = true;
+const estoque = 4;
+const idade = 20;
+
+console.log(usuarioAtivo && senhaCorreta);
+console.log(estoque > 0 || idade >= 18);
+console.log(!usuarioAtivo);
+```
+
+## Exemplos de regra
+
+```js
+const podeComprar = idade >= 18 && estoque > 0;
+const precisaRevisarNota = nota < 7;
+const acessoConceitualPermitido = usuarioAtivo && senhaCorreta;
+
+console.log(podeComprar);
+console.log(precisaRevisarNota);
+console.log(acessoConceitualPermitido);
+```
+
+## Boas práticas específicas
+
+Nomeie booleans como perguntas ou estados: `estaDisponivel`, `usuarioAtivo`, `temEstoque`, `podeComprar`. Isso deixa o `if` quase uma frase em português.

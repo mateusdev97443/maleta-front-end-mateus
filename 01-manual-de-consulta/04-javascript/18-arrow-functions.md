@@ -1,35 +1,44 @@
 # Arrow functions
 
-Arrow function é uma forma moderna e curta de escrever funções. Para iniciantes, use quando a função for simples e a leitura continuar clara.
+Arrow function é uma sintaxe moderna para criar funções. Ela é útil em funções curtas e callbacks simples.
+
+## Função tradicional x arrow
 
 ```js
 function somarTradicional(a, b) {
   return a + b;
 }
 
-const somar = (a, b) => {
+const somarArrow = (a, b) => {
   return a + b;
 };
+```
 
+## Retorno explícito
+
+```js
+const calcularDesconto = (preco, percentual) => {
+  const desconto = preco * percentual;
+  return preco - desconto;
+};
+```
+
+Use quando há mais de uma linha ou variável intermediária.
+
+## Retorno implícito
+
+```js
 const dobrar = (numero) => numero * 2;
 ```
 
-Retorno implícito funciona quando a função tem apenas uma expressão. Evite arrows longas demais. O comportamento de `this` não será aprofundado nesta fase.
+Funciona bem para expressões curtas.
 
 ## Quando usar
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+- Callbacks pequenos em `map`, `filter` e `find`.
+- Funções auxiliares muito simples.
+- Códigos em que a equipe já usa esse padrão.
 
-## Erros comuns
+## Quando evitar no início
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+Evite arrow function se ela deixar a leitura pior. Para aprender, função tradicional pode ser mais didática. O comportamento de `this` não será aprofundado nesta fase.

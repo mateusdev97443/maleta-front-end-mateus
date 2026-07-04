@@ -1,39 +1,50 @@
 # Métodos básicos de string
 
-Métodos de string ajudam a consultar e ajustar textos.
+Métodos de string ajudam a medir, padronizar, buscar e recortar textos.
+
+## Medir e padronizar
 
 ```js
-const email = "  MATEUS@email.com  ";
-const nome = "Mateus Ernandes";
+const nome = "  Mateus Ernandes  ";
 
 console.log(nome.length);
-console.log(email.trim().toLowerCase());
+console.log(nome.trim());
+console.log(nome.toLowerCase());
 console.log(nome.toUpperCase());
-console.log(nome.includes("Ernandes"));
-console.log(nome.startsWith("Mateus"));
-console.log(nome.endsWith("Ribeiro"));
-console.log(nome.replace("Ernandes", "Turet"));
-console.log(nome.slice(0, 6));
-
-const emailValido = email.trim().includes("@");
 ```
 
-Use esses métodos para validações simples e padronização de texto antes de comparar valores.
+## Buscar partes do texto
 
-## Quando usar
+```js
+const email = "mateus@email.com";
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+console.log(email.includes("@"));
+console.log(email.startsWith("mateus"));
+console.log(email.endsWith(".com"));
+```
 
-## Erros comuns
+## Substituir e recortar
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
+```js
+const frase = "Estudar CSS";
+const corrigida = frase.replace("CSS", "JavaScript");
+const primeiraPalavra = corrigida.slice(0, 7);
 
-## Boas práticas
+console.log(corrigida);
+console.log(primeiraPalavra);
+```
 
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+## Validação simples
+
+```js
+const nomeDigitado = "  Mateus  ";
+const emailDigitado = " MATEUS@email.com ";
+
+const nomeValido = nomeDigitado.trim().length >= 3;
+const emailTratado = emailDigitado.trim().toLowerCase();
+const emailValido = emailTratado.includes("@") && emailTratado.includes(".");
+```
+
+## Boa prática específica
+
+Padronize antes de comparar. `"Mateus"` e `" mateus "` podem representar a mesma intenção humana, mas são textos diferentes para o JavaScript.

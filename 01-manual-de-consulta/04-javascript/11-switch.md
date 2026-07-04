@@ -1,16 +1,18 @@
 # Switch
 
-`switch` compara um mesmo valor contra vários casos. É útil quando há categorias fixas.
+`switch` é útil quando uma variável deve ser comparada com valores fixos. Ele deixa categorias explícitas.
+
+## Estrutura
 
 ```js
-const statusPedido = "pago";
+const statusPedido = "enviado";
 
 switch (statusPedido) {
   case "pendente":
     console.log("Aguardando pagamento");
     break;
   case "pago":
-    console.log("Separar pedido");
+    console.log("Separar produto");
     break;
   case "enviado":
     console.log("Acompanhar entrega");
@@ -20,22 +22,29 @@ switch (statusPedido) {
 }
 ```
 
-Use `break` para evitar que o código continue nos próximos casos. Para condições com intervalos, `if` costuma ser melhor.
+## Diferença para `if`
 
-## Quando usar
+Use `switch` para igualdade contra categorias. Use `if` para intervalos, combinações lógicas e comparações como maior ou menor.
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+## Outros exemplos
+
+```js
+const nivelUsuario = "editor";
+
+switch (nivelUsuario) {
+  case "admin":
+    console.log("Pode gerenciar tudo");
+    break;
+  case "editor":
+    console.log("Pode editar conteúdo");
+    break;
+  default:
+    console.log("Permissão básica");
+}
+```
 
 ## Erros comuns
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+- Esquecer `break`.
+- Repetir lógica que seria mais clara com objeto ou função.
+- Usar `switch` para faixa de nota, onde `if` é mais direto.

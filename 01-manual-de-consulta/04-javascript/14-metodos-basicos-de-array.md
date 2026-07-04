@@ -1,41 +1,51 @@
 # Métodos básicos de array
 
-Métodos de array ajudam a adicionar, remover, procurar e transformar itens.
+Métodos de array são ferramentas prontas para adicionar, remover, procurar e transformar itens.
+
+## Métodos que alteram o original
 
 ```js
-const tecnologias = ["HTML", "CSS"];
-tecnologias.push("JavaScript");
-tecnologias.pop();
-tecnologias.unshift("Git");
-tecnologias.shift();
+const tarefas = ["estudar HTML", "revisar CSS"];
 
-console.log(tecnologias.includes("CSS"));
-console.log(tecnologias.indexOf("HTML"));
-console.log(tecnologias.join(" | "));
-console.log(tecnologias.slice(0, 1));
+tarefas.push("praticar JS");
+tarefas.unshift("abrir editor");
+tarefas.pop();
+tarefas.shift();
 
-const numeros = [1, 2, 3];
-const dobrados = numeros.map((numero) => numero * 2);
-const maioresQueUm = numeros.filter((numero) => numero > 1);
-const encontrado = numeros.find((numero) => numero === 2);
+console.log(tarefas);
 ```
 
-`push`, `pop`, `shift` e `unshift` alteram o array original. `slice`, `map`, `filter` e `find` retornam resultado sem precisar alterar a lista original.
+`push`, `pop`, `shift` e `unshift` modificam o array original.
 
-## Quando usar
+## Procurar e juntar
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+```js
+const tecnologias = ["HTML", "CSS", "JavaScript"];
 
-## Erros comuns
+console.log(tecnologias.includes("CSS"));
+console.log(tecnologias.indexOf("JavaScript"));
+console.log(tecnologias.join(" -> "));
+```
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
+## Recortar sem alterar
 
-## Boas práticas
+```js
+const primeiras = tecnologias.slice(0, 2);
+console.log(primeiras);
+console.log(tecnologias);
+```
 
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+## `map`, `filter` e `find` introdutórios
+
+```js
+const numeros = [1, 2, 3, 4];
+const dobrados = numeros.map((numero) => numero * 2);
+const pares = numeros.filter((numero) => numero % 2 === 0);
+const primeiroMaiorQueDois = numeros.find((numero) => numero > 2);
+```
+
+`map` cria lista transformada, `filter` cria lista filtrada e `find` retorna um item.
+
+## Cuidado
+
+Não use `map` apenas para imprimir; se a intenção é percorrer sem criar novo array, um loop pode ser mais honesto para iniciante.

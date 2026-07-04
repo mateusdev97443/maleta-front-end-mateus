@@ -1,32 +1,48 @@
 # Variáveis: let, const e var
 
-Variável é um nome que guarda um valor para uso posterior. Use `const` por padrão quando o valor não será reatribuído; use `let` quando precisar mudar o valor; evite `var` em código moderno por ter regras de escopo menos previsíveis.
+Variável é um nome que aponta para um valor. Ela permite reutilizar dados e dar significado ao código.
+
+## Declaração, atribuição e reatribuição
+
+Declaração cria o nome. Atribuição coloca um valor nesse nome. Reatribuição troca o valor depois.
 
 ```js
-const nomeCompleto = "Mateus Ernandes";
-let pontos = 0;
-
-pontos = pontos + 10;
-
-var codigoAntigo = "evite em código novo";
+let pontuacao; // declaração
+pontuacao = 10; // atribuição
+pontuacao = 15; // reatribuição
 ```
 
-Reatribuição é trocar o valor guardado. `const` impede reatribuição do identificador, mas objetos e arrays guardados em `const` ainda podem ter conteúdo interno alterado. Use camelCase e nomes descritivos: `precoFinal`, `usuarioLogado`, `listaDeCursos`.
+## `const`
 
-## Quando usar
+Use `const` quando o identificador não deve receber outro valor.
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+```js
+const nomeDoAluno = "Mateus";
+const LIMITE_APROVACAO = 7;
+```
+
+Constantes nomeadas, como `LIMITE_APROVACAO`, deixam regras numéricas mais claras do que valores soltos no código.
+
+## `let`
+
+Use `let` quando o valor precisa mudar.
+
+```js
+let tentativas = 0;
+tentativas = tentativas + 1;
+```
+
+## `var`
+
+`var` pertence a um estilo antigo de JavaScript. Ele tem escopo menos previsível para iniciantes e pode causar confusão em blocos. Em código moderno da Maleta, evite `var`.
+
+## Nomes descritivos e camelCase
+
+Use camelCase para variáveis comuns: `precoFinal`, `usuarioAtivo`, `quantidadeEmEstoque`. Um bom nome reduz necessidade de comentário.
 
 ## Erros comuns
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+- Usar `const` e depois tentar reatribuir.
+- Usar `let` sem necessidade, escondendo que o valor deveria ser estável.
+- Criar nomes genéricos como `a`, `b`, `coisa`.
+- Confundir alterar conteúdo de array com reatribuir a variável do array.

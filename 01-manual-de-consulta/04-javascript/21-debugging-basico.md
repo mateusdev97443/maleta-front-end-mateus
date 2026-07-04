@@ -1,34 +1,58 @@
 # Debugging básico
 
-Debugging é investigar por que o código não fez o esperado. Comece lendo a mensagem de erro, a linha indicada e o nome da variável envolvida.
+Debugging é investigar o motivo de um resultado inesperado. O objetivo não é adivinhar, mas coletar pistas.
+
+## Leia a mensagem de erro
+
+Uma mensagem geralmente informa o tipo do erro, o nome envolvido e a linha aproximada. Não ignore esses dados.
+
+## Variável não definida
+
+```js
+const nome = "Mateus";
+console.log(nome);
+```
+
+Se você escrever `console.log(nme)`, a linguagem indicará que `nme` não existe. Isso costuma ser erro de digitação.
+
+## Tipo inesperado
+
+```js
+const preco = "100";
+const desconto = 20;
+
+console.log(typeof preco);
+console.log(typeof desconto);
+```
+
+Se o cálculo ficar estranho, confira tipos antes de mudar a fórmula.
+
+## Função sem retorno
+
+```js
+function calcularTotal(preco, quantidade) {
+  preco * quantidade;
+}
+
+const total = calcularTotal(10, 3);
+console.log(total); // undefined
+```
+
+A correção é usar `return`.
+
+## Testar valores intermediários
 
 ```js
 const preco = 100;
-const desconto = 0.2;
+const percentual = 0.15;
+const desconto = preco * percentual;
 
 console.log("preco", preco);
+console.log("percentual", percentual);
 console.log("desconto", desconto);
-
-const precoFinal = preco - preco * desconto;
-console.log("precoFinal", precoFinal);
+console.log("final", preco - desconto);
 ```
 
-Teste valores intermediários, isole um problema pequeno e não altere tudo ao mesmo tempo. Erros comuns incluem digitação, variável não definida, tipo inesperado e `return` ausente.
+## Método de investigação
 
-## Quando usar
-
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
-
-## Erros comuns
-
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+Isole o menor trecho possível. Altere uma coisa por vez. Depois que entender a causa, limpe logs temporários.

@@ -1,35 +1,57 @@
 # Strings e template literals
 
-String é texto. Pode usar aspas simples, aspas duplas ou crase. Crase cria template literal, que permite interpolar variáveis e quebrar linhas com mais facilidade.
+String é texto. Ela pode representar nome, email, mensagem, status ou qualquer sequência de caracteres.
+
+## Aspas simples, duplas e crase
 
 ```js
-const primeiroNome = 'Mateus';
-const sobrenome = "Ribeiro";
+const nome = 'Mateus';
 const area = "Front-end";
-
-const fraseAntiga = primeiroNome + " estuda " + area + ".";
-const fraseModerna = `${primeiroNome} ${sobrenome} estuda ${area}.`;
-
-const bloco = `Aluno: ${primeiroNome}
-Área: ${area}`;
+const frase = `Estudando ${area}`;
 ```
 
-Prefira template literals quando houver variáveis no texto. Cuidado para não abrir com aspas e fechar com crase.
+Escolha um padrão e mantenha consistência no arquivo. A crase é especial porque permite interpolação.
 
-## Quando usar
+## Concatenação
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+Concatenação junta textos com `+`.
+
+```js
+const nome = "Mateus";
+const mensagem = "Olá, " + nome + "!";
+console.log(mensagem);
+```
+
+Funciona, mas pode ficar difícil de ler quando há muitas variáveis.
+
+## Template literals
+
+Template literal usa crase e `${}` para inserir valores.
+
+```js
+const nome = "Mateus";
+const fase = 5;
+const mensagem = `${nome} está na Fase ${fase} da Maleta.`;
+
+console.log(mensagem);
+```
+
+## Quebra de linha
+
+```js
+const resumo = `Aluno: Mateus
+Fase: JavaScript Fundamentos
+Status: em estudo`;
+
+console.log(resumo);
+```
 
 ## Erros comuns
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
+- Abrir com aspas simples e fechar com aspas duplas.
+- Usar `${nome}` dentro de aspas comuns esperando interpolação.
+- Esquecer que espaços dentro da string fazem parte do texto.
 
-## Boas práticas
+## Boa prática específica
 
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+Use template literals para mensagens com variáveis. Reserve concatenação para casos muito simples.

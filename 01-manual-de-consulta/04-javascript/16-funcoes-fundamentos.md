@@ -1,37 +1,54 @@
 # Funções: fundamentos
 
-Função é um bloco reutilizável com uma responsabilidade. Ela evita repetição e dá nome a uma ação.
+Função é um bloco com nome que executa uma tarefa. Ela evita repetição e dá intenção ao código.
+
+## Declaração e chamada
 
 ```js
-function exibirSaudacao(nome) {
+function exibirBoasVindas() {
+  console.log("Bem-vindo aos fundamentos de JavaScript.");
+}
+
+exibirBoasVindas();
+```
+
+## Parâmetro e argumento
+
+```js
+function saudarAluno(nome) {
   console.log(`Olá, ${nome}!`);
 }
 
+saudarAluno("Mateus");
+```
+
+`nome` é parâmetro. `"Mateus"` é argumento.
+
+## Função sem retorno
+
+```js
+function exibirStatus(status) {
+  console.log(`Status atual: ${status}`);
+}
+```
+
+Ela executa uma ação, mas não entrega valor para outra parte do código.
+
+## Função com retorno
+
+```js
 function calcularTotal(preco, quantidade) {
   return preco * quantidade;
 }
 
-exibirSaudacao("Mateus");
-const total = calcularTotal(50, 2);
+const total = calcularTotal(30, 3);
 console.log(total);
 ```
 
-Parâmetros são nomes recebidos pela função; argumentos são valores enviados na chamada. Função sem `return` apenas executa uma ação; função com `return` entrega um resultado.
+## Responsabilidade única
 
-## Quando usar
+Prefira uma função para calcular e outra para exibir, em vez de misturar tudo.
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+## Nomes com verbo
 
-## Erros comuns
-
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+Use verbos: `calcularTotal`, `validarNome`, `formatarMensagem`, `buscarItemNaLista`.

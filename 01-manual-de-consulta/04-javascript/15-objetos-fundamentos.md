@@ -1,42 +1,57 @@
 # Objetos: fundamentos
 
-Objeto agrupa propriedades e valores de uma entidade.
+Objeto representa uma entidade com propriedades e valores.
+
+## Objeto de projeto
 
 ```js
 const projeto = {
   nome: "Maleta Front-end",
   fase: 5,
+  tecnologia: "JavaScript",
   concluido: false
 };
+```
 
+## Acesso com ponto e colchetes
+
+```js
 console.log(projeto.nome);
-console.log(projeto["fase"]);
+console.log(projeto["tecnologia"]);
+```
 
+Ponto é mais comum. Colchetes são úteis quando a propriedade está em uma variável.
+
+```js
+const campo = "fase";
+console.log(projeto[campo]);
+```
+
+## Alterar e adicionar
+
+```js
 projeto.concluido = true;
-projeto.responsavel = "Mateus";
+projeto.revisadoPor = "Prompt Mestre";
+```
+
+## Objeto de aluno e array de objetos
+
+```js
+const aluno = {
+  nome: "Mateus",
+  trilha: "Front-end",
+  estudandoJavaScript: true
+};
 
 const projetos = [
   { nome: "HTML", fase: 2 },
-  { nome: "CSS", fase: 3 }
+  { nome: "CSS", fase: 3 },
+  { nome: "JavaScript", fase: 5 }
 ];
 ```
 
-Use objeto quando um item possui várias características. Use array de objetos quando houver uma lista de entidades semelhantes.
-
-## Quando usar
-
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
-
 ## Erros comuns
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+- Usar array quando o dado tem propriedades nomeadas.
+- Esquecer vírgula entre propriedades.
+- Criar objetos com nomes de propriedade pouco claros.

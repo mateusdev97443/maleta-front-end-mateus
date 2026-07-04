@@ -1,39 +1,48 @@
 # Callbacks: introdução
 
-Callback é uma função passada como argumento para outra função. A ideia é permitir que uma função execute uma ação recebida de fora.
+Callback é uma função passada como argumento para outra função. A função principal decide quando chamar o comportamento recebido.
+
+## Callback próprio simples
 
 ```js
-function executarOperacao(numero, operacao) {
-  return operacao(numero);
+function executarComNumero(numero, callback) {
+  return callback(numero);
 }
 
 function dobrar(numero) {
   return numero * 2;
 }
 
-console.log(executarOperacao(5, dobrar));
-
-const nomes = ["Mateus", "Ana"];
-const nomesFormatados = nomes.map((nome) => nome.toUpperCase());
-console.log(nomesFormatados);
+console.log(executarComNumero(5, dobrar));
 ```
 
-Aqui o foco é a ideia básica. Assincronicidade, promises e recursos de rede ficam para uma fase posterior.
+## Callback em `map`
 
-## Quando usar
+```js
+const nomes = ["mateus", "ana"];
+const nomesMaiusculos = nomes.map((nome) => nome.toUpperCase());
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+console.log(nomesMaiusculos);
+```
+
+## Callback em `filter`
+
+```js
+const produtos = [
+  { nome: "Caderno", disponivel: true },
+  { nome: "Caneta", disponivel: false }
+];
+
+const disponiveis = produtos.filter((produto) => produto.disponivel === true);
+console.log(disponiveis);
+```
+
+## Limite desta fase
+
+Aqui callback é apenas função passada como argumento. Assuntos de execução em outro momento da aplicação ficam para depois.
 
 ## Erros comuns
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+- Chamar a função antes de passar como callback sem querer.
+- Usar nomes genéricos que escondem o que o callback recebe.
+- Escrever callback grande demais dentro de `map` ou `filter`.

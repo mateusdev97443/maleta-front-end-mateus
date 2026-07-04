@@ -1,18 +1,35 @@
 # Loops: for, while e for...of
 
-Loops repetem instruções sem duplicar código. Todo loop precisa de condição de parada.
+Loops existem para repetir uma ação sem copiar linhas. Todo loop precisa ter começo, avanço e parada.
+
+## `for`
+
+Use quando há contador ou quantidade conhecida.
 
 ```js
-for (let contador = 1; contador <= 3; contador++) {
-  console.log(`Repetição ${contador}`);
+for (let contador = 1; contador <= 5; contador++) {
+  console.log(`Item ${contador}`);
 }
+```
 
+## `while`
+
+Use quando a repetição depende de uma condição que pode mudar durante o processo.
+
+```js
 let tentativas = 0;
+
 while (tentativas < 3) {
-  console.log("Tentando novamente");
+  console.log(`Tentativa ${tentativas + 1}`);
   tentativas++;
 }
+```
 
+## `for...of`
+
+Use para percorrer arrays de forma legível.
+
+```js
 const tecnologias = ["HTML", "CSS", "JavaScript"];
 
 for (const tecnologia of tecnologias) {
@@ -20,22 +37,21 @@ for (const tecnologia of tecnologias) {
 }
 ```
 
-Use `for` quando precisar de contador, `while` quando a repetição depender de uma condição e `for...of` para percorrer listas de forma legível.
+## Loop infinito
 
-## Quando usar
+```js
+let contador = 1;
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+while (contador <= 3) {
+  console.log(contador);
+  contador++;
+}
+```
+
+Sem `contador++`, a condição nunca mudaria.
 
 ## Erros comuns
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+- Usar `<=` quando deveria usar `<` ao percorrer índices.
+- Esquecer incremento.
+- Alterar o array enquanto percorre sem necessidade.

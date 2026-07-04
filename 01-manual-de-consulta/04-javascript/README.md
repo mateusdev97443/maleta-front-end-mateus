@@ -1,38 +1,42 @@
 # Manual JavaScript Fundamentos
 
-A Fase 5 da Maleta de Ferramentas Front-end tem como objetivo construir uma base sólida de JavaScript puro antes de avançar para manipulação visual, projetos interativos ou ferramentas mais complexas. Aqui Mateus aprende a pensar em lógica, dados, condições, repetições e funções com clareza profissional.
+A Fase 5 transforma JavaScript em uma base de raciocínio para Front-end. O objetivo é fazer Mateus entender como representar dados, tomar decisões, repetir processos, organizar listas, modelar objetos e criar funções antes de conectar essa lógica à interface.
+
+## Objetivo da Fase 5
+
+Construir domínio inicial de JavaScript puro, com foco em lógica, leitura de código e solução de problemas pequenos. Ao final, Mateus deve conseguir explicar cada linha dos exemplos, prever saídas no console e criar funções simples com entradas e retornos claros.
 
 ## O que será estudado
 
-- Papel do JavaScript no Front-end e diferença entre HTML, CSS e JS.
-- Execução pelo console do navegador, arquivo `.js` e ligação introdutória com HTML.
-- Sintaxe, comentários, console, variáveis, tipos, operadores e coerção.
-- Condicionais, `switch`, loops, arrays, objetos e funções.
-- Escopo, retorno, arrow functions e callbacks introdutórios.
-- Métodos básicos de arrays e strings.
-- Debugging básico, erros comuns, boas práticas, snippets, exercícios, desafios e revisão.
+- Papel do JavaScript no Front-end e diferença entre estrutura, estilo e comportamento.
+- Execução no console do navegador, em arquivo `.js` e ligação introdutória via `<script>`.
+- Sintaxe, comentários, console, variáveis, tipos de dados, operadores e comparação.
+- `null`, `undefined`, truthy, falsy, condicionais, `switch` e loops.
+- Arrays, métodos básicos de arrays, objetos, funções, parâmetros, retorno e escopo.
+- Arrow functions e callbacks apenas como introdução à ideia de função passada como argumento.
+- Métodos básicos de string, debugging, erros comuns, boas práticas, snippets, exercícios, desafios e revisão.
 
 ## O que não será estudado ainda
 
-- Frameworks ou bibliotecas como React, Vue, Angular e similares.
-- TypeScript, Node avançado, ferramentas de build ou arquitetura complexa.
-- DOM avançado, manipulação de tela, eventos de interface e projetos interativos.
-- Requisições externas, assincronicidade avançada ou integrações com APIs.
+- Frameworks, bibliotecas externas, tipagem avançada ou ferramentas complexas.
+- Manipulação avançada de tela, seleção de elementos ou projetos interativos.
+- Requisições externas, assincronicidade avançada ou integração com APIs.
+- Aplicações grandes. Esta fase treina lógica com valores fixos e `console.log`.
 
 ## Pré-requisitos
 
-Antes desta fase, revise HTML, CSS, layout e responsividade das fases anteriores. A ideia é que a estrutura, o visual e a responsividade já estejam claros para que agora a lógica seja estudada sem misturar assuntos.
+Antes de iniciar, revise HTML, CSS, layout e responsividade das fases anteriores. A sequência correta é: primeiro entender estrutura e visual; depois aprender lógica; somente em fases futuras conectar lógica à tela.
 
-## Como estudar esta fase
+## Como estudar
 
-1. Leia os capítulos na ordem recomendada.
-2. Digite os exemplos manualmente no console ou em um arquivo `.js`.
-3. Altere valores pequenos e observe o resultado no `console.log`.
-4. Faça os exercícios sem copiar respostas prontas.
-5. Use o modelo de análise lógica antes de escrever soluções maiores.
-6. Volte aos erros comuns sempre que algo não funcionar.
+1. Leia um capítulo por vez e digite os exemplos manualmente.
+2. Antes de executar, tente prever o resultado do console.
+3. Troque valores pequenos para observar mudanças de comportamento.
+4. Anote erros reais: mensagem, linha, causa e correção.
+5. Resolva os exercícios sem copiar soluções prontas.
+6. Use o modelo de análise lógica antes dos mini desafios.
 
-## Índice
+## Índice completo
 
 - [Introdução ao JavaScript](01-introducao-ao-javascript.md)
 - [Como executar JavaScript](02-como-executar-javascript.md)
@@ -67,24 +71,24 @@ Antes desta fase, revise HTML, CSS, layout e responsividade das fases anteriores
 
 ## Ordem recomendada de estudo
 
-Siga do capítulo 1 ao 30. Os capítulos 1 a 9 formam a base de linguagem; 10 a 20 formam a base de lógica e estruturas; 21 a 30 consolidam prática, revisão e padrão profissional.
+Estude na ordem dos arquivos. Os capítulos 1 a 9 constroem vocabulário da linguagem; 10 a 14 treinam decisões, repetições e listas; 15 a 20 organizam dados e ações; 21 a 30 consolidam investigação, prática e padrão profissional.
 
-## Avisos importantes
+## Avisos de escopo
 
-- Sem frameworks nesta fase: o foco é JavaScript puro.
-- Sem DOM avançado nesta fase: a ligação com HTML aparece apenas para entender onde um arquivo `.js` entra.
-- Sem projetos grandes: a prática acontece com valores fixos, raciocínio e `console.log`.
+- Sem frameworks: nenhum exemplo depende de biblioteca externa ou ferramenta de interface.
+- Sem DOM avançado: a tag `<script>` aparece apenas para mostrar onde o arquivo JavaScript entra.
+- Sem projetos grandes: os exemplos usam dados fixos e `console.log` para treinar raciocínio.
 
 ## Conexão com a Fábrica de Projetos Front-end
 
-Esta fase prepara Mateus para escrever regras de negócio simples que futuramente serão usadas nos projetos da Fábrica de Projetos Front-end: validações, cálculos, filtros, classificações e organização de dados antes de qualquer manipulação visual.
+A Fábrica de Projetos exigirá decisões como calcular preço, validar texto, filtrar produtos, classificar níveis, percorrer listas e montar resumos. Esta fase treina essas regras isoladamente para que, no futuro, a interface apenas consuma uma lógica já compreendida.
 
 ## Critérios para considerar a fase concluída
 
-- Explicar com as próprias palavras o papel do JavaScript.
-- Usar `const` e `let` corretamente, evitando `var`.
-- Comparar valores com `===` e `!==`.
+- Explicar a diferença prática entre HTML, CSS e JavaScript.
+- Escolher entre `const` e `let` com justificativa.
+- Usar comparação estrita em decisões.
 - Resolver problemas simples com condicionais, loops, arrays, objetos e funções.
-- Ler mensagens de erro básicas e investigar com `console.log`.
+- Identificar erros comuns sem apagar o código inteiro.
 - Concluir exercícios, mini desafios e perguntas de revisão.
 - Aplicar o padrão profissional JavaScript básico da Maleta.

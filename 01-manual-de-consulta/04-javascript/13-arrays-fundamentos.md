@@ -1,43 +1,54 @@
 # Arrays: fundamentos
 
-Array é uma lista ordenada. Cada item tem um índice que começa em zero.
+Array é uma lista ordenada. Ele serve para guardar vários valores relacionados.
+
+## Índice começa em zero
 
 ```js
 const tecnologias = ["HTML", "CSS", "JavaScript"];
 
 console.log(tecnologias[0]);
-tecnologias[1] = "CSS3";
+console.log(tecnologias[1]);
+console.log(tecnologias[2]);
+```
+
+## Acessar, alterar e medir
+
+```js
+tecnologias[1] = "CSS moderno";
 console.log(tecnologias.length);
+```
 
+## Adicionar e remover
+
+```js
 tecnologias.push("Git");
-tecnologias.pop();
+const ultima = tecnologias.pop();
 
-for (const tecnologia of tecnologias) {
-  console.log(tecnologia);
-}
+console.log(tecnologias);
+console.log(ultima);
+```
 
+## Arrays de tipos diferentes de estudo
+
+```js
+const notas = [8, 7.5, 9];
 const projetos = [
   { nome: "Landing page", concluido: true },
   { nome: "Portfólio", concluido: false }
 ];
 ```
 
-Use arrays quando houver vários valores da mesma natureza: tecnologias, notas, produtos ou tarefas.
+## Percorrer
 
-## Quando usar
-
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+```js
+for (const nota of notas) {
+  console.log(`Nota: ${nota}`);
+}
+```
 
 ## Erros comuns
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+- Tentar acessar `lista[lista.length]`, que está fora da lista.
+- Confundir posição visual “primeiro item” com índice `0`.
+- Guardar dados sem relação no mesmo array.

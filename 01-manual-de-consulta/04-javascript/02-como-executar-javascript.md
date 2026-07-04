@@ -1,31 +1,47 @@
 # Como executar JavaScript
 
-JavaScript pode ser executado diretamente no console do navegador para estudos rápidos, em um arquivo `.js` separado ou em uma tag `<script>` no HTML. O arquivo externo é a forma mais organizada para projetos.
+Existem três formas úteis para estudar JavaScript básico: console do navegador, arquivo `.js` separado e script interno no HTML. Cada uma tem um papel.
+
+## Console do navegador
+
+O console é ideal para testar uma linha, investigar valores e aprender rapidamente. Ele não substitui organização em arquivo, mas é excelente para estudo.
+
+```js
+const linguagem = "JavaScript";
+console.log(linguagem);
+```
+
+## Arquivo `.js`
+
+Em projetos, prefira um arquivo separado, por exemplo `script.js`. Isso evita misturar estrutura HTML com lógica.
+
+```js
+const nome = "Mateus";
+console.log(`${nome} iniciou os estudos de JavaScript.`);
+```
+
+## Tag `<script>`
+
+A ligação básica com HTML pode ser feita assim:
 
 ```html
 <script src="script.js"></script>
 ```
 
-```js
-console.log("JavaScript conectado!");
+## Script interno x externo
+
+Script interno fica dentro do HTML e serve apenas para testes muito pequenos. Script externo fica em arquivo próprio, melhora leitura, reaproveitamento e manutenção.
+
+```html
+<script>
+  console.log("Teste rápido");
+</script>
 ```
 
-Script interno fica dentro do HTML e serve para testes pequenos. Script externo fica em um arquivo próprio, facilita manutenção e separa estrutura de lógica. Nesta fase, a ligação com HTML é apenas introdutória; manipulação avançada de página fica para depois.
+## Posição do script
 
-## Quando usar
+Para estudo inicial, colocar a tag antes do fechamento de `</body>` costuma ser simples porque o HTML principal já foi lido. Como esta fase não aprofunda manipulação de tela, a posição aparece apenas como organização básica.
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+## Organização mínima
 
-## Erros comuns
-
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+Use nomes simples e claros: `script.js`, `estudos.js` ou `fundamentos.js`. Em cada arquivo, agrupe exemplos por tema e separe blocos com comentários úteis.

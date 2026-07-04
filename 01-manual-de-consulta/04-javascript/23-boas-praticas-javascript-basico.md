@@ -1,31 +1,87 @@
 # Boas práticas de JavaScript básico
 
-Boas práticas reduzem erro e aumentam legibilidade.
+Boas práticas são decisões pequenas que deixam o código mais previsível, legível e fácil de corrigir.
+
+## Use nomes claros
+
+Um nome deve revelar intenção.
 
 ```js
-const TAXA_DESCONTO_PADRAO = 0.1;
+const precoFinal = 120;
+const usuarioAtivo = true;
+```
 
-function calcularPrecoComDesconto(preco) {
-  return preco - preco * TAXA_DESCONTO_PADRAO;
+Evite nomes que exigem adivinhação, como `x`, `temp`, `coisa` ou `valor1`.
+
+## Prefira `const`
+
+Se o identificador não será reatribuído, use `const`.
+
+```js
+const tecnologiaPrincipal = "JavaScript";
+```
+
+Isso reduz mudanças acidentais.
+
+## Use `let` apenas com reatribuição
+
+```js
+let tentativas = 0;
+tentativas++;
+```
+
+Se não houver mudança de valor, `let` comunica a intenção errada.
+
+## Evite `var`
+
+`var` tem comportamento antigo de escopo. Para a Maleta, o padrão moderno é `const` e `let`.
+
+## Use comparação estrita
+
+```js
+const fase = 5;
+console.log(fase === 5);
+```
+
+Comparação estrita evita conversões invisíveis.
+
+## Crie funções pequenas
+
+Uma função pequena é mais fácil de testar.
+
+```js
+function calcularSubtotal(preco, quantidade) {
+  return preco * quantidade;
 }
 ```
 
-Use nomes claros, `const` por padrão, `let` quando precisar reatribuir e evite `var`. Prefira comparação estrita, funções pequenas, responsabilidade única e testes em partes. Evite números mágicos criando constantes nomeadas. Comente intenção, não o óbvio. Organize raciocínio antes do código.
+## Uma função deve ter uma responsabilidade principal
 
-## Quando usar
+Calcular, validar e exibir são responsabilidades diferentes. Separar facilita manutenção.
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+## Evite números mágicos
 
-## Erros comuns
+```js
+const NOTA_MINIMA_APROVACAO = 7;
+const nota = 8;
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
+console.log(nota >= NOTA_MINIMA_APROVACAO);
+```
 
-## Boas práticas
+O nome explica a regra.
 
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+## Evite repetição
+
+Se três trechos fazem a mesma coisa com valores diferentes, considere criar função.
+
+## Comente intenção, não o óbvio
+
+Bom comentário explica regra de negócio. Comentário ruim narra a sintaxe.
+
+## Teste em partes
+
+Calcule valores intermediários e confira com `console.log` antes de montar a solução inteira.
+
+## Organize antes de codar
+
+Escreva entrada, processamento e saída. Depois transforme isso em variáveis, condições, loops e funções.

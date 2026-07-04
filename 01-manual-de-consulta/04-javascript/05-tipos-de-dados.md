@@ -1,38 +1,48 @@
 # Tipos de dados
 
-Tipo de dado define a natureza de um valor. Valor é o conteúdo; tipo é a categoria desse conteúdo.
+Tipo de dado é a categoria de um valor. Entender tipos evita comparações erradas e decisões confusas.
+
+## Tipos principais
 
 ```js
 const nome = "Mateus"; // string
 const idade = 22; // number
 const estaEstudando = true; // boolean
-const endereco = null; // ausência intencional
+const complemento = null; // ausência intencional
 let telefone; // undefined
-const projeto = { nome: "Maleta" }; // object
-const tecnologias = ["HTML", "CSS", "JS"]; // array
+const aluno = { nome: "Mateus", fase: 5 }; // object
+const tecnologias = ["HTML", "CSS", "JavaScript"]; // array
 function saudar() { return "Olá"; } // function
+```
 
-console.log(typeof nome);
-console.log(typeof idade);
+## Valor x tipo
+
+`"22"` e `22` parecem parecidos, mas têm tipos diferentes. O primeiro é texto; o segundo é número.
+
+```js
+console.log(typeof "22");
+console.log(typeof 22);
+```
+
+## `typeof` e `Array.isArray`
+
+`typeof` ajuda a investigar. Arrays, porém, são uma estrutura do tipo object por baixo; por isso use `Array.isArray`.
+
+```js
+console.log(typeof aluno);
+console.log(typeof tecnologias);
 console.log(Array.isArray(tecnologias));
 ```
 
-`typeof` ajuda a investigar valores, mas arrays aparecem como `object`; por isso use `Array.isArray` para confirmar listas.
+## Exemplos práticos
 
-## Quando usar
+- Nome do usuário: string.
+- Preço do produto: number.
+- Produto disponível: boolean.
+- Endereço complementar não informado por decisão: null.
+- Lista de notas: array.
+- Projeto com várias propriedades: object.
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+## Cuidado específico
 
-## Erros comuns
-
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+Não trate número digitado como número real sem verificar. Em muitos contextos, dados chegam como string e precisam ser compreendidos antes de cálculo.

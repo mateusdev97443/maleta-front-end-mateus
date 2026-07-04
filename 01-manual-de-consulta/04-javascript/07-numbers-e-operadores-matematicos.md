@@ -1,39 +1,65 @@
 # Numbers e operadores matemáticos
 
-JavaScript usa `number` para inteiros e decimais. Decimal usa ponto, não vírgula.
+JavaScript usa o tipo `number` para números inteiros e decimais. Decimais usam ponto, não vírgula.
+
+## Operações básicas
 
 ```js
-const preco = 99.90;
+const preco = 80;
 const quantidade = 3;
 
-const soma = preco + 10;
-const subtracao = preco - 20;
-const multiplicacao = preco * quantidade;
-const divisao = preco / 2;
-const resto = quantidade % 2;
-const total = (preco + 10) * quantidade;
+console.log(preco + 10); // soma
+console.log(preco - 5); // subtração
+console.log(preco * quantidade); // multiplicação
+console.log(preco / 2); // divisão
+console.log(quantidade % 2); // resto
+```
 
+## Precedência e parênteses
+
+Multiplicação e divisão são resolvidas antes de soma e subtração. Use parênteses para mostrar intenção.
+
+```js
+const resultadoConfuso = 10 + 5 * 2;
+const resultadoClaro = (10 + 5) * 2;
+
+console.log(resultadoConfuso);
+console.log(resultadoClaro);
+```
+
+## Incremento e decremento
+
+```js
 let contador = 0;
 contador++;
 contador--;
 ```
 
-A precedência matemática importa: multiplicação e divisão vêm antes de soma e subtração. Use parênteses para deixar a intenção clara.
+Use com cuidado: para iniciantes, `contador = contador + 1` pode ser mais explícito.
 
-## Quando usar
+## Cálculo de desconto
 
-Use este conhecimento quando precisar transformar uma ideia em passos lógicos claros, testar valores no console e preparar código JavaScript básico para projetos Front-end futuros.
+```js
+const precoOriginal = 200;
+const percentualDesconto = 0.15;
+const valorDesconto = precoOriginal * percentualDesconto;
+const precoFinal = precoOriginal - valorDesconto;
+
+console.log(precoFinal);
+```
+
+## Cálculo de total
+
+```js
+const precoUnitario = 35;
+const quantidadeComprada = 4;
+const total = precoUnitario * quantidadeComprada;
+
+console.log(total);
+```
 
 ## Erros comuns
 
-- Copiar código sem entender o papel de cada linha.
-- Misturar muitos assuntos ao mesmo tempo.
-- Ignorar mensagens do console.
-- Usar nomes vagos como `x`, `coisa` ou `dados` sem contexto.
-
-## Boas práticas
-
-- Prefira clareza em vez de código curto demais.
-- Teste cada pequena parte com valores fixos.
-- Use indentação consistente.
-- Explique a intenção quando um comentário realmente ajudar.
+- Escrever `10,5` pensando em decimal; em JavaScript use `10.5`.
+- Misturar string numérica com number.
+- Esquecer parênteses em fórmulas com várias etapas.
