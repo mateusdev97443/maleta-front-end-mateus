@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Projeto vanilla da Maleta Front-end Mateus que consome uma API pública, renderiza usuários e permite busca local com estados acessíveis.">
   <title>Buscador de Usuários Vanilla</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/script.js" defer></script>
@@ -22,7 +23,7 @@
     <section class="painel" aria-labelledby="titulo-busca">
       <div>
         <h2 id="titulo-busca">Buscar usuários por nome</h2>
-        <p class="texto-apoio">
+        <p class="texto-apoio" id="ajuda-busca">
           Os usuários são carregados uma vez da API e a busca acontece localmente, sem nova requisição a cada tecla.
         </p>
       </div>
@@ -30,12 +31,12 @@
       <form class="formulario-busca" id="formulario-busca">
         <div class="campo-grupo">
           <label for="campo-busca">Nome do usuário</label>
-          <input id="campo-busca" name="busca" type="search" autocomplete="off">
+          <input id="campo-busca" name="busca" type="search" autocomplete="off" aria-describedby="ajuda-busca mensagem-status">
         </div>
 
         <div class="acoes">
           <button type="button" class="botao botao--secundario" id="botao-limpar">Limpar busca</button>
-          <button type="button" class="botao botao--primario" id="botao-recarregar">Tentar novamente</button>
+          <button type="button" class="botao botao--primario" id="botao-recarregar">Recarregar usuários</button>
         </div>
       </form>
     </section>
@@ -46,7 +47,7 @@
         <p id="mensagem-status" class="mensagem-status" role="status" aria-live="polite">Preparando busca...</p>
       </div>
 
-      <div id="lista-usuarios" class="lista-usuarios" aria-label="Lista de usuários encontrados"></div>
+      <ul id="lista-usuarios" class="lista-usuarios" aria-label="Lista de usuários encontrados"></ul>
     </section>
   </main>
 </body>

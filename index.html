@@ -3,109 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Página inicial pública da Maleta Front-end Mateus, com fases concluídas, manuais e projetos vanilla.">
+  <meta name="description" content="Página inicial pública da Maleta Front-end Mateus, com fases concluídas, materiais de estudo, projeto vanilla e status de consolidação pós-auditoria.">
   <title>Maleta Front-end Mateus</title>
   <link rel="stylesheet" href="assets/css/home.css">
 </head>
 <body>
+  <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
   <header class="hero">
     <div class="container hero__content">
       <p class="eyebrow">Maleta de Ferramentas Front-end</p>
-      <h1>Maleta Front-end Mateus</h1>
+      <h1>Estudo, prática e evolução Front-end com base vanilla.</h1>
       <p class="hero__subtitle">
-        Uma maleta de estudo, consulta, prática e evolução front-end para consolidar fundamentos com organização, qualidade e projetos reais.
+        Uma base organizada para consultar fundamentos, revisar qualidade, praticar projetos reais e registrar evolução antes de avançar para ferramentas mais complexas.
       </p>
       <div class="status-card" aria-label="Status atual da Maleta">
-        <strong>Status atual:</strong> Fases 1 a 9 concluídas, auditadas, aprovadas e mescladas na main.
+        <strong>Status atual:</strong> Fases 1 a 9 concluídas. Áreas de suporte em consolidação pós-auditoria antes de uma futura Fase 10.
       </div>
-      <div class="hero__actions" aria-label="Links principais">
+      <nav class="hero__actions" aria-label="Links principais">
         <a class="button button--primary" href="./03-fabrica-de-projetos/01-buscador-de-usuarios-vanilla/">Abrir projeto da Fase 9</a>
-        <a class="button button--secondary" href="./README.md">Ver README</a>
-      </div>
+        <a class="button button--secondary" href="./README.md">Ver README mestre</a>
+      </nav>
     </div>
   </header>
 
-  <main>
+  <main id="conteudo-principal">
+    <section class="section" aria-labelledby="como-usar-title">
+      <div class="container">
+        <div class="section__header">
+          <p class="eyebrow">Fluxo de uso</p>
+          <h2 id="como-usar-title">Como usar a Maleta</h2>
+          <p>Use a Maleta como uma rotina de estudo e entrega: consulte, pratique, revise, registre e só então avance.</p>
+        </div>
+
+        <ol class="step-list">
+          <li><strong>Consultar:</strong> revise os manuais antes de implementar conceitos.</li>
+          <li><strong>Praticar:</strong> use exercícios, snippets e projetos vanilla com escopo claro.</li>
+          <li><strong>Validar:</strong> aplique checklists de qualidade antes de considerar uma entrega pronta.</li>
+          <li><strong>Registrar:</strong> documente decisões e aprendizados no dossiê de evolução.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--highlight" aria-labelledby="materiais-title">
+      <div class="container">
+        <div class="section__header">
+          <p class="eyebrow">Materiais principais</p>
+          <h2 id="materiais-title">Base de consulta e prática</h2>
+        </div>
+
+        <div class="resource-grid">
+          <article class="card">
+            <span class="card__tag">Manual</span>
+            <h3>Manuais de consulta</h3>
+            <p>Guias de HTML, CSS, responsividade, JavaScript, DOM, eventos, Fetch, APIs e integração vanilla.</p>
+            <a href="./01-manual-de-consulta/">Abrir manuais de consulta</a>
+          </article>
+
+          <article class="card">
+            <span class="card__tag">Projetos</span>
+            <h3>Fábrica de Projetos</h3>
+            <p>Área para criar projetos com briefing, escopo, revisão e evolução progressiva.</p>
+            <a href="./03-fabrica-de-projetos/">Abrir Fábrica de Projetos</a>
+          </article>
+
+          <article class="card">
+            <span class="card__tag">Qualidade</span>
+            <h3>Checklists de qualidade</h3>
+            <p>Critérios de revisão para validar estrutura, acessibilidade, escopo, segurança e documentação.</p>
+            <a href="./04-checklists-de-qualidade/">Abrir checklists de qualidade</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section" aria-labelledby="fases-title">
       <div class="container">
         <div class="section__header">
           <p class="eyebrow">Evolução guiada</p>
           <h2 id="fases-title">Fases concluídas</h2>
-          <p>Conheça o caminho construído da fundação da Maleta até o primeiro projeto real guiado em JavaScript vanilla.</p>
+          <p>Da fundação da Maleta ao primeiro projeto real guiado em JavaScript vanilla.</p>
         </div>
 
         <div class="phase-grid">
           <article class="card">
             <span class="card__tag">Fase 1</span>
             <h3>Fundação da Maleta</h3>
-            <p>Estrutura inicial do repositório, organização principal, sistema operacional da Maleta e base para evolução.</p>
-            <a href="./README.md">Acessar fase</a>
+            <p>Estrutura inicial do repositório, organização principal e base para evolução.</p>
+            <a href="./README.md">Acessar visão geral da Fase 1</a>
           </article>
 
           <article class="card">
             <span class="card__tag">Fase 2</span>
             <h3>Manual HTML Completo</h3>
-            <p>Manual de HTML semântico, estrutura de documentos, boas práticas, exercícios e revisão.</p>
-            <a href="./01-manual-de-consulta/01-html/">Acessar fase</a>
+            <p>HTML semântico, estrutura de documentos, boas práticas, exercícios e revisão.</p>
+            <a href="./01-manual-de-consulta/01-html/">Acessar Manual HTML</a>
           </article>
 
           <article class="card">
             <span class="card__tag">Fase 3</span>
             <h3>Manual CSS Completo</h3>
-            <p>Manual de CSS com seletores, cascata, box model, tipografia, unidades, variáveis, boas práticas e exercícios.</p>
-            <a href="./01-manual-de-consulta/02-css/">Acessar fase</a>
+            <p>Seletores, cascata, box model, tipografia, unidades, variáveis e boas práticas.</p>
+            <a href="./01-manual-de-consulta/02-css/">Acessar Manual CSS</a>
           </article>
 
           <article class="card">
             <span class="card__tag">Fase 4</span>
             <h3>Layout e Responsividade</h3>
-            <p>Manual de layout, Flexbox, Grid, containers, breakpoints, mobile-first e padrões responsivos.</p>
-            <a href="./01-manual-de-consulta/03-layout-responsividade/">Acessar fase</a>
+            <p>Flexbox, Grid, containers, breakpoints, mobile-first e padrões responsivos.</p>
+            <a href="./01-manual-de-consulta/03-layout-responsividade/">Acessar Layout e Responsividade</a>
           </article>
 
           <article class="card">
             <span class="card__tag">Fase 5</span>
             <h3>JavaScript Fundamentos</h3>
-            <p>Fundamentos de JavaScript: variáveis, tipos, operadores, condicionais, loops, arrays, objetos e funções.</p>
-            <a href="./01-manual-de-consulta/04-javascript/">Acessar fase</a>
+            <p>Variáveis, tipos, operadores, condicionais, loops, arrays, objetos e funções.</p>
+            <a href="./01-manual-de-consulta/04-javascript/">Acessar JavaScript Fundamentos</a>
           </article>
 
           <article class="card">
             <span class="card__tag">Fase 6</span>
             <h3>JavaScript DOM e Eventos</h3>
-            <p>Manipulação do DOM, seleção de elementos, eventos, formulários, validações simples e componentes básicos.</p>
-            <a href="./01-manual-de-consulta/05-dom-eventos/">Acessar fase</a>
+            <p>DOM, seleção de elementos, eventos, formulários, validações e componentes básicos.</p>
+            <a href="./01-manual-de-consulta/05-dom-eventos/">Acessar DOM e Eventos</a>
           </article>
 
           <article class="card">
             <span class="card__tag">Fase 7</span>
             <h3>JavaScript Assíncrono, Fetch e APIs</h3>
-            <p>Promises, async/await, Fetch, HTTP básico, APIs públicas, loading, erro e renderização de dados.</p>
-            <a href="./01-manual-de-consulta/06-javascript-assincrono-apis/">Acessar fase</a>
+            <p>Promises, async/await, Fetch, HTTP básico, APIs públicas e estados de interface.</p>
+            <a href="./01-manual-de-consulta/06-javascript-assincrono-apis/">Acessar Fetch e APIs</a>
           </article>
 
           <article class="card">
             <span class="card__tag">Fase 8</span>
-            <h3>Laboratório de Integração Front-end Vanilla</h3>
-            <p>Laboratório didático em Markdown para integrar HTML, CSS, DOM, eventos, Fetch, busca, filtro e estados de interface.</p>
-            <a href="./01-manual-de-consulta/07-laboratorio-integracao-vanilla/">Acessar fase</a>
+            <h3>Laboratório de Integração Vanilla</h3>
+            <p>Integração de HTML, CSS, DOM, eventos, Fetch, busca, filtros e estados.</p>
+            <a href="./01-manual-de-consulta/07-laboratorio-integracao-vanilla/">Acessar Laboratório Vanilla</a>
           </article>
 
           <article class="card card--featured">
             <span class="card__tag">Fase 9</span>
             <h3>Primeiro Projeto Real Guiado Vanilla</h3>
-            <p>Primeiro projeto real da Fábrica de Projetos: Buscador de Usuários Vanilla com HTML, CSS, JavaScript, API pública, cards, busca local e estados de interface.</p>
-            <a href="./03-fabrica-de-projetos/01-buscador-de-usuarios-vanilla/">Abrir projeto</a>
+            <p>Buscador de Usuários Vanilla com API pública, cards, busca local e estados de interface.</p>
+            <a href="./03-fabrica-de-projetos/01-buscador-de-usuarios-vanilla/">Abrir projeto da Fase 9</a>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section section--highlight" aria-labelledby="projetos-title">
+    <section class="section section--highlight" aria-labelledby="qualidade-title">
+      <div class="container quality-layout">
+        <div class="section__header">
+          <p class="eyebrow">Padrão de qualidade</p>
+          <h2 id="qualidade-title">Critérios antes de avançar</h2>
+          <p>A Maleta prioriza fundamentos sólidos, escopo explícito e revisão cuidadosa antes de adicionar complexidade.</p>
+        </div>
+
+        <ul class="check-list">
+          <li>HTML semântico, `lang="pt-BR"`, viewport e headings coerentes.</li>
+          <li>CSS mobile-first, responsivo, com contraste adequado e foco visível.</li>
+          <li>JavaScript vanilla com funções claras, estados de interface e DOM seguro.</li>
+          <li>Sem frameworks, bibliotecas externas, npm ou build obrigatório nesta etapa.</li>
+          <li>Documentação alinhada ao que realmente foi implementado.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="projetos-title">
       <div class="container">
         <div class="section__header">
-          <p class="eyebrow">Fábrica de Projetos</p>
-          <h2 id="projetos-title">Projetos disponíveis</h2>
+          <p class="eyebrow">Projetos disponíveis</p>
+          <h2 id="projetos-title">Entrega prática publicada</h2>
         </div>
 
         <article class="project-card">
@@ -113,11 +182,36 @@
             <span class="card__tag">Projeto da Fase 9</span>
             <h3>Buscador de Usuários Vanilla</h3>
             <p>
-              Projeto real com HTML, CSS e JavaScript vanilla que consome API pública sem token, renderiza cards de usuários, permite busca local e trata loading, erro, vazio e sucesso.
+              Projeto com HTML, CSS e JavaScript vanilla que consome API pública sem token, renderiza cards de usuários, permite busca local e trata loading, erro, vazio e sucesso.
             </p>
           </div>
-          <a class="button button--primary" href="./03-fabrica-de-projetos/01-buscador-de-usuarios-vanilla/">Abrir projeto</a>
+          <a class="button button--primary" href="./03-fabrica-de-projetos/01-buscador-de-usuarios-vanilla/">Abrir Buscador de Usuários Vanilla</a>
         </article>
+      </div>
+    </section>
+
+    <section class="section section--highlight" aria-labelledby="status-title">
+      <div class="container">
+        <div class="section__header">
+          <p class="eyebrow">Evolução e status</p>
+          <h2 id="status-title">Concluído não é o mesmo que parado</h2>
+          <p>As fases foram concluídas, enquanto áreas de suporte seguem em evolução controlada para melhorar manutenção e revisão.</p>
+        </div>
+
+        <div class="status-grid">
+          <article class="status-item">
+            <h3>Fases 1 a 9</h3>
+            <p><strong>Concluídas.</strong> Base técnica e projeto real guiado entregues.</p>
+          </article>
+          <article class="status-item">
+            <h3>Áreas de suporte</h3>
+            <p><strong>Em evolução.</strong> Snippets, checklists, prompts, dossiê e arquivo amadurecem conforme a Maleta cresce.</p>
+          </article>
+          <article class="status-item">
+            <h3>Consolidação atual</h3>
+            <p><strong>Pós-auditoria.</strong> Ajustes de documentação, acessibilidade, vitrine e validação antes da Fase 10.</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -126,7 +220,7 @@
         <p class="eyebrow">Continuidade</p>
         <h2 id="proximos-passos-title">Próximos passos</h2>
         <p>
-          A próxima etapa será planejada separadamente. Antes de avançar para frameworks, a Maleta ainda deve consolidar projetos vanilla, formulários, organização profissional e integração de conceitos.
+          Antes de criar uma Fase 10, a Maleta deve concluir a consolidação pós-auditoria, revisar documentação, reforçar acessibilidade e manter a proposta vanilla sem complexidade prematura.
         </p>
       </div>
     </section>

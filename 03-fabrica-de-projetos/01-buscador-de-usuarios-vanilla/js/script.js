@@ -34,6 +34,7 @@ async function buscarUsuarios() {
     usuariosOriginais = Array.isArray(dados.users) ? dados.users : [];
     campoBusca.value = '';
     renderizarUsuarios(usuariosOriginais);
+    atualizarTextoBotaoRecarregar(false);
   } catch (erro) {
     usuariosOriginais = [];
     console.error(erro);
@@ -79,6 +80,7 @@ function renderizarUsuarios(usuarios) {
 }
 
 function criarCardUsuario(usuario) {
+  const item = document.createElement('li');
   const card = document.createElement('article');
   card.classList.add('card-usuario');
 
@@ -92,7 +94,8 @@ function criarCardUsuario(usuario) {
   adicionarDetalhe(listaDetalhes, 'Empresa', usuario.company?.name || TEXTO_NAO_INFORMADO);
 
   card.append(titulo, listaDetalhes);
-  return card;
+  item.appendChild(card);
+  return item;
 }
 
 function adicionarDetalhe(listaDetalhes, rotulo, valor) {
@@ -122,15 +125,17 @@ function mostrarLoading() {
 function mostrarErro() {
   limparLista();
   atualizarMensagem('Não foi possível carregar os usuários agora. Clique em tentar novamente para recarregar.', 'erro');
+  atualizarTextoBotaoRecarregar(true);
 }
 
 function mostrarEstadoVazio() {
-  atualizarMensagem('Nenhum usuário encontrado para a busca atual.', 'vazio');
+  atualizarMensagem('Nenhum usuário encontrado. Tente outro nome ou limpe a busca para ver todos os usuários.', 'vazio');
 }
 
 function mostrarSucesso(total) {
   const textoUsuario = total === 1 ? 'usuário encontrado' : 'usuários encontrados';
   atualizarMensagem(`${total} ${textoUsuario}.`, 'sucesso');
+  atualizarTextoBotaoRecarregar(false);
 }
 
 function atualizarMensagem(texto, classeEstado) {
@@ -152,6 +157,10 @@ function atualizarBotoes() {
   campoBusca.disabled = estaCarregando;
   botaoLimpar.disabled = estaCarregando;
   botaoRecarregar.disabled = estaCarregando;
+}
+
+function atualizarTextoBotaoRecarregar(temErro) {
+  botaoRecarregar.textContent = temErro ? 'Tentar novamente' : 'Recarregar usuários';
 }
 
 iniciarAplicacao();
