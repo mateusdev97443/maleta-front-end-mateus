@@ -40,4 +40,14 @@ maleta-front-end-mateus/
 
 ## Status
 
-Rascunho inicial estruturado para crescimento contínuo.
+Status: Fases 1 a 9 concluídas, auditadas, aprovadas e mescladas na "main".
+
+## GitHub Pages
+
+Página inicial da Maleta:
+
+https://mateusdev97443.github.io/maleta-front-end-mateus/
+
+Projeto disponível:
+
+https://mateusdev97443.github.io/maleta-front-end-mateus/03-fabrica-de-projetos/01-buscador-de-usuarios-vanilla/
