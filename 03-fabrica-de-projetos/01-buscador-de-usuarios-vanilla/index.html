@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscador de Usuários Vanilla</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <header class="cabecalho">
+    <div class="container">
+      <p class="etiqueta">Fase 9 — Primeiro Projeto Real Guiado Vanilla</p>
+      <h1>Buscador de Usuários Vanilla</h1>
+      <p class="cabecalho__texto">
+        Um projeto simples para praticar HTML, CSS, JavaScript, DOM, eventos e consumo de API pública sem token.
+      </p>
+    </div>
+  </header>
+
+  <main class="container conteudo-principal">
+    <section class="painel" aria-labelledby="titulo-busca">
+      <div>
+        <h2 id="titulo-busca">Buscar usuários por nome</h2>
+        <p class="texto-apoio">
+          Os usuários são carregados uma vez da API e a busca acontece localmente, sem nova requisição a cada tecla.
+        </p>
+      </div>
+
+      <form class="formulario-busca" id="formulario-busca">
+        <div class="campo-grupo">
+          <label for="campo-busca">Nome do usuário</label>
+          <input id="campo-busca" name="busca" type="search" autocomplete="off">
+        </div>
+
+        <div class="acoes">
+          <button type="button" class="botao botao--secundario" id="botao-limpar">Limpar busca</button>
+          <button type="button" class="botao botao--primario" id="botao-recarregar">Tentar novamente</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="resultado" aria-labelledby="titulo-resultados">
+      <div class="resultado__topo">
+        <h2 id="titulo-resultados">Resultados</h2>
+        <p id="mensagem-status" class="mensagem-status" role="status" aria-live="polite">Preparando busca...</p>
+      </div>
+
+      <div id="lista-usuarios" class="lista-usuarios" aria-label="Lista de usuários encontrados"></div>
+    </section>
+  </main>
+</body>
+</html>
