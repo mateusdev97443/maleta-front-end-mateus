@@ -48,18 +48,19 @@ async function loadUsers() {
 }
 
 async function fetchUsers() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users");
+  const response = await fetch("https://dummyjson.com/users?limit=10");
 
   if (!response.ok) {
     throw new Error(`Erro ${response.status} ao carregar usuários.`);
   }
 
-  return response.json();
+  const data = await response.json();
+  return data.users;
 }
 
 function renderUsers(users) {
   elements.list.innerHTML = users
-    .map(user => `<li>${user.name} — ${user.email}</li>`)
+    .map(user => `<li>${user.firstName} ${user.lastName} — ${user.email}</li>`)
     .join("");
 }
 

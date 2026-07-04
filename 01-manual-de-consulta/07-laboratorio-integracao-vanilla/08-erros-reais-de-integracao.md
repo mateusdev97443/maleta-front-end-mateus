@@ -1,49 +1,329 @@
 # Erros reais de integração
 
-## Async fora de ordem
+## 1. Async fora de ordem
 
-Problema: uma resposta antiga chega depois de uma nova e sobrescreve a tela. Acontece quando várias buscas são disparadas sem controle. Exemplo: dois cliques rápidos em recarregar. Correção: desabilite o botão durante loading ou compare a requisição atual. Evite permitindo uma ação por vez.
+### Problema
 
-## Render duplicado
+Uma resposta antiga chega depois de uma ação mais recente e sobrescreve a tela atual. Em uma tela pequena isso já confunde o usuário; em uma tela com busca, filtro e detalhe, o problema fica mais difícil de rastrear.
 
-Problema: os mesmos cards aparecem repetidos. Acontece quando `innerHTML +=` é usado sem limpar a lista. Exemplo: `list.innerHTML += card`. Correção: use `list.innerHTML = cards.join("")`. Evite limpando resultado anterior.
+### Por que acontece
 
-## Estado quebrado
+Isso acontece porque várias ações assíncronas são disparadas sem controle de carregamento ou identificação da última requisição. Normalmente o código parece funcionar no primeiro teste, mas quebra quando a ação é repetida ou quando a API demora.
 
-Problema: loading e erro aparecem juntos. Acontece quando cada função altera só um pedaço da UI. Exemplo: `showError` não remove loading. Correção: chame `clearUI` antes do novo estado. Evite centralizando transições.
+### Exemplo do erro
 
-## DOM inconsistente
+```js
+loadUsers();
+loadUsers();
+```
 
-Problema: o código tenta alterar elemento inexistente. Acontece por seletor errado ou HTML imaginado. Exemplo: `document.querySelector("#cards").innerHTML = html` quando não há `#cards`. Correção: confira seletores e trate ausência. Evite nomeando IDs com clareza.
+### Correção
 
-## Variável global bagunçada
+```js
+if (isLoading) return;
+isLoading = true;
+await loadUsers();
+isLoading = false;
+```
 
-Problema: qualquer função altera qualquer dado. Acontece quando tudo fica solto no escopo global. Exemplo: `users = users.filter(...)`. Correção: use estado simples e preserve fonte original. Evite mutações sem intenção.
+### Como evitar
 
-## Filtro alterando lista original
+Bloqueie ações durante loading ou guarde um identificador da requisição atual. Revise o fluxo perguntando qual estado visual deve existir antes, durante e depois da ação.
 
-Problema: limpar filtro não restaura dados. Acontece quando o resultado filtrado substitui a fonte. Exemplo: `users = users.filter(...)`. Correção: crie `filteredUsers`. Evite tratando a lista original como somente leitura.
+## 2. Render duplicado
 
-## Loading que não some
+### Problema
 
-Problema: usuário vê carregamento infinito. Acontece quando o `catch` mostra erro sem limpar loading. Exemplo: `showError()` isolado. Correção: limpar estado em sucesso e falha. Evite criando caminho final para todos os resultados.
+A lista mostra itens repetidos depois de recarregar ou filtrar. Em uma tela pequena isso já confunde o usuário; em uma tela com busca, filtro e detalhe, o problema fica mais difícil de rastrear.
 
-## Erro antigo permanecendo
+### Por que acontece
 
-Problema: dados novos aparecem com mensagem de falha antiga. Acontece por não limpar feedback antes de tentar novamente. Correção: `clearFeedback()` no início do fluxo. Evite mensagens independentes sem controle.
+Isso acontece porque o código adiciona HTML novo sem remover o resultado anterior. Normalmente o código parece funcionar no primeiro teste, mas quebra quando a ação é repetida ou quando a API demora.
 
-## Evento registrado mais de uma vez
+### Exemplo do erro
 
-Problema: um clique executa a mesma ação várias vezes. Acontece quando `addEventListener` fica dentro de função chamada repetidamente. Correção: registre eventos em `init`. Evite colocar listener dentro de render.
+```js
+list.innerHTML += card;
+```
 
-## Função gigante que faz tudo
+### Correção
 
-Problema: buscar, filtrar, validar e renderizar ficam inseparáveis. Acontece por pressa. Correção: dividir em funções por responsabilidade. Evite aceitando crescimento desordenado.
+```js
+list.innerHTML = cards.join("");
+```
 
-## Buscar API de novo sem necessidade
+### Como evitar
 
-Problema: cada filtro dispara rede. Acontece por confundir busca local com busca remota. Correção: carregue uma vez e filtre array local. Evite requisições em evento `input` quando os dados já existem.
+Trate renderização como substituição do estado visual, não como acúmulo sem controle. Revise o fluxo perguntando qual estado visual deve existir antes, durante e depois da ação.
 
-## Esquecer de limpar resultado anterior
+## 3. Estado quebrado
 
-Problema: UI mistura estado antigo e novo. Acontece quando a renderização só adiciona. Correção: limpar lista, detalhe e mensagens antes do novo desenho. Evite sempre iniciando transição com limpeza explícita.
+### Problema
+
+Loading, erro, vazio e sucesso aparecem misturados. Em uma tela pequena isso já confunde o usuário; em uma tela com busca, filtro e detalhe, o problema fica mais difícil de rastrear.
+
+### Por que acontece
+
+Isso acontece porque cada função altera um pedaço da tela e ninguém limpa o estado anterior. Normalmente o código parece funcionar no primeiro teste, mas quebra quando a ação é repetida ou quando a API demora.
+
+### Exemplo do erro
+
+```js
+showLoading();
+showError("Falhou");
+```
+
+### Correção
+
+```js
+clearUI();
+showError("Falhou");
+```
+
+### Como evitar
+
+Crie uma rotina de limpeza antes de toda transição importante de estado. Revise o fluxo perguntando qual estado visual deve existir antes, durante e depois da ação.
+
+## 4. DOM inconsistente
+
+### Problema
+
+O javascript tenta alterar um elemento que não existe. Em uma tela pequena isso já confunde o usuário; em uma tela com busca, filtro e detalhe, o problema fica mais difícil de rastrear.
+
+### Por que acontece
+
+Isso acontece porque o seletor não corresponde ao HTML conceitual ou a área ainda não foi criada. Normalmente o código parece funcionar no primeiro teste, mas quebra quando a ação é repetida ou quando a API demora.
+
+### Exemplo do erro
+
+```js
+document.querySelector("#cards").innerHTML = html;
+```
+
+### Correção
+
+```js
+const list = document.querySelector("#lista");
+if (!list) return;
+list.innerHTML = html;
+```
+
+### Como evitar
+
+Use nomes previsíveis e confira os elementos necessários no início. Revise o fluxo perguntando qual estado visual deve existir antes, durante e depois da ação.
+
+## 5. Variável global bagunçada
+
+### Problema
+
+Qualquer função altera dados centrais sem intenção clara. Em uma tela pequena isso já confunde o usuário; em uma tela com busca, filtro e detalhe, o problema fica mais difícil de rastrear.
+
+### Por que acontece
+
+Isso acontece porque muitas variáveis soltas passam a ser modificadas em vários pontos. Normalmente o código parece funcionar no primeiro teste, mas quebra quando a ação é repetida ou quando a API demora.
+
+### Exemplo do erro
+
+```js
+users = [];
+users = users.filter(match);
+```
+
+### Correção
+
+```js
+const state = { users: [], filteredUsers: [] };
+state.filteredUsers = state.users.filter(match);
+```
+
+### Como evitar
+
+Agrupe estado simples e defina quais funções podem alterar cada parte. Revise o fluxo perguntando qual estado visual deve existir antes, durante e depois da ação.
+
+## 6. Filtro alterando lista original
+
+### Problema
+
+Limpar filtro não recupera todos os itens. Em uma tela pequena isso já confunde o usuário; em uma tela com busca, filtro e detalhe, o problema fica mais difícil de rastrear.
+
+### Por que acontece
+
+Isso acontece porque o resultado filtrado substitui a fonte original de dados. Normalmente o código parece funcionar no primeiro teste, mas quebra quando a ação é repetida ou quando a API demora.
+
+### Exemplo do erro
+
+```js
+users = users.filter(user => user.name.includes(term));
+```
+
+### Correção
+
+```js
+const filteredUsers = users.filter(user => user.name.includes(term));
+```
+
+### Como evitar
+
+Considere a lista original como fonte de verdade para filtros locais. Revise o fluxo perguntando qual estado visual deve existir antes, durante e depois da ação.
+
+## 7. Loading que não some
+
+### Problema
+
+A interface fica eternamente carregando após sucesso ou erro. Em uma tela pequena isso já confunde o usuário; em uma tela com busca, filtro e detalhe, o problema fica mais difícil de rastrear.
+
+### Por que acontece
+
+Isso acontece porque o código mostra loading, mas não define saída para todos os caminhos. Normalmente o código parece funcionar no primeiro teste, mas quebra quando a ação é repetida ou quando a API demora.
+
+### Exemplo do erro
+
+```js
+showLoading();
+await fetchUsers();
+renderUsers(users);
+```
+
+### Correção
+
+```js
+showLoading();
+try { renderUsers(await fetchUsers()); } finally { hideLoading(); }
+```
+
+### Como evitar
+
+Use `finally` ou uma função de estado que sempre substitua o loading. Revise o fluxo perguntando qual estado visual deve existir antes, durante e depois da ação.
+
+## 8. Erro antigo permanecendo na tela
+
+### Problema
+
+Uma mensagem de falha continua visível após uma nova tentativa bem-sucedida. Em uma tela pequena isso já confunde o usuário; em uma tela com busca, filtro e detalhe, o problema fica mais difícil de rastrear.
+
+### Por que acontece
+
+Isso acontece porque a nova operação renderiza sucesso sem limpar feedback anterior. Normalmente o código parece funcionar no primeiro teste, mas quebra quando a ação é repetida ou quando a API demora.
+
+### Exemplo do erro
+
+```js
+showError("Falhou");
+renderUsers(users);
+```
+
+### Correção
+
+```js
+clearFeedback();
+renderUsers(users);
+```
+
+### Como evitar
+
+Limpe mensagens no começo da tentativa e antes de renderizar sucesso. Revise o fluxo perguntando qual estado visual deve existir antes, durante e depois da ação.
+
+## 9. Evento registrado mais de uma vez
+
+### Problema
+
+Um único clique executa a mesma função várias vezes. Em uma tela pequena isso já confunde o usuário; em uma tela com busca, filtro e detalhe, o problema fica mais difícil de rastrear.
+
+### Por que acontece
+
+Isso acontece porque o listener é adicionado dentro de renderizações ou funções chamadas repetidamente. Normalmente o código parece funcionar no primeiro teste, mas quebra quando a ação é repetida ou quando a API demora.
+
+### Exemplo do erro
+
+```js
+function render() { button.addEventListener("click", loadUsers); }
+```
+
+### Correção
+
+```js
+function init() { button.addEventListener("click", loadUsers); }
+```
+
+### Como evitar
+
+Registre eventos em `init` ou garanta que o registro ocorra apenas uma vez. Revise o fluxo perguntando qual estado visual deve existir antes, durante e depois da ação.
+
+## 10. Função gigante que faz tudo
+
+### Problema
+
+Uma função busca, filtra, valida, renderiza e controla estado ao mesmo tempo. Em uma tela pequena isso já confunde o usuário; em uma tela com busca, filtro e detalhe, o problema fica mais difícil de rastrear.
+
+### Por que acontece
+
+Isso acontece porque o fluxo cresceu sem separação de responsabilidades. Normalmente o código parece funcionar no primeiro teste, mas quebra quando a ação é repetida ou quando a API demora.
+
+### Exemplo do erro
+
+```js
+async function start() { /* 80 linhas misturadas */ }
+```
+
+### Correção
+
+```js
+async function loadUsers() { const users = await fetchUsers(); renderUsers(users); }
+```
+
+### Como evitar
+
+Divida por intenção: buscar, processar, renderizar e mostrar feedback. Revise o fluxo perguntando qual estado visual deve existir antes, durante e depois da ação.
+
+## 11. Buscar API de novo sem necessidade
+
+### Problema
+
+Cada tecla ou filtro dispara uma requisição externa. Em uma tela pequena isso já confunde o usuário; em uma tela com busca, filtro e detalhe, o problema fica mais difícil de rastrear.
+
+### Por que acontece
+
+Isso acontece porque o filtro local é confundido com busca remota. Normalmente o código parece funcionar no primeiro teste, mas quebra quando a ação é repetida ou quando a API demora.
+
+### Exemplo do erro
+
+```js
+input.addEventListener("input", () => fetch(url));
+```
+
+### Correção
+
+```js
+input.addEventListener("input", () => renderUsers(filterUsers(users)));
+```
+
+### Como evitar
+
+Depois de carregar dados estáveis, derive resultados localmente. Revise o fluxo perguntando qual estado visual deve existir antes, durante e depois da ação.
+
+## 12. Esquecer de limpar resultado anterior
+
+### Problema
+
+A tela mistura cards antigos com mensagens novas. Em uma tela pequena isso já confunde o usuário; em uma tela com busca, filtro e detalhe, o problema fica mais difícil de rastrear.
+
+### Por que acontece
+
+Isso acontece porque o código muda só a parte nova e deixa sobras visuais. Normalmente o código parece funcionar no primeiro teste, mas quebra quando a ação é repetida ou quando a API demora.
+
+### Exemplo do erro
+
+```js
+showEmpty(); // lista antiga continua
+```
+
+### Correção
+
+```js
+clearUI();
+showEmpty();
+```
+
+### Como evitar
+
+Antes de vazio, erro ou sucesso, remova o que não pertence ao estado atual. Revise o fluxo perguntando qual estado visual deve existir antes, durante e depois da ação.
