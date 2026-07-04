@@ -36,7 +36,8 @@ async function buscarUsuarios() {
     renderizarUsuarios(usuariosOriginais);
   } catch (erro) {
     usuariosOriginais = [];
-    mostrarErro(erro.message);
+    console.error(erro);
+    mostrarErro();
   } finally {
     estaCarregando = false;
     atualizarBotoes();
@@ -118,9 +119,9 @@ function mostrarLoading() {
   atualizarBotoes();
 }
 
-function mostrarErro(mensagem) {
+function mostrarErro() {
   limparLista();
-  atualizarMensagem(`${mensagem} Clique em tentar novamente para recarregar.`, 'erro');
+  atualizarMensagem('Não foi possível carregar os usuários agora. Clique em tentar novamente para recarregar.', 'erro');
 }
 
 function mostrarEstadoVazio() {
