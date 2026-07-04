@@ -2,14 +2,15 @@
 
 ## Objetivo
 
-Este manual reúne fundamentos, padrões e exemplos práticos de HTML para consulta rápida durante estudos e projetos Front-end. O foco é escrever marcação semântica, acessível, validável, fácil de manter e preparada para SEO básico.
+Este manual organiza os fundamentos e padrões profissionais de HTML para estudo, consulta rápida e aplicação em projetos Front-end reais. Ele prioriza marcação semântica, acessível, validável, preparada para SEO básico e fácil de manter por outras pessoas.
 
 ## Como usar
 
-- Use os capítulos na ordem sugerida para estudar do zero.
-- Use o índice como referência rápida durante projetos reais.
-- Copie os snippets somente depois de entender a semântica de cada elemento.
-- Revise qualquer página com o checklist final antes de entregar ou commitar.
+- Estude os capítulos na ordem recomendada se estiver começando.
+- Consulte arquivos específicos quando estiver implementando uma parte da página, como formulários, tabelas, imagens ou estrutura semântica.
+- Use os snippets como ponto de partida, mas adapte textos, atributos e hierarquia ao contexto real do projeto.
+- Revise sua página com o checklist final antes de abrir PR, entregar atividade ou publicar.
+- Volte aos capítulos de erros comuns e boas práticas sempre que encontrar marcação confusa ou difícil de manter.
 
 ## Ordem recomendada de estudo
 
@@ -35,36 +36,37 @@ Este manual reúne fundamentos, padrões e exemplos práticos de HTML para consu
 
 ## Arquivos disponíveis
 
-| Arquivo | Uso principal |
+| Arquivo | Para que serve |
 |---|---|
-| [01-estrutura-base-html.md](./01-estrutura-base-html.md) | Montar a base correta de qualquer documento HTML. |
+| [01-estrutura-base-html.md](./01-estrutura-base-html.md) | Criar a base correta de qualquer documento HTML. |
 | [02-head-metadados-seo.md](./02-head-metadados-seo.md) | Configurar `head`, metadados, favicon e SEO básico. |
-| [03-semantica-html.md](./03-semantica-html.md) | Escolher tags estruturais com intenção correta. |
-| [04-textos-headings-paragrafos.md](./04-textos-headings-paragrafos.md) | Organizar conteúdo textual com hierarquia. |
-| [05-links-imagens-midias.md](./05-links-imagens-midias.md) | Usar links, imagens, vídeo, áudio e iframe com acessibilidade. |
-| [06-listas-tabelas.md](./06-listas-tabelas.md) | Estruturar coleções e dados tabulares. |
-| [07-formularios.md](./07-formularios.md) | Criar formulários claros, acessíveis e validáveis. |
-| [08-atributos-importantes.md](./08-atributos-importantes.md) | Consultar atributos essenciais do HTML. |
-| [09-acessibilidade-html.md](./09-acessibilidade-html.md) | Aplicar acessibilidade desde a marcação. |
-| [10-validacao-html.md](./10-validacao-html.md) | Revisar qualidade estrutural e erros de validação. |
-| [11-erros-comuns-html.md](./11-erros-comuns-html.md) | Evitar problemas frequentes em projetos reais. |
-| [12-boas-praticas-html.md](./12-boas-praticas-html.md) | Manter HTML limpo, previsível e profissional. |
-| [13-snippets-html.md](./13-snippets-html.md) | Reaproveitar blocos prontos e comentados. |
-| [14-checklist-final-html.md](./14-checklist-final-html.md) | Conferir uma página antes da entrega. |
-| [15-exercicios-html.md](./15-exercicios-html.md) | Praticar em níveis progressivos. |
-| [16-mini-desafios-html.md](./16-mini-desafios-html.md) | Resolver briefings curtos com critérios de qualidade. |
-| [17-perguntas-de-revisao-html.md](./17-perguntas-de-revisao-html.md) | Fixar conhecimento por autoavaliação. |
-| [18-modelo-analise-html.md](./18-modelo-analise-html.md) | Auditar HTML de qualquer página. |
-| [19-padrao-profissional-projetos.md](./19-padrao-profissional-projetos.md) | Entregar projetos HTML com padrão mínimo profissional. |
+| [03-semantica-html.md](./03-semantica-html.md) | Decidir quais tags estruturais usar e evitar `div` sem necessidade. |
+| [04-textos-headings-paragrafos.md](./04-textos-headings-paragrafos.md) | Organizar títulos, parágrafos, ênfase, citações e trechos de código. |
+| [05-links-imagens-midias.md](./05-links-imagens-midias.md) | Criar links, imagens, vídeos, áudios e iframes com acessibilidade e performance. |
+| [06-listas-tabelas.md](./06-listas-tabelas.md) | Escolher entre listas e tabelas e estruturar dados tabulares corretamente. |
+| [07-formularios.md](./07-formularios.md) | Construir formulários acessíveis, validáveis e prontos para integração. |
+| [08-atributos-importantes.md](./08-atributos-importantes.md) | Consultar atributos essenciais como `id`, `class`, `data-*`, `aria-*`, `name` e `required`. |
+| [09-acessibilidade-html.md](./09-acessibilidade-html.md) | Revisar landmarks, headings, `alt`, labels, teclado, links, botões e ARIA. |
+| [10-validacao-html.md](./10-validacao-html.md) | Identificar problemas de HTML mal formado e qualidade estrutural. |
+| [11-erros-comuns-html.md](./11-erros-comuns-html.md) | Evitar problemas recorrentes que prejudicam manutenção, SEO e acessibilidade. |
+| [12-boas-praticas-html.md](./12-boas-praticas-html.md) | Aplicar padrões de clareza, simplicidade, separação de responsabilidades e manutenção. |
+| [13-snippets-html.md](./13-snippets-html.md) | Copiar exemplos prontos e bem formatados para cenários comuns. |
+| [14-checklist-final-html.md](./14-checklist-final-html.md) | Aprovar ou reprovar uma página HTML antes da entrega. |
+| [15-exercicios-html.md](./15-exercicios-html.md) | Praticar fundamentos em níveis básico, intermediário e aplicado. |
+| [16-mini-desafios-html.md](./16-mini-desafios-html.md) | Resolver briefings curtos com requisitos e critérios de qualidade. |
+| [17-perguntas-de-revisao-html.md](./17-perguntas-de-revisao-html.md) | Fazer autoavaliação e fixar conceitos importantes. |
+| [18-modelo-analise-html.md](./18-modelo-analise-html.md) | Auditar qualquer HTML por estrutura, semântica, acessibilidade, SEO e melhorias. |
+| [19-padrao-profissional-projetos.md](./19-padrao-profissional-projetos.md) | Entregar arquivos HTML com organização, nomenclatura e critérios profissionais. |
 
 ## Como aplicar em projetos reais
 
-1. Comece pela estrutura base e defina idioma, título, descrição e viewport.
-2. Desenhe a estrutura semântica antes de pensar em aparência visual.
-3. Garanta que textos, links, imagens e formulários tenham significado e contexto.
-4. Valide o HTML e revise acessibilidade, SEO básico e manutenção.
-5. Use o checklist final antes de abrir pull request ou publicar.
+1. Crie o documento com `doctype`, idioma, `charset`, `viewport`, `title` e `description`.
+2. Desenhe a estrutura do `body` antes de escrever detalhes: `header`, `nav`, `main`, seções e `footer`.
+3. Escreva conteúdo com headings em ordem lógica e textos de links compreensíveis.
+4. Inclua imagens, mídias, tabelas e formulários com atributos obrigatórios e acessibilidade desde o começo.
+5. Valide o HTML, revise o checklist final e corrija problemas antes do commit.
+6. Em projetos maiores, use o modelo de análise para revisar páginas antigas ou pull requests de colegas.
 
 ## Status da Fase 2
 
-Fase 2 — Manual HTML Completo: concluída como material de estudo, consulta e revisão prática.
+Fase 2 — Manual HTML Completo: conteúdo concluído e aprofundado para estudo, consulta prática, revisão técnica e aplicação em projetos reais.
