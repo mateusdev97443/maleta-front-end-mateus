@@ -6,6 +6,10 @@ A Fase 5 transforma JavaScript em uma base de raciocínio para Front-end. O obje
 
 Construir domínio inicial de JavaScript puro, com foco em lógica, leitura de código e solução de problemas pequenos. Ao final, Mateus deve conseguir explicar cada linha dos exemplos, prever saídas no console e criar funções simples com entradas e retornos claros.
 
+## Objetivo de aprendizado
+
+Ao concluir esta fase, Mateus deve ser capaz de transformar um problema simples em dados, condições, repetições e funções pequenas. O aprendizado esperado não é decorar sintaxe, mas raciocinar sobre entrada, processamento e saída com JavaScript básico.
+
 ## O que será estudado
 
 - Papel do JavaScript no Front-end e diferença entre estrutura, estilo e comportamento.
@@ -59,10 +63,10 @@ Antes de iniciar, revise HTML, CSS, layout e responsividade das fases anteriores
 - [Callbacks: introdução](19-callbacks-introducao.md)
 - [Métodos básicos de string](20-metodos-basicos-de-string.md)
 - [Debugging básico](21-debugging-basico.md)
-- [Erros comuns em JavaScript](22-erros-comuns-em-javascript.md)
+- [Problemas frequentes em JavaScript](22-erros-comuns-em-javascript.md)
 - [Boas práticas de JavaScript básico](23-boas-praticas-javascript-basico.md)
 - [Snippets JavaScript fundamentos](24-snippets-javascript-fundamentos.md)
-- [Checklist final](25-checklist-final.md)
+- [Revisão final da fase](25-checklist-final.md)
 - [Exercícios práticos](26-exercicios-praticos.md)
 - [Mini desafios](27-mini-desafios.md)
 - [Perguntas de revisão](28-perguntas-de-revisao.md)
