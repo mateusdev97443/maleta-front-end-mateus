@@ -204,7 +204,9 @@ button:focus-visible {
 .lista-usuarios {
   display: grid;
   gap: 1rem;
+  margin: 0;
   padding: 1.25rem;
+  list-style: none;
 }
 
 .card-usuario {
@@ -263,5 +265,21 @@ button:focus-visible {
 @media (min-width: 1024px) {
   .lista-usuarios {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .botao:hover:not(:disabled) {
+    transform: none;
   }
 }

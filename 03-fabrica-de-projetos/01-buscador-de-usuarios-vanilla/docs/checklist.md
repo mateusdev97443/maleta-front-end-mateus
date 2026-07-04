@@ -57,7 +57,7 @@
 - [x] Limpa a lista antes de renderizar novamente.
 - [x] Renderiza cards dinamicamente.
 - [x] Usa `createElement` e `textContent` para dados externos.
-- [x] Possui botão de tentar novamente/recarregar.
+- [x] Possui botão contextual para tentar novamente ou recarregar.
 - [x] Possui botão de limpar busca.
 - [x] Usa funções pequenas com nomes claros.
 
@@ -77,8 +77,8 @@
 - [x] Sem Axios.
 - [x] Sem Bootstrap.
 - [x] Sem Tailwind.
-- [x] Sem deploy.
-- [x] Sem GitHub Pages.
+- [x] Sem deploy como requisito da Fase 9.
+- [x] Sem dependência de GitHub Pages para funcionar localmente.
 - [x] Sem SPA complexa.
 - [x] Sem roteamento.
 - [x] Sem múltiplos projetos.

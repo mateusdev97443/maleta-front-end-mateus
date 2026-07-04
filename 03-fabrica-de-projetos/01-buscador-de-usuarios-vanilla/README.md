@@ -17,7 +17,7 @@ O Buscador de Usuários Vanilla carrega usuários da API pública DummyJSON, exi
 - Consumo de API pública sem token.
 - Estado de loading durante o carregamento.
 - Estado de erro com mensagem amigável.
-- Botão para tentar novamente ou recarregar usuários.
+- Botão contextual para recarregar usuários ou tentar novamente após erro.
 - Estado de lista vazia quando a busca não encontra resultados.
 - Estado de sucesso com quantidade encontrada.
 - Renderização dinâmica de cards de usuários.
@@ -53,6 +53,12 @@ O Buscador de Usuários Vanilla carrega usuários da API pública DummyJSON, exi
     ├── checklist.md
     └── explicacao-do-fluxo.md
 ```
+
+## Publicação e escopo de deploy
+
+Durante a Fase 9, deploy não fazia parte do escopo obrigatório do projeto. Depois da Fase 9, o projeto foi disponibilizado pela home pública da Maleta via GitHub Pages para facilitar apresentação e consulta.
+
+Isso não muda o escopo técnico: o projeto continua sendo HTML, CSS e JavaScript vanilla, sem build, sem npm e sem depender de GitHub Pages para funcionar localmente.
 
 ## Como abrir localmente
 
@@ -117,8 +123,8 @@ Este projeto é intencionalmente pequeno. Ele não possui paginação, autentica
 - Bootstrap, Tailwind ou bibliotecas externas.
 - SPA complexa.
 - Roteamento.
-- Deploy.
-- GitHub Pages.
+- Deploy como requisito da Fase 9.
+- Dependência de GitHub Pages para funcionar localmente.
 
 ## Próximos estudos possíveis
 
