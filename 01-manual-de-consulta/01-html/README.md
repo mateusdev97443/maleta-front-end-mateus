@@ -1,9 +1,24 @@
 ---
 title: Manual HTML Completo
 permalink: /01-manual-de-consulta/01-html/
+breadcrumbs:
+  - label: Manual
+    url: /01-manual-de-consulta/
+  - label: Manual HTML Completo
 ---
 
-# Manual HTML Completo
+
+<div class="doc-note">
+<strong>Foco da seção:</strong> marcação semântica, acessível, validável, preparada para SEO básico e fácil de manter.
+</div>
+
+## Comece por aqui
+
+<div class="doc-grid">
+  <a class="doc-card" href="./01-estrutura-base-html.md"><strong>Estrutura base</strong><span>Comece pelo documento mínimo correto.</span></a>
+  <a class="doc-card" href="./03-semantica-html.md"><strong>Semântica</strong><span>Escolha tags por significado, não por aparência.</span></a>
+  <a class="doc-card" href="./14-checklist-final-html.md"><strong>Checklist final</strong><span>Revise antes de entregar ou publicar.</span></a>
+</div>
 
 ## Objetivo
 
@@ -75,3 +90,10 @@ Este manual organiza os fundamentos e padrões profissionais de HTML para estudo
 ## Status da Fase 2
 
 Fase 2 — Manual HTML Completo: conteúdo concluído e aprofundado para estudo, consulta prática, revisão técnica e aplicação em projetos reais.
+
+## Próximo passo
+
+<div class="doc-actions">
+  <a href="{{ '/01-manual-de-consulta/02-css/' | relative_url }}">Avançar para CSS</a>
+  <a href="{{ '/01-manual-de-consulta/' | relative_url }}">Voltar ao Manual</a>
+</div>

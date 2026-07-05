@@ -1,9 +1,24 @@
 ---
 title: Manual CSS Completo
 permalink: /01-manual-de-consulta/02-css/
+breadcrumbs:
+  - label: Manual
+    url: /01-manual-de-consulta/
+  - label: Manual CSS Completo
 ---
 
-# Manual CSS Completo
+
+<div class="doc-note">
+<strong>Foco da seção:</strong> estilização base com clareza visual, organização, acessibilidade e manutenção.
+</div>
+
+## Comece por aqui
+
+<div class="doc-grid">
+  <a class="doc-card" href="./01-introducao-css.md"><strong>Introdução ao CSS</strong><span>Entenda o papel do CSS no front-end.</span></a>
+  <a class="doc-card" href="./05-box-model.md"><strong>Box Model</strong><span>Domine dimensões, espaçamentos e bordas.</span></a>
+  <a class="doc-card" href="./16-checklist-final-css.md"><strong>Checklist final</strong><span>Revise organização, estados e contraste.</span></a>
+</div>
 
 ## Objetivo
 
@@ -81,3 +96,10 @@ Este manual reúne fundamentos, padrões e exemplos práticos de CSS para consul
 ## Status da Fase 3
 
 Fase 3 — Manual CSS Completo: conteúdo criado para estudo, consulta prática, revisão técnica e aplicação profissional em projetos Front-end, sem avançar profundamente para Layout e Responsividade.
+
+## Próximo passo
+
+<div class="doc-actions">
+  <a href="{{ '/01-manual-de-consulta/04-javascript/' | relative_url }}">Avançar para JavaScript</a>
+  <a href="{{ '/01-manual-de-consulta/' | relative_url }}">Voltar ao Manual</a>
+</div>
