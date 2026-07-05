@@ -40,19 +40,19 @@ Todos os exemplos são didáticos em Markdown. O código aparece apenas dentro d
 
 ## Ordem recomendada de estudo
 
-1. [Introdução ao laboratório de integração](./01-introducao-ao-laboratorio-de-integracao.md)
-2. [Padrão base de projeto vanilla](./02-padrao-base-de-projeto-vanilla.md)
-3. [Estados de aplicação](./03-estados-de-aplicacao.md)
-4. [Projeto 1: lista de usuários com API](./04-projeto-1-lista-de-usuarios-api.md)
-5. [Projeto 2: busca dinâmica](./05-projeto-2-busca-dinamica.md)
-6. [Projeto 3: detalhe dinâmico](./06-projeto-3-detalhe-dinamico.md)
-7. [Projeto 4: lista com filtros e estados](./07-projeto-4-lista-com-filtros-e-estados.md)
-8. [Erros reais de integração](./08-erros-reais-de-integracao.md)
-9. [Boas práticas de organização](./09-boas-praticas-de-organizacao.md)
-10. [Snippets do laboratório](./10-snippets-do-laboratorio.md)
-11. [Checklist de projeto vanilla](./11-checklist-de-projeto-vanilla.md)
-12. [Mini desafios](./12-mini-desafios.md)
-13. [Modelo mental de integração](./13-modelo-mental-de-integracao.md)
+1. [Introdução ao laboratório de integração](./01-introducao-ao-laboratorio-de-integracao.html)
+2. [Padrão base de projeto vanilla](./02-padrao-base-de-projeto-vanilla.html)
+3. [Estados de aplicação](./03-estados-de-aplicacao.html)
+4. [Projeto 1: lista de usuários com API](./04-projeto-1-lista-de-usuarios-api.html)
+5. [Projeto 2: busca dinâmica](./05-projeto-2-busca-dinamica.html)
+6. [Projeto 3: detalhe dinâmico](./06-projeto-3-detalhe-dinamico.html)
+7. [Projeto 4: lista com filtros e estados](./07-projeto-4-lista-com-filtros-e-estados.html)
+8. [Erros reais de integração](./08-erros-reais-de-integracao.html)
+9. [Boas práticas de organização](./09-boas-praticas-de-organizacao.html)
+10. [Snippets do laboratório](./10-snippets-do-laboratorio.html)
+11. [Checklist de projeto vanilla](./11-checklist-de-projeto-vanilla.html)
+12. [Mini desafios](./12-mini-desafios.html)
+13. [Modelo mental de integração](./13-modelo-mental-de-integracao.html)
 
 ## Padrão esperado de estudo
 
