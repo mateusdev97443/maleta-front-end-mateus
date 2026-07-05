@@ -13,7 +13,7 @@ breadcrumbs:
 ## Comece por aqui
 
 <div class="doc-grid">
-  <a class="doc-card" href="./checklist-auditoria-repositorio.md"><strong>Auditoria do repositório</strong><span>Validação local e revisão pós-auditoria.</span></a>
+  <a class="doc-card" href="./checklist-auditoria-repositorio.html"><strong>Auditoria do repositório</strong><span>Validação local e revisão pós-auditoria.</span></a>
   <a class="doc-card" href="{{ '/01-manual-de-consulta/' | relative_url }}"><strong>Manual de Consulta</strong><span>Volte aos fundamentos quando um critério falhar.</span></a>
 </div>
 
@@ -55,7 +55,7 @@ Não criar checklist duplicado para cada pequena alteração. Prefira checklists
 ## Arquivos disponíveis
 
 <div class="doc-actions">
-  <a href="./checklist-auditoria-repositorio.md">Checklist de auditoria do repositório</a>
+  <a href="./checklist-auditoria-repositorio.html">Checklist de auditoria do repositório</a>
 </div>
 
 ## Próximo passo

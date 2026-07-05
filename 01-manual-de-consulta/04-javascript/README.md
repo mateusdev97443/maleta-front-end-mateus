@@ -15,9 +15,9 @@ breadcrumbs:
 ## Comece por aqui
 
 <div class="doc-grid">
-  <a class="doc-card" href="01-introducao-ao-javascript.md"><strong>Introdução</strong><span>Entenda o papel do JavaScript no front-end.</span></a>
-  <a class="doc-card" href="10-condicionais-if-else.md"><strong>Condicionais</strong><span>Treine decisões com entrada, processamento e saída.</span></a>
-  <a class="doc-card" href="25-checklist-final.md"><strong>Revisão final</strong><span>Consolide os critérios para concluir a fase.</span></a>
+  <a class="doc-card" href="01-introducao-ao-javascript.html"><strong>Introdução</strong><span>Entenda o papel do JavaScript no front-end.</span></a>
+  <a class="doc-card" href="10-condicionais-if-else.html"><strong>Condicionais</strong><span>Treine decisões com entrada, processamento e saída.</span></a>
+  <a class="doc-card" href="25-checklist-final.html"><strong>Revisão final</strong><span>Consolide os critérios para concluir a fase.</span></a>
 </div>
 
 A Fase 5 transforma JavaScript em uma base de raciocínio para Front-end. O objetivo é fazer Mateus entender como representar dados, tomar decisões, repetir processos, organizar listas, modelar objetos e criar funções antes de conectar essa lógica à interface.
@@ -62,36 +62,36 @@ Antes de iniciar, revise HTML, CSS, layout e responsividade das fases anteriores
 
 ## Arquivos disponíveis
 
-- [Introdução ao JavaScript](01-introducao-ao-javascript.md)
-- [Como executar JavaScript](02-como-executar-javascript.md)
-- [Sintaxe, comentários e console](03-sintaxe-comentarios-e-console.md)
-- [Variáveis: let, const e var](04-variaveis-let-const-var.md)
-- [Tipos de dados](05-tipos-de-dados.md)
-- [Strings e template literals](06-strings-e-template-literals.md)
-- [Numbers e operadores matemáticos](07-numbers-e-operadores-matematicos.md)
-- [Booleans, comparações e lógica](08-booleans-comparacoes-e-logica.md)
-- [Null, undefined, truthy e falsy](09-null-undefined-truthy-falsy.md)
-- [Condicionais if, else if e else](10-condicionais-if-else.md)
-- [Switch](11-switch.md)
-- [Loops: for, while e for...of](12-loops-for-while-for-of.md)
-- [Arrays: fundamentos](13-arrays-fundamentos.md)
-- [Métodos básicos de array](14-metodos-basicos-de-array.md)
-- [Objetos: fundamentos](15-objetos-fundamentos.md)
-- [Funções: fundamentos](16-funcoes-fundamentos.md)
-- [Parâmetros, retorno e escopo](17-parametros-retorno-e-escopo.md)
-- [Arrow functions](18-arrow-functions.md)
-- [Callbacks: introdução](19-callbacks-introducao.md)
-- [Métodos básicos de string](20-metodos-basicos-de-string.md)
-- [Debugging básico](21-debugging-basico.md)
-- [Problemas frequentes em JavaScript](22-erros-comuns-em-javascript.md)
-- [Boas práticas de JavaScript básico](23-boas-praticas-javascript-basico.md)
-- [Snippets JavaScript fundamentos](24-snippets-javascript-fundamentos.md)
-- [Revisão final da fase](25-checklist-final.md)
-- [Exercícios práticos](26-exercicios-praticos.md)
-- [Mini desafios](27-mini-desafios.md)
-- [Perguntas de revisão](28-perguntas-de-revisao.md)
-- [Modelo de análise de problema lógico](29-modelo-de-analise-de-problema-logico.md)
-- [Padrão profissional JavaScript básico](30-padrao-profissional-javascript-basico.md)
+- [Introdução ao JavaScript](01-introducao-ao-javascript.html)
+- [Como executar JavaScript](02-como-executar-javascript.html)
+- [Sintaxe, comentários e console](03-sintaxe-comentarios-e-console.html)
+- [Variáveis: let, const e var](04-variaveis-let-const-var.html)
+- [Tipos de dados](05-tipos-de-dados.html)
+- [Strings e template literals](06-strings-e-template-literals.html)
+- [Numbers e operadores matemáticos](07-numbers-e-operadores-matematicos.html)
+- [Booleans, comparações e lógica](08-booleans-comparacoes-e-logica.html)
+- [Null, undefined, truthy e falsy](09-null-undefined-truthy-falsy.html)
+- [Condicionais if, else if e else](10-condicionais-if-else.html)
+- [Switch](11-switch.html)
+- [Loops: for, while e for...of](12-loops-for-while-for-of.html)
+- [Arrays: fundamentos](13-arrays-fundamentos.html)
+- [Métodos básicos de array](14-metodos-basicos-de-array.html)
+- [Objetos: fundamentos](15-objetos-fundamentos.html)
+- [Funções: fundamentos](16-funcoes-fundamentos.html)
+- [Parâmetros, retorno e escopo](17-parametros-retorno-e-escopo.html)
+- [Arrow functions](18-arrow-functions.html)
+- [Callbacks: introdução](19-callbacks-introducao.html)
+- [Métodos básicos de string](20-metodos-basicos-de-string.html)
+- [Debugging básico](21-debugging-basico.html)
+- [Problemas frequentes em JavaScript](22-erros-comuns-em-javascript.html)
+- [Boas práticas de JavaScript básico](23-boas-praticas-javascript-basico.html)
+- [Snippets JavaScript fundamentos](24-snippets-javascript-fundamentos.html)
+- [Revisão final da fase](25-checklist-final.html)
+- [Exercícios práticos](26-exercicios-praticos.html)
+- [Mini desafios](27-mini-desafios.html)
+- [Perguntas de revisão](28-perguntas-de-revisao.html)
+- [Modelo de análise de problema lógico](29-modelo-de-analise-de-problema-logico.html)
+- [Padrão profissional JavaScript básico](30-padrao-profissional-javascript-basico.html)
 
 ## Ordem recomendada de estudo
 
