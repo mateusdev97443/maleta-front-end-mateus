@@ -1,3 +1,8 @@
+---
+title: Layout e Responsividade
+permalink: /01-manual-de-consulta/03-layout-responsividade/
+---
+
 # Manual Layout e Responsividade
 
 ## Objetivo da fase

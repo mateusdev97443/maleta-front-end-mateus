@@ -1,3 +1,8 @@
+---
+title: Sistema Operacional da Maleta
+permalink: /00-sistema-operacional/
+---
+
 # Sistema Operacional da Maleta
 
 ## Objetivo

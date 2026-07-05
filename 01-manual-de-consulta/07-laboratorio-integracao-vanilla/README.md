@@ -1,3 +1,8 @@
+---
+title: Laboratório de Integração Vanilla
+permalink: /01-manual-de-consulta/07-laboratorio-integracao-vanilla/
+---
+
 # FASE 8 — Laboratório de Integração Front-end Vanilla
 
 ## Objetivo da fase

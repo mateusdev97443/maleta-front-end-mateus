@@ -1,3 +1,8 @@
+---
+title: Manual JavaScript Fundamentos
+permalink: /01-manual-de-consulta/04-javascript/
+---
+
 # Manual JavaScript Fundamentos
 
 A Fase 5 transforma JavaScript em uma base de raciocínio para Front-end. O objetivo é fazer Mateus entender como representar dados, tomar decisões, repetir processos, organizar listas, modelar objetos e criar funções antes de conectar essa lógica à interface.

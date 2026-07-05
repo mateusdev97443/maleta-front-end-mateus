@@ -1,3 +1,8 @@
+---
+title: Debug e DevTools
+permalink: /01-manual-de-consulta/09-debug-devtools/
+---
+
 # Debug e DevTools
 
 ## Objetivo

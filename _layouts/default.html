@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Documentação pública da Maleta Front-end Mateus para consulta, prática, qualidade e evolução front-end.">
+  <title>{% if page.title %}{{ page.title | escape }} | {% endif %}{{ site.title | default: "Maleta Front-end Mateus" | escape }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/docs.css' | relative_url }}">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+  <header class="site-header" id="topo">
+    <div class="docs-container site-header__inner">
+      <a class="brand" href="{{ '/' | relative_url }}" aria-label="Ir para a home da Maleta Front-end Mateus">
+        <span class="brand__mark" aria-hidden="true">M</span>
+        <span>Maleta Front-end Mateus</span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal da documentação">
+        <a href="{{ '/' | relative_url }}">Home</a>
+        <a href="{{ '/01-manual-de-consulta/' | relative_url }}">Manual</a>
+        <a href="{{ '/03-fabrica-de-projetos/' | relative_url }}">Projetos</a>
+        <a href="{{ '/04-checklists-de-qualidade/' | relative_url }}">Checklists</a>
+        <a href="{{ '/06-dossie-de-evolucao/' | relative_url }}">Dossiê</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo-principal" class="docs-main">
+    <div class="docs-container docs-shell">
+      <article class="reading-card">
+        {{ content }}
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="docs-container footer__inner">
+      <p><strong>Maleta Front-end Mateus</strong><span>Estudo contínuo com base vanilla, acessibilidade e boas práticas.</span></p>
+      <nav class="footer__nav" aria-label="Links úteis do rodapé">
+        <a href="{{ '/' | relative_url }}">Home</a>
+        <a href="{{ '/01-manual-de-consulta/' | relative_url }}">Manual</a>
+        <a href="{{ '/03-fabrica-de-projetos/' | relative_url }}">Projetos</a>
+        <a href="{{ '/04-checklists-de-qualidade/' | relative_url }}">Checklists</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,3 +1,8 @@
+---
+title: Checklists de Qualidade
+permalink: /04-checklists-de-qualidade/
+---
+
 # Checklists de Qualidade
 
 ## Objetivo

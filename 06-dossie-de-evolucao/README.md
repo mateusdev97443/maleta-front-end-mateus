@@ -1,3 +1,8 @@
+---
+title: Dossiê de Evolução
+permalink: /06-dossie-de-evolucao/
+---
+
 # Dossiê de Evolução
 
 ## Objetivo

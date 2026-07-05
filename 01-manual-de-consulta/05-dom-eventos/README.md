@@ -1,3 +1,8 @@
+---
+title: DOM e Eventos
+permalink: /01-manual-de-consulta/05-dom-eventos/
+---
+
 # Manual JavaScript DOM e Eventos
 
 ## Objetivo da fase
