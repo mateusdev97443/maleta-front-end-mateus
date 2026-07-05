@@ -1,9 +1,24 @@
 ---
 title: Manual JavaScript Fundamentos
 permalink: /01-manual-de-consulta/04-javascript/
+breadcrumbs:
+  - label: Manual
+    url: /01-manual-de-consulta/
+  - label: Manual JavaScript Fundamentos
 ---
 
-# Manual JavaScript Fundamentos
+
+<div class="doc-note">
+<strong>Foco da seção:</strong> raciocínio com dados, decisões, repetições, objetos e funções antes de conectar a lógica à interface.
+</div>
+
+## Comece por aqui
+
+<div class="doc-grid">
+  <a class="doc-card" href="01-introducao-ao-javascript.md"><strong>Introdução</strong><span>Entenda o papel do JavaScript no front-end.</span></a>
+  <a class="doc-card" href="10-condicionais-if-else.md"><strong>Condicionais</strong><span>Treine decisões com entrada, processamento e saída.</span></a>
+  <a class="doc-card" href="25-checklist-final.md"><strong>Revisão final</strong><span>Consolide os critérios para concluir a fase.</span></a>
+</div>
 
 A Fase 5 transforma JavaScript em uma base de raciocínio para Front-end. O objetivo é fazer Mateus entender como representar dados, tomar decisões, repetir processos, organizar listas, modelar objetos e criar funções antes de conectar essa lógica à interface.
 
@@ -45,7 +60,7 @@ Antes de iniciar, revise HTML, CSS, layout e responsividade das fases anteriores
 5. Resolva os exercícios sem copiar soluções prontas.
 6. Use o modelo de análise lógica antes dos mini desafios.
 
-## Índice completo
+## Arquivos disponíveis
 
 - [Introdução ao JavaScript](01-introducao-ao-javascript.md)
 - [Como executar JavaScript](02-como-executar-javascript.md)
@@ -101,3 +116,11 @@ A Fábrica de Projetos exigirá decisões como calcular preço, validar texto, f
 - Identificar erros comuns sem apagar o código inteiro.
 - Concluir exercícios, mini desafios e perguntas de revisão.
 - Aplicar o padrão profissional JavaScript básico da Maleta.
+
+
+## Próximo passo
+
+<div class="doc-actions">
+  <a href="{{ '/03-fabrica-de-projetos/' | relative_url }}">Praticar na Fábrica de Projetos</a>
+  <a href="{{ '/01-manual-de-consulta/' | relative_url }}">Voltar ao Manual</a>
+</div>
