@@ -1,3 +1,7 @@
+---
+title: Fábrica de Projetos
+---
+
 # Fábrica de Projetos
 
 Área para criar, repetir e evoluir projetos front-end com escopo claro, critérios de qualidade e base escalável.

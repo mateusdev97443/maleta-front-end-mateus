@@ -1,3 +1,7 @@
+---
+title: Manual de Consulta
+---
+
 # Manual de Consulta
 
 Guias técnicos curtos e objetivos para apoiar estudo, implementação e revisão de projetos front-end.
