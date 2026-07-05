@@ -1,5 +1,6 @@
 ---
 title: Fábrica de Projetos
+permalink: /03-fabrica-de-projetos/
 ---
 
 # Fábrica de Projetos

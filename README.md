@@ -1,5 +1,6 @@
 ---
 title: Maleta Front-end Mateus
+permalink: /readme/
 ---
 
 # Maleta Front-end Mateus

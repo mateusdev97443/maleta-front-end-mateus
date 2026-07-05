@@ -1,5 +1,6 @@
 ---
 title: Manual de Consulta
+permalink: /01-manual-de-consulta/
 ---
 
 # Manual de Consulta

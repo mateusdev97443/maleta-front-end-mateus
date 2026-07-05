@@ -1,3 +1,8 @@
+---
+title: Snippets e Componentes
+permalink: /02-snippets-e-componentes/
+---
+
 # Snippets e Componentes
 
 ## Objetivo

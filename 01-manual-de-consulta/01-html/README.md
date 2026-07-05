@@ -1,5 +1,6 @@
 ---
 title: Manual HTML Completo
+permalink: /01-manual-de-consulta/01-html/
 ---
 
 # Manual HTML Completo

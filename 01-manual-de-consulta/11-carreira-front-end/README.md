@@ -1,3 +1,8 @@
+---
+title: Carreira Front-end
+permalink: /01-manual-de-consulta/11-carreira-front-end/
+---
+
 # Carreira Front-end
 
 ## Objetivo

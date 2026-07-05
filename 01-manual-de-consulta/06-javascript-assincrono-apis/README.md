@@ -1,3 +1,8 @@
+---
+title: JavaScript Assíncrono, Fetch e APIs
+permalink: /01-manual-de-consulta/06-javascript-assincrono-apis/
+---
+
 # Fase 7 — JavaScript Assíncrono, Fetch e APIs
 
 ## Objetivo

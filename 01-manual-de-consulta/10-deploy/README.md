@@ -1,3 +1,8 @@
+---
+title: Deploy
+permalink: /01-manual-de-consulta/10-deploy/
+---
+
 # Deploy
 
 ## Objetivo

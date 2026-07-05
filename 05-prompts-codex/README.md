@@ -1,3 +1,8 @@
+---
+title: Prompts Codex
+permalink: /05-prompts-codex/
+---
+
 # Prompts Codex
 
 ## Objetivo

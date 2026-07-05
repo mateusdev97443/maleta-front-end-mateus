@@ -1,3 +1,8 @@
+---
+title: SEO e Performance
+permalink: /01-manual-de-consulta/08-seo-performance/
+---
+
 # SEO e Performance
 
 ## Objetivo

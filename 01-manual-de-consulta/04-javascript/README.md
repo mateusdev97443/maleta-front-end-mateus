@@ -1,5 +1,6 @@
 ---
 title: Manual JavaScript Fundamentos
+permalink: /01-manual-de-consulta/04-javascript/
 ---
 
 # Manual JavaScript Fundamentos

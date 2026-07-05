@@ -1,5 +1,6 @@
 ---
 title: Manual CSS Completo
+permalink: /01-manual-de-consulta/02-css/
 ---
 
 # Manual CSS Completo
